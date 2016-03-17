@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--Thanks to Karthika PB for the code this is based on:
+http://stackoverflow.com/questions/29387575/spinner-how-to-set-border-around-drop-down-list
+-->
+
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/colorBackground" />
+    <corners android:radius="5dip" />
+    <padding android:left="8dp"/>
+    <padding android:right="2dp"/>
+    <stroke
+        android:color="@color/colorButtonBorder"
+        android:width="2dp" />
+</shape>

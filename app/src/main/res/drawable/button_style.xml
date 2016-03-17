@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--Thanks to Emmby for the code this is based on: http://stackoverflow.com/questions/1521640/standard-android-button-with-a-different-color -->
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true" >
+        <shape>
+            <gradient
+                android:startColor="@color/colorButton"
+                android:endColor="@color/colorButtonBorder"
+                android:angle="270" />
+            <stroke
+                android:width="2dp"
+                android:color="@color/colorButtonBorder" />
+            <corners
+                android:radius="5dp" />
+            <padding
+                android:left="5dp"
+                android:top="5dp"
+                android:right="5dp"
+                android:bottom="5dp" />
+        </shape>
+    </item>
+
+    <item android:state_focused="true" >
+        <shape>
+            <gradient
+                android:endColor="@color/colorButton"
+                android:startColor="@color/colorButtonBorder"
+                android:angle="270" />
+            <stroke
+                android:width="2dp"
+                android:color="@color/colorButtonBorder" />
+            <corners
+                android:radius="5dp" />
+            <padding
+                android:left="5dp"
+                android:top="5dp"
+                android:right="5dp"
+                android:bottom="5dp" />
+        </shape>
+    </item>
+
+    <item>
+        <shape>
+            <gradient
+                android:endColor="@color/colorButton"
+                android:startColor="@color/colorButtonBorder"
+                android:angle="270" />
+            <stroke
+                android:width="2dp"
+                android:color="@color/colorButtonBorder" />
+            <corners
+                android:radius="5dp" />
+            <padding
+                android:left="5dp"
+                android:top="5dp"
+                android:right="5dp"
+                android:bottom="5dp" />
+        </shape>
+    </item>
+
+</selector>

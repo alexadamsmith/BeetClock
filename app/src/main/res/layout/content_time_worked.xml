@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@color/colorBackground">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        tools:showIn="@layout/activity_main" tools:context=".TimeWorked">
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="15dp"></FrameLayout>
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:showIn="@layout/activity_main" tools:context=".TimeWorked">
+
+            <TextView
+                android:text="@string/crops"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:textSize="16dp"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:showIn="@layout/activity_main" tools:context=".TimeWorked"
+            android:id="@+id/crop_select">
+
+            <Spinner
+                android:id="@+id/crop_spinner_worked"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:typeface="serif"
+                android:textSize="20dp"
+                android:popupBackground="@color/colorBackground"/>
+            <!--android:background="@drawable/border_style"-->
+
+
+        </LinearLayout>
+
+            <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="15dp"></FrameLayout>
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:showIn="@layout/activity_main" tools:context=".TimeWorked">
+
+            <TextView
+                android:text="@string/jobs"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:textSize="16dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:showIn="@layout/activity_main" tools:context=".TimeWorked">
+
+
+            <Spinner
+                android:id="@+id/jobs_spinner_worked"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:typeface="serif"
+                android:textSize="20dp"
+                android:popupBackground="@color/colorBackground"/>
+            <!--android:background="@drawable/border_style"-->
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="15dp"></FrameLayout>
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:showIn="@layout/activity_main" tools:context=".TimeWorked">
+
+            <EditText android:id="@+id/edit_hours"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:hint="@string/hours_worked"
+                android:typeface="serif"
+                android:textColor="@color/colorTextStd"/>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="15dp"></FrameLayout>
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:showIn="@layout/activity_main" tools:context=".TimeWorked">
+
+            <EditText android:id="@+id/edit_workers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:hint="@string/workers_worked"
+                android:typeface="serif"
+                android:textColor="@color/colorTextStd"/>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="15dp"></FrameLayout>
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:showIn="@layout/activity_main" tools:context=".TimeWorked"
+            android:id="@+id/clock_controls">
+
+            <TextView
+                android:id="@+id/current_date"
+                android:text="@string/current_date"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:textSize="16dp"/>
+
+            <FrameLayout
+                android:layout_width="5dp"
+                android:layout_height="fill_parent"></FrameLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_pickDate"
+                android:onClick="openDatePicker"
+                android:typeface="serif"
+                android:textColor="@color/colorTextStd"
+                android:textSize="16dp"
+                android:background="@drawable/button_style"/>
+            <!--
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/button_show"
+                        android:onClick="getTimes"/>
+                        -->
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="15dp"></FrameLayout>
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:showIn="@layout/activity_time_worked" tools:context=".TimeWorked">
+
+            <TextView
+                android:text="@string/equipment"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:textSize="16dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:showIn="@layout/activity_time_worked" tools:context=".TimeWorked">
+
+
+            <Spinner
+                android:id="@+id/equip_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:typeface="serif"
+                android:textSize="20dp"
+                android:popupBackground="@color/colorBackground"/>
+            <!--android:background="@drawable/border_style"-->
+            <FrameLayout
+                android:layout_width="5dp"
+                android:layout_height="fill_parent"></FrameLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_add"
+                android:onClick="addEquip"
+                android:typeface="serif"
+                android:textColor="@color/colorTextStd"
+                android:textSize="16dp"
+                android:background="@drawable/button_style"/>
+
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="15dp"></FrameLayout>
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:showIn="@layout/activity_time_worked" tools:context=".TimeWorked"
+           >
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/button_Save"
+                android:onClick="saveWork"
+                android:typeface="serif"
+                android:textColor="@color/colorTextStd"
+                android:textSize="16dp"
+                android:background="@drawable/button_style"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
+
+
+

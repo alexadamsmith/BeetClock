@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_id": "beetclock",
+    "project_number": "296582458356",
+    "name": "BeetClock"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:296582458356:android:af6630059baa6224",
+        "client_id": "android:aas.beetclock",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "aas.beetclock"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "296582458356-2sgepkudm7219vlrii2qc8ai02a54co8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "aas.beetclock",
+            "certificate_hash": "26130917F2216E63BE6A1EE2704D40C55053740E"
+          }
+        },
+        {
+          "client_id": "296582458356-pce33me4imkm7eqcv7fpn0l0tlbk99hm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 1,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 2
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}

@@ -1,0 +1,57 @@
+    <resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+      <!--
+        <item name="colorBackground">@color/colorBackground</item>
+        <item name="colorButton">@color/colorButton</item>
+        -->
+
+        <item name="android:textViewStyle">@style/SerifTextViewStyle</item>
+        <item name="android:buttonStyle">@style/SerifButtonStyle</item>
+        <item name="android:scrollViewStyle">@style/SerifScrollStyle</item>
+        <item name="android:editTextStyle">@style/SerifEditText</item>
+
+        <item name="actionOverflowMenuStyle">@style/CMOptionsMenu</item>
+
+
+    </style>
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+
+
+        <style name="CMOptionsMenu" parent="Widget.AppCompat.PopupMenu.Overflow">
+            <item name="android:popupBackground">@color/colorBackground</item>
+        </style>
+
+        <style name="SerifTextViewStyle" parent="android:Widget.TextView">
+            <item name="android:typeface">serif</item>
+            <item name="android:textColor">@color/colorTextStd</item>
+        </style>
+
+        <style name="SerifButtonStyle" parent="android:Widget.Button">
+            <item name="android:typeface">serif</item>
+            <item name="android:background">@drawable/button_style</item>
+            <item name="android:textSize">16dp</item>
+            <item name="android:textColor">@color/colorTextStd</item>
+        </style>
+
+        <style name="SerifScrollStyle" parent="android:Widget.ScrollView">
+            <item name="android:typeface">serif</item>
+            <item name="android:textColor">@color/colorTextStd</item>
+        </style>
+
+        <style name="SerifEditText" parent="android:Widget.EditText">
+            <item name="android:typeface">serif</item>
+            <item name="android:textColor">@color/colorTextStd</item>
+        </style>
+</resources>
