@@ -20,7 +20,6 @@
     <string name="jobsManage">Manage jobs:</string>
     <string name="machineManage">Manage equipment:</string>
     <string name="clearRecords">Clear records:</string>
-    <string name="button_cleartimes">Delete all records</string>
     <string name="button_addcrop">Add crop</string>
     <string name="button_addjob">Add job</string>
     <string name="button_addmachine">Add equipment</string>
@@ -32,14 +31,16 @@
     <string name="button_deletemachine">Delete equipment</string>
 
 
-
+<!-- Mange records strings-->
     <string name="export">Export records:</string>
     <string name="export_exp">Saves all records to a .csv file in the \"Downloads\" folder</string>
     <string name="button_export">Export all records to file</string>
     <string name="importrecords">Import records:</string>
-    <string name="importrecords_exp">Select records file in \"Downloads\" folder</string>
+    <string name="importrecords_exp">Import from records file in \"Downloads\" folder.  This will clear all existing entries!</string>
+    <string name="edit_import">To import records, enter \"import\"</string>
     <string name="button_import">Import records</string>
-    <string name="edit_delete">To delete all records, enter \"delete\"</string>
+    <string name="edit_delete">To delete records, enter \"delete\"</string>
+    <string name="button_cleartimes">Delete records</string>
 
 
     <!-- PopulateSheet strings -->

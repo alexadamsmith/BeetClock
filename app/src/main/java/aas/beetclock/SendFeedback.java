@@ -23,6 +23,7 @@ public class SendFeedback extends AppCompatActivity {
         setContentView(R.layout.activity_send_feedback);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Send feedback");
 
         //Enables Strict Mode testing
         /*
@@ -46,6 +47,10 @@ public class SendFeedback extends AppCompatActivity {
         //On create
 
         //This should allow networking on the main thread, which is otherwise taboo apparently
+    }
+
+    public void onBackPressed() {
+        finish();
     }
 
     public void sendFeedback(View view){

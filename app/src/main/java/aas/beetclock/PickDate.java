@@ -28,6 +28,7 @@ public class PickDate extends AppCompatActivity {
         setContentView(R.layout.activity_pick_date);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Pick Date");
 
         //Enables Strict Mode testing
         /*
@@ -79,9 +80,10 @@ public class PickDate extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        finish();
         //For some reason I need to explicitly tell it what to do when back is pressed; crashes otherwise
-           Intent intent = new Intent(this, MainActivity.class);
-           startActivity(intent);
+        //   Intent intent = new Intent(this, MainActivity.class);
+        //   startActivity(intent);
     }
 
 

@@ -19,6 +19,7 @@ public class DisplaySummary extends AppCompatActivity {
         setContentView(R.layout.activity_display_summary);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Summary");
 
         //Enables Strict Mode testing
         /*
@@ -54,6 +55,9 @@ public class DisplaySummary extends AppCompatActivity {
         msgView.addView(textView);
 
 
+    }
+    public void onBackPressed() {
+        finish();
     }
 
 }

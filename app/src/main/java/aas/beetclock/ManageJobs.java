@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class ManageJobs extends AppCompatActivity {
@@ -24,6 +25,7 @@ public class ManageJobs extends AppCompatActivity {
         setContentView(R.layout.activity_manage_jobs);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Manage jobs");
 
         //Enables Strict Mode testing
         /*
@@ -61,13 +63,22 @@ public class ManageJobs extends AppCompatActivity {
 */
     }
 
+    public void onBackPressed() {
+        finish();
+    }
+
     private class populateSpinners extends AsyncTask<String, Integer, List<String[]>> {
         protected List<String[]> doInBackground(String... param) {
 
             //Get an array of crops
             SQLiteHelper db = new SQLiteHelper(ManageJobs.this);
                        List<String> joblist = db.getJobList();
-            java.util.Collections.sort(joblist);
+            java.util.Collections.sort(joblist, new Comparator<String>() {
+                @Override
+                public int compare(String o1, String o2) {
+                    return o1.compareToIgnoreCase(o2);
+                }
+            }); // Alphebetizes while ignoring case
             String[] jobArray = new String[joblist.size()];
             jobArray = joblist.toArray(jobArray);
 

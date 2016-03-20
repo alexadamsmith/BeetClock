@@ -147,6 +147,12 @@ public class DoScriptExecute extends AppCompatActivity { //previously just an ac
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+        }
+
+
     /**
      * Called when an activity launched here (specifically, AccountPicker
      * and authorization) exits, giving you the requestCode you started it with,

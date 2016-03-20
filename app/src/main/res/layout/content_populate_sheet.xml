@@ -23,7 +23,7 @@
         android:focusable="true"
         android:focusableInTouchMode="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:showIn="@layout/activity_crop_list" tools:context="aas.beetclock.PopulateSheet">
+        tools:showIn="@layout/activity_populate_sheet" tools:context="aas.beetclock.PopulateSheet">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
@@ -32,7 +32,7 @@
             android:orientation="horizontal"
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_main" tools:context=".PopulateSheet">
+            tools:showIn="@layout/activity_populate_sheet" tools:context=".PopulateSheet">
 
             <TextView
                 android:id="@+id/file_text"
@@ -54,7 +54,7 @@
             android:orientation="horizontal"
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_crop_list" tools:context=".PopulateSheet">
+            tools:showIn="@layout/activity_populate_sheet" tools:context=".PopulateSheet">
             />
             <Spinner
                 android:id="@+id/files_spinner"
@@ -72,7 +72,7 @@
             android:orientation="horizontal"
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_crop_list" tools:context=".PopulateSheet">
+            tools:showIn="@layout/activity_populate_sheet" tools:context=".PopulateSheet">
             />
             <Button
                 android:layout_width="wrap_content"
@@ -95,7 +95,7 @@
             android:orientation="horizontal"
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_main" tools:context=".PopulateSheet">
+            tools:showIn="@layout/activity_populate_sheet" tools:context=".PopulateSheet">
 
             <TextView
                 android:text="@string/chooseSheet"
@@ -111,7 +111,7 @@
             android:orientation="horizontal"
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_crop_list" tools:context=".PopulateSheet">
+            tools:showIn="@layout/activity_populate_sheet" tools:context=".PopulateSheet">
             />
             <Spinner
                 android:id="@+id/sheets_spinner"
@@ -134,7 +134,7 @@
             android:orientation="horizontal"
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_main" tools:context=".PopulateSheet">
+            tools:showIn="@layout/activity_populate_sheet" tools:context=".PopulateSheet">
 
             <TextView
                 android:text="@string/chooseCrop"
@@ -151,7 +151,7 @@
             android:orientation="horizontal"
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_crop_list" tools:context=".PopulateSheet">
+            tools:showIn="@layout/activity_populate_sheet" tools:context=".PopulateSheet">
             />
             <Spinner
                 android:id="@+id/crops_spinner"
@@ -174,7 +174,7 @@
             android:orientation="horizontal"
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_work_summary" tools:context=".PopulateSheet">
+            tools:showIn="@layout/activity_populate_sheet" tools:context=".PopulateSheet">
             />
 
             <TextView
@@ -193,7 +193,7 @@
             android:orientation="horizontal"
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_work_summary" tools:context=".WorkSummary">
+            tools:showIn="@layout/activity_populate_sheet" tools:context=".PopulateSheet">
             />
 
             <Button
@@ -219,7 +219,7 @@
             android:orientation="horizontal"
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_crop_list" tools:context=".PopulateSheet">
+            tools:showIn="@layout/activity_populate_sheet" tools:context=".PopulateSheet">
             />
             <Button
                 android:layout_width="fill_parent"

@@ -166,7 +166,7 @@
             android:onClick="displayRecords"
             android:typeface="serif"
             android:textColor="@color/colorTextStd"
-            android:textSize="15dp"
+            android:textSize="16dp"
             android:background="@drawable/button_style"/>
 
     </LinearLayout>

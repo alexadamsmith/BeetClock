@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -65,7 +66,7 @@ public class WorkSummary extends AppCompatActivity {
         setContentView(R.layout.activity_work_summary);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("View Report");
+        getSupportActionBar().setTitle("View summaries");
 
        //Enables Strict Mode testing
        /*
@@ -130,7 +131,6 @@ public class WorkSummary extends AppCompatActivity {
 
    }
 
-
     private class onLoad extends AsyncTask<String, Integer, List<String>> {
         protected List<String> doInBackground(String... param) {
 
@@ -153,7 +153,12 @@ public class WorkSummary extends AppCompatActivity {
             SQLiteHelper db = new SQLiteHelper(WorkSummary.this);
             String nullsearch = null; // Must send function a null string in order to return all results
             List<String> croplist = db.getCropList(nullsearch);
-            java.util.Collections.sort(croplist);
+            java.util.Collections.sort(croplist, new Comparator<String>() {
+                @Override
+                public int compare(String o1, String o2) {
+                    return o1.compareToIgnoreCase(o2);
+                }
+            }); // Alphebetizes while ignoring case
 
             return croplist;
         }
@@ -200,9 +205,11 @@ public class WorkSummary extends AppCompatActivity {
 
 
     public void onBackPressed() {
+        finish();
+
         //For some reason I need to explicitly tell it what to do when back is pressed; crashes otherwise
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        //Intent intent = new Intent(this, MainActivity.class);
+        //startActivity(intent);
             }
 
     public void onResume(){

@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -78,6 +79,7 @@ public class PopulateSheet extends AppCompatActivity {
         setContentView(R.layout.activity_populate_sheet);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Fill NOFA spreadsheet");
 
         //Do on execute:
 
@@ -109,6 +111,10 @@ public class PopulateSheet extends AppCompatActivity {
 
     }// end oncreate
 
+    public void onBackPressed() {
+        finish();
+    }
+
     private class onLoad extends AsyncTask<String, Integer, List<String[]>> {
         protected List<String[]> doInBackground(String... param) {
 
@@ -128,7 +134,12 @@ public class PopulateSheet extends AppCompatActivity {
             SQLiteHelper db = new SQLiteHelper(PopulateSheet.this);
             String nullsearch = null; // Must send function a null string in order to return all results
             List<String> croplist = db.getCropList(nullsearch);
-            java.util.Collections.sort(croplist);
+            java.util.Collections.sort(croplist, new Comparator<String>() {
+                @Override
+                public int compare(String o1, String o2) {
+                    return o1.compareToIgnoreCase(o2);
+                }
+            }); // Alphebetizes while ignoring case
             String[] cropArray = new String[croplist.size()];
             cropArray = croplist.toArray(cropArray);
 

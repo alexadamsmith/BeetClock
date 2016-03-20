@@ -23,6 +23,8 @@ import android.content.Context;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import aas.beetclock.SQLiteHelper;
+
+import java.util.Comparator;
 import java.util.List;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -178,19 +180,34 @@ public class MainActivity extends AppCompatActivity {
             SQLiteHelper db = new SQLiteHelper(MainActivity.this);
             String nullsearch = null; // Must send function a null string in order to return all results
             List<String> croplist = db.getCropList(nullsearch);
-            java.util.Collections.sort(croplist);
+            java.util.Collections.sort(croplist, new Comparator<String>() {
+                @Override
+                public int compare(String o1, String o2) {
+                    return o1.compareToIgnoreCase(o2);
+                }
+            }); // Alphebetizes while ignoring case
             String[] cropArray = new String[croplist.size()];
             cropArray = croplist.toArray(cropArray);
 
             //Get an array of jobs
             List<String> joblist = db.getJobList();
-            java.util.Collections.sort(joblist); // Put jobs in alphebetical order
+            java.util.Collections.sort(joblist, new Comparator<String>() {
+                @Override
+                public int compare(String o1, String o2) {
+                    return o1.compareToIgnoreCase(o2);
+                }
+            }); // Alphebetizes while ignoring case
             String[] jobArray = new String[joblist.size()];
             jobArray = joblist.toArray(jobArray);
 
             //Get an array of machinery
             List<String> equiplist = db.getMachineList(nullsearch);
-            java.util.Collections.sort(equiplist);
+            java.util.Collections.sort(equiplist, new Comparator<String>() {
+                @Override
+                public int compare(String o1, String o2) {
+                    return o1.compareToIgnoreCase(o2);
+                }
+            }); // Alphebetizes while ignoring case
             String[] equipArray = new String[equiplist.size()];
             equipArray = equiplist.toArray(equipArray);
 

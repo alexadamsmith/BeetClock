@@ -83,7 +83,7 @@ public class SendReport extends AppCompatActivity {
         setContentView(R.layout.activity_send_report);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("View / Send Report");
+        getSupportActionBar().setTitle("Email report");
 
         new onLoad().execute("");
 
@@ -226,9 +226,11 @@ public class SendReport extends AppCompatActivity {
 
 
     public void onBackPressed() {
+        finish();
+
         //For some reason I need to explicitly tell it what to do when back is pressed; crashes otherwise
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        //Intent intent = new Intent(this, MainActivity.class);
+        //startActivity(intent);
     }
 
     public void onResume(){

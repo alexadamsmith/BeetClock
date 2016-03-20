@@ -28,7 +28,7 @@
         android:orientation="horizontal"
         android:layout_height="wrap_content"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:showIn="@layout/activity_work_summary" tools:context=".WorkSummary">
+        tools:showIn="@layout/activity_send_feedback" tools:context=".SendFeedback">
         />
 
         <Button
@@ -54,7 +54,7 @@
         android:orientation="horizontal"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:showIn="@layout/activity_work_summary" tools:context=".WorkSummary">
+        tools:showIn="@layout/activity_send_feedback" tools:context=".SendFeedback">
         />
 
         <EditText android:id="@+id/edit_feedbackEmail"
@@ -78,7 +78,7 @@
         android:orientation="horizontal"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:showIn="@layout/activity_work_summary" tools:context=".WorkSummary">
+        tools:showIn="@layout/activity_send_feedback" tools:context=".SendFeedback">
         />
 
         <EditText android:id="@+id/edit_feedback"

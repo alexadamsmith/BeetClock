@@ -78,7 +78,7 @@
             android:orientation="horizontal"
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_display_report" tools:context=".DisplayReport">
+            tools:showIn="@layout/activity_send_report" tools:context=".SendReport">
             />
 
             <TextView
@@ -98,7 +98,7 @@
             android:orientation="horizontal"
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_display_report" tools:context=".DisplayReport">
+            tools:showIn="@layout/activity_send_report" tools:context=".SendReport">
             />
 
             <EditText android:id="@+id/edit_sender"
@@ -184,15 +184,6 @@
                 android:background="@drawable/button_style"/>
 
         </LinearLayout>
-
-        <!--
-            <ScrollView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:id="@+id/display_summary">
-
-            </ScrollView>
-            -->
 
     </LinearLayout>
 

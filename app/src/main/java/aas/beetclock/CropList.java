@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class CropList extends AppCompatActivity {
@@ -31,7 +32,7 @@ public class CropList extends AppCompatActivity {
         setContentView(R.layout.activity_crop_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Manage Records");
+        getSupportActionBar().setTitle("Manage crops");
 
         //Enables Strict Mode testing
         /*
@@ -65,6 +66,9 @@ public class CropList extends AppCompatActivity {
 
 //As an alternative, try printing all crop values
     }
+    public void onBackPressed() {
+        finish();
+    }
 
     private class populateSpinners extends AsyncTask<String, Integer, List<String[]>> {
         protected List<String[]> doInBackground(String... param) {
@@ -73,7 +77,12 @@ public class CropList extends AppCompatActivity {
             SQLiteHelper db = new SQLiteHelper(CropList.this);
             String nullsearch = null; // Must send function a null string in order to return all results
             List<String> croplist = db.getCropList(nullsearch);
-            java.util.Collections.sort(croplist);
+            java.util.Collections.sort(croplist, new Comparator<String>() {
+                @Override
+                public int compare(String o1, String o2) {
+                    return o1.compareToIgnoreCase(o2);
+                }
+            }); // Alphebetizes while ignoring case
             String[] cropArray = new String[croplist.size()];
             cropArray = croplist.toArray(cropArray);
 

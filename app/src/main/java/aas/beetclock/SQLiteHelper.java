@@ -340,12 +340,21 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     } // End get jobs
 
     // Delete all time records
-    public void deleteTimes() {
-
+    public Integer deleteTimes(Long selected) {
+        String selectQuery = Long.toString(selected);
         SQLiteDatabase db = this.getWritableDatabase();
-        //Delete all rows in the table
-        db.delete(TABLE_TIMES, null, null);
+        int rowcount = db.delete(TABLE_TIMES,
+                KEY_TIME + ">=?",
+                new String[] {selectQuery});
         db.close();
+
+        return rowcount;
+
+        //String query = "";
+        //query = "DELETE FROM " + TABLE_TIMES +" WHERE "+ KEY_TIME + ">="+ selectQuery ;
+        //db.rawQuery(query, null); // Go ahead and delete; return nothing
+        //Delete all rows in the table
+        //db.delete(TABLE_TIMES, null, null);
 
     } // end deleteTimes
 

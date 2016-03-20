@@ -32,7 +32,7 @@
         android:orientation="horizontal"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:showIn="@layout/activity_main" tools:context=".CropList">
+        tools:showIn="@layout/activity_crop_list" tools:context=".CropList">
 
         <TextView
             android:text="@string/cropsManage"
@@ -49,7 +49,7 @@
         android:orientation="horizontal"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:showIn="@layout/activity_main" tools:context=".CropList">
+        tools:showIn="@layout/activity_crop_list" tools:context=".CropList">
         />
 
         <EditText android:id="@+id/edit_newcrop"
@@ -73,7 +73,7 @@
         android:orientation="horizontal"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:showIn="@layout/activity_main" tools:context=".CropList">
+        tools:showIn="@layout/activity_crop_list" tools:context=".CropList">
         />
 
         <Button

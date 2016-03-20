@@ -20,6 +20,7 @@ import android.widget.Toast;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class TimeWorked extends AppCompatActivity {
         setContentView(R.layout.activity_time_worked);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Time Worked");
+        getSupportActionBar().setTitle("Enter time worked");
 
         //Enables Strict Mode testing
         /*
@@ -103,6 +104,9 @@ public class TimeWorked extends AppCompatActivity {
 
     }//end on create
 
+    public void onBackPressed() {
+        finish();
+    }
 
     private class populateSpinners extends AsyncTask<String, Integer, List<String[]>> {
         protected List<String[]> doInBackground(String... param) {
@@ -111,19 +115,34 @@ public class TimeWorked extends AppCompatActivity {
             SQLiteHelper db = new SQLiteHelper(TimeWorked.this);
             String nullsearch = null; // Must send function a null string in order to return all results
             List<String> croplist = db.getCropList(nullsearch);
-            java.util.Collections.sort(croplist);
+            java.util.Collections.sort(croplist, new Comparator<String>() {
+                @Override
+                public int compare(String o1, String o2) {
+                    return o1.compareToIgnoreCase(o2);
+                }
+            }); // Alphebetizes while ignoring case
             String[] cropArray = new String[croplist.size()];
             cropArray = croplist.toArray(cropArray);
 
             //Get an array of jobs
             List<String> joblist = db.getJobList();
-            java.util.Collections.sort(joblist);
+            java.util.Collections.sort(joblist, new Comparator<String>() {
+                @Override
+                public int compare(String o1, String o2) {
+                    return o1.compareToIgnoreCase(o2);
+                }
+            }); // Alphebetizes while ignoring case
             String[] jobArray = new String[joblist.size()];
             jobArray = joblist.toArray(jobArray);
 
             //Get an array of machinery
             List<String> equiplist = db.getMachineList(nullsearch);
-            java.util.Collections.sort(equiplist);
+            java.util.Collections.sort(equiplist, new Comparator<String>() {
+                @Override
+                public int compare(String o1, String o2) {
+                    return o1.compareToIgnoreCase(o2);
+                }
+            }); // Alphebetizes while ignoring case
             String[] equipArray = new String[equiplist.size()];
             equipArray = equiplist.toArray(equipArray);
 
@@ -183,7 +202,7 @@ public class TimeWorked extends AppCompatActivity {
 
 //Set text view to reflect selected date
         TextView msgView = (TextView) findViewById(R.id.current_date);
-        msgView.setTextSize(20);
+        msgView.setTextSize(16);
         String dateSince = new String();
 
         Date date = new Date(Long.valueOf(selection));
@@ -235,10 +254,11 @@ public class TimeWorked extends AppCompatActivity {
     try {
         workers = Integer.parseInt(workersString);
     } catch (NumberFormatException nfe) {
-        isvalid=false;
-        Toast.makeText(getApplicationContext(), "Enter valid number of workers", Toast.LENGTH_LONG).show();
+        if (!workersString.equals("") && !workersString.equals(null)) {
+            Toast.makeText(getApplicationContext(), "Invalid number of workers", Toast.LENGTH_SHORT).show();
+        }
     }
-if(hours > 0 && workers > 1){
+if(hours > 0 && workers > 0){
     //Multiply elapsed (ms) by workers
     long msElapsed = (long)hours * 3600000;
     long timeWorked = msElapsed * (long)workers;
@@ -283,6 +303,8 @@ if(hours > 0 && workers > 1){
     Toast.makeText(getApplicationContext(), "Enter valid numbers for hours and workers", Toast.LENGTH_SHORT).show();
 
     */
+}else{
+    Toast.makeText(getApplicationContext(), "Invalid number of workers", Toast.LENGTH_SHORT).show();
 }
 
 } // end saveWork
@@ -329,7 +351,7 @@ if(hours > 0 && workers > 1){
 
         protected void onPostExecute(String result) {
             Toast.makeText(getApplicationContext(), "Work time saved", Toast.LENGTH_SHORT).show();
-        }
+             }
     }
 
 

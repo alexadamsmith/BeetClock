@@ -19,7 +19,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        tools:showIn="@layout/activity_main" tools:context=".TimeWorked">
+        tools:showIn="@layout/activity_time_worked" tools:context=".TimeWorked">
 
         <FrameLayout
             android:layout_width="fill_parent"
@@ -32,7 +32,7 @@
             android:orientation="horizontal"
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_main" tools:context=".TimeWorked">
+            tools:showIn="@layout/activity_time_worked" tools:context=".TimeWorked">
 
             <TextView
                 android:text="@string/crops"
@@ -50,7 +50,7 @@
             android:orientation="horizontal"
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_main" tools:context=".TimeWorked"
+            tools:showIn="@layout/activity_time_worked" tools:context=".TimeWorked"
             android:id="@+id/crop_select">
 
             <Spinner
@@ -76,7 +76,7 @@
             android:orientation="horizontal"
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_main" tools:context=".TimeWorked">
+            tools:showIn="@layout/activity_time_worked" tools:context=".TimeWorked">
 
             <TextView
                 android:text="@string/jobs"
@@ -93,7 +93,7 @@
             android:orientation="horizontal"
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_main" tools:context=".TimeWorked">
+            tools:showIn="@layout/activity_time_worked" tools:context=".TimeWorked">
 
 
             <Spinner
@@ -118,7 +118,7 @@
             android:orientation="horizontal"
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_main" tools:context=".TimeWorked">
+            tools:showIn="@layout/activity_time_worked" tools:context=".TimeWorked">
 
             <EditText android:id="@+id/edit_hours"
                 android:layout_width="match_parent"
@@ -141,7 +141,7 @@
             android:orientation="horizontal"
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_main" tools:context=".TimeWorked">
+            tools:showIn="@layout/activity_time_worked" tools:context=".TimeWorked">
 
             <EditText android:id="@+id/edit_workers"
                 android:layout_width="match_parent"
@@ -164,8 +164,8 @@
             android:orientation="horizontal"
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_main" tools:context=".TimeWorked"
-            android:id="@+id/clock_controls">
+            tools:showIn="@layout/activity_time_worked" tools:context=".TimeWorked"
+            >
 
             <TextView
                 android:id="@+id/current_date"

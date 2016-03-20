@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class ManageEquipment extends AppCompatActivity {
@@ -24,6 +25,7 @@ public class ManageEquipment extends AppCompatActivity {
         setContentView(R.layout.activity_manage_equipment);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Manage equipment");
 
         //Enables Strict Mode testing
         /*
@@ -55,6 +57,10 @@ public class ManageEquipment extends AppCompatActivity {
 
     }
 
+    public void onBackPressed() {
+        finish();
+    }
+
     private class populateSpinners extends AsyncTask<String, Integer, List<String[]>> {
         protected List<String[]> doInBackground(String... param) {
 
@@ -64,7 +70,12 @@ public class ManageEquipment extends AppCompatActivity {
             //Initialize machinery spinner and populate with items
             //Load machinery names from Machine table
             List<String> machinelist = db.getMachineList(nullsearch);
-            java.util.Collections.sort(machinelist);
+            java.util.Collections.sort(machinelist, new Comparator<String>() {
+                @Override
+                public int compare(String o1, String o2) {
+                    return o1.compareToIgnoreCase(o2);
+                }
+            }); // Alphebetizes while ignoring case
             String[] spinmachine = new String[machinelist.size()];
             spinmachine = machinelist.toArray(spinmachine);
 
