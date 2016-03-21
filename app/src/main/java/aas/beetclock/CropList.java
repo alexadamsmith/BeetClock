@@ -46,25 +46,7 @@ public class CropList extends AppCompatActivity {
 
 //Load crop names from Crops table
         new populateSpinners().execute("");
-/*
-                StringBuilder liststring = new StringBuilder();
-                String sep = ", ";
-                for (String each : croplist) {
-                  liststring.append(sep).append(each);
-                }
-                String display = liststring.toString();
 
-                //String test = "Print this I beg you!!!";
-
-                TextView textView = new TextView(CropList.this);
-                textView.setTextSize(20);
-                textView.setText(display);
-                RelativeLayout msgLayout = (RelativeLayout) findViewById(R.id.display_crop_text);
-                msgLayout.removeAllViews();
-                msgLayout.addView(textView);
-                */
-
-//As an alternative, try printing all crop values
     }
     public void onBackPressed() {
         finish();
@@ -121,29 +103,6 @@ public class CropList extends AppCompatActivity {
             new doAdd().execute(newcrop);
         }
 
-
-        /*
-        //Then I can add the new crop to the Crops table
-        SQLiteHelper db = new SQLiteHelper(this);
-        db.addCropList(newcrop);
-
-        //And finally I want to update the list of crops on the spinner
-        String nullsearch = null; // Must send function a null string in order to return all results
-        List<String> croplist = db.getCropList(nullsearch);
-//Initialize spinner and populate with items
-        String[] spinarray = new String[croplist.size()];
-        spinarray = croplist.toArray(spinarray);
-        //This initializes the spinner with values from crop table
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
-                CropList.this, android.R.layout.simple_spinner_item, spinarray);
-        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//Update spinner values
-        Spinner crop_update_spinner = (Spinner)findViewById(R.id.crop_update_spinner);
-        crop_update_spinner.setAdapter(spinnerArrayAdapter);
-
-        Toast.makeText(getApplicationContext(), "Crop added", Toast.LENGTH_SHORT).show();
-        */
-
     } // End add newcrop
 
     private class doAdd extends AsyncTask<String, Integer, String> {
@@ -172,27 +131,7 @@ public class CropList extends AppCompatActivity {
         String selection = spin.getSelectedItem().toString();
 
         new doRemove().execute(selection);
-        /*
-        //Now I can call the delete function in SQLiteHelper
-        SQLiteHelper db = new SQLiteHelper(this);
-        db.deleteCropList(selection);
 
-        //And finally I want to update the list of crops on the spinner
-        String nullsearch = null; // Must send function a null string in order to return all results
-        List<String> croplist = db.getCropList(nullsearch);
-//Initialize spinner and populate with items
-        String[] spinarray = new String[croplist.size()];
-        spinarray = croplist.toArray(spinarray);
-        //This initializes the spinner with values from crop table
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
-                CropList.this, R.layout.spinnertext, spinarray);
-        spinnerArrayAdapter.setDropDownViewResource(R.layout.spinnertext);
-//Update spinner values
-        Spinner crop_update_spinner = (Spinner)findViewById(R.id.crop_update_spinner);
-        crop_update_spinner.setAdapter(spinnerArrayAdapter);
-
-        Toast.makeText(getApplicationContext(), "Crop deleted", Toast.LENGTH_SHORT).show();
-        */
     }//End delete crop
 
     private class doRemove extends AsyncTask<String, Integer, String> {

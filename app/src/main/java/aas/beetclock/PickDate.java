@@ -41,19 +41,6 @@ public class PickDate extends AppCompatActivity {
                 */
 
 
-/*
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-*/
-
-
-
         //Get calendar with current time and use it to initialize datePicker
         Calendar now = Calendar.getInstance();
         pickDate = (DatePicker) findViewById(R.id.datePicker);
@@ -81,9 +68,6 @@ public class PickDate extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finish();
-        //For some reason I need to explicitly tell it what to do when back is pressed; crashes otherwise
-        //   Intent intent = new Intent(this, MainActivity.class);
-        //   startActivity(intent);
     }
 
 

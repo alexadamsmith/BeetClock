@@ -38,29 +38,6 @@ public class ManageJobs extends AppCompatActivity {
 */
         new populateSpinners().execute("");
 
-        /*
-//Initialize jobs spinner and populate
-        SQLiteHelper db = new SQLiteHelper(ManageJobs.this);
-        String nullsearch = null; // Must send function a null string in order to return all results
-        //I also want to populate the jobs spinner with jobs from the jobs table
-        List<String> joblist = db.getJobList();
-        String[] jobsarray = new String[joblist.size()];
-        jobsarray = joblist.toArray(jobsarray);
-        //This initializes the spinner with values from the job table
-        ArrayAdapter<String> jobsArrayAdapter = new ArrayAdapter<String>(
-                this, R.layout.spinnertext, jobsarray);
-        jobsArrayAdapter.setDropDownViewResource(R.layout.spinnertext);
-        Spinner jobs_spinner = (Spinner)findViewById(R.id.jobs_spinner);
-        jobs_spinner.setAdapter(jobsArrayAdapter);
-
-        //Initialize categories spinner and populate.  These values will never change.
-        String[] categories = {"Soil prep","Cultivation","Post-harvest"};
-        ArrayAdapter<String> catsArrayAdapter = new ArrayAdapter<String>(
-                this, R.layout.spinnertext, categories);
-        catsArrayAdapter.setDropDownViewResource(R.layout.spinnertext);
-        Spinner cats_spinner = (Spinner)findViewById(R.id.categories_spinner);
-        cats_spinner.setAdapter(catsArrayAdapter);
-*/
     }
 
     public void onBackPressed() {
@@ -131,27 +108,6 @@ public class ManageJobs extends AppCompatActivity {
             new doAdd().execute(catJob);
         }
 
-
-        /*
-        //Then I can add the category job array to the Jobs table
-        SQLiteHelper db = new SQLiteHelper(this);
-        db.addJobList(catJob);
-
-        //And finally I want to update the list of crops on the spinner
-        List<String> joblist = db.getJobList();
-//Initialize spinner and populate with items
-        String[] spinarray = new String[joblist.size()];
-        spinarray = joblist.toArray(spinarray);
-        //This initializes the spinner with values from crop table
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
-                ManageJobs.this, android.R.layout.simple_spinner_item, spinarray);
-        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//Update spinner values
-        Spinner job_update_spinner = (Spinner)findViewById(R.id.jobs_spinner);
-        job_update_spinner.setAdapter(spinnerArrayAdapter);
-
-        Toast.makeText(getApplicationContext(), "Job added", Toast.LENGTH_SHORT).show();
-        */
     }//End add job
 
     private class doAdd extends AsyncTask<String[], Integer, String> {
@@ -179,26 +135,7 @@ public class ManageJobs extends AppCompatActivity {
         String selection = spin.getSelectedItem().toString();
 
         new doRemove().execute(selection);
-        /*
-        //Now I can call the delete function in SQLiteHelper
-        SQLiteHelper db = new SQLiteHelper(this);
-        db.deleteJobList(selection);
 
-        //And finally I want to update the list of crops on the spinner
-        List<String> joblist = db.getJobList();
-//Initialize spinner and populate with items
-        String[] spinarray = new String[joblist.size()];
-        spinarray = joblist.toArray(spinarray);
-        //This initializes the spinner with values from crop table
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
-                ManageJobs.this, R.layout.spinnertext, spinarray);
-        spinnerArrayAdapter.setDropDownViewResource(R.layout.spinnertext);
-//Update spinner values
-        // Spinner jobs_spinner = (Spinner)findViewById(R.id.jobs_spinner);
-        spin.setAdapter(spinnerArrayAdapter);
-
-        Toast.makeText(getApplicationContext(), "Job deleted", Toast.LENGTH_SHORT).show();
-        */
     }//end delete job
 
     private class doRemove extends AsyncTask<String, Integer, String> {

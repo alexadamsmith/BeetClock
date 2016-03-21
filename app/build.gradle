@@ -30,7 +30,7 @@ android {
             keyPassword "PASSWORD"
         }
     }
-    */
+*/
 
     buildTypes {
         release {

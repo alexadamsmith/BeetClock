@@ -4,10 +4,9 @@ package aas.beetclock;
 under a Creative Commons Attribution-ShareAlike 4.0 International License.*/
 
 import android.content.DialogInterface;
+import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
-//import android.support.design.widget.FloatingActionButton;
-//import android.support.design.widget.Snackbar;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -20,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.content.SharedPreferences;
 import android.content.Context;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import aas.beetclock.SQLiteHelper;
@@ -67,67 +67,11 @@ public class MainActivity extends AppCompatActivity {
                 .build());
                 */
 
-
-
-
-
-
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         // Run when the app loads***********************************
-
-/* moved to populateSpinners
-
-
-        //Load values from the crop table
-
-        SQLiteHelper db = new SQLiteHelper(this);
-        String nullsearch = null; // Must send function a null string in order to return all results
-        List<String> croplist = db.getCropList(nullsearch);
-
-//This populates the crop spinner with the search results
-
-        //First it is necessary to convert the list of search results to an array
-        String[] spinarray = new String[croplist.size()];
-        spinarray = croplist.toArray(spinarray);
-
-        //This initializes the spinner with values from crop table
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
-                this, R.layout.spinnertext, spinarray); //android.R.layout.simple_spinner_item
-        spinnerArrayAdapter.setDropDownViewResource(R.layout.spinnertext); //android.R.layout.simple_spinner_item
-
-        Spinner crop_spinner = (Spinner)findViewById(R.id.crop_spinner);
-        crop_spinner.setAdapter(spinnerArrayAdapter);
-
-
-//Initialize machinery spinner and populate with items
-        List<String> machinelist = db.getMachineList(nullsearch);
-        String[] spinmachine = new String[machinelist.size()];
-        spinmachine = machinelist.toArray(spinmachine);
-        ArrayAdapter<String> machineArrayAdapter = new ArrayAdapter<String>(
-                this, R.layout.spinnertext, spinmachine);
-        machineArrayAdapter.setDropDownViewResource(R.layout.spinnertext);
-
-        Spinner machine_spinner = (Spinner)findViewById(R.id.equip_spinner);
-        machine_spinner.setAdapter(machineArrayAdapter);
-
-        //Placing a digital clock in the upper lefthand corner
-        DigitalClock digital = (DigitalClock) findViewById(R.id.digital_clock);
-
-        //I also want to populate the jobs spinner with jobs from the jobs table
-        List<String> joblist = db.getJobList();
-        String[] jobsarray = new String[joblist.size()];
-        jobsarray = joblist.toArray(jobsarray);
-        //This initializes the spinner with values from the job table
-        ArrayAdapter<String> jobsArrayAdapter = new ArrayAdapter<String>(
-                this, R.layout.spinnertext, jobsarray); //android.R.layout.simple_spinner_item
-        jobsArrayAdapter.setDropDownViewResource(R.layout.spinnertext);//android.R.layout.simple_spinner_item
-        Spinner jobs_spinner = (Spinner)findViewById(R.id.jobs_spinner);
-        jobs_spinner.setAdapter(jobsArrayAdapter);
-
-        */
 
         //Populate Spinners
         new populateSpinners().execute("");
@@ -136,42 +80,30 @@ public class MainActivity extends AppCompatActivity {
         //refreshButtons();
         new refreshButtons().execute("");
 
-        //Finally remove old sharedPreference values
+        // set initial background image based on configuration
+        Configuration config = new Configuration();
+        ImageView background = (ImageView) findViewById(R.id.background_image);
+        background.setImageResource(R.drawable.bcbg_tall);
 
-/*
-        //Checks whether there is a current crop saved to SharedPreferences.  If so, displays crop and time started
-        SharedPreferences sharedPref = this.getSharedPreferences(
-                "aas.beetclock", Context.MODE_PRIVATE);
-       // SharedPreferences sharedPref = MainActivity.this.getPreferences(Context.MODE_PRIVATE);
-      //  SharedPreferences.Editor editor = sharedPref.edit();
-        String savedcrop = sharedPref.getString(SAVED_CROP, "");
-        if(savedcrop.equals("")) {}else{
-//If there is already a crop saved to SharedPreferences, I want to display crop and time started
-            String savedtime = sharedPref.getString(SAVED_TIME, "");
-            long longtime = Long.parseLong(savedtime);
-            //Put the date into a readable format
-            Date date = new Date(longtime);
-            DateFormat formatter = new SimpleDateFormat("hh:mm:aa");
 
-            //Retrieve the saved job
-            String savedjob = sharedPref.getString(SAVED_JOB, "");
 
-            //Parse together string reporting open job
-            String timeStarted = "Started " + savedjob + "ing " + savedcrop + " at " + formatter.format(date);
 
-            //Insert the date and crop into a text view
-            TextView textView = new TextView(this);
-            textView.setTextSize(20);
-            textView.setText(timeStarted);
-
-            //Update the text layout
-            ScrollView msgView = (ScrollView) findViewById(R.id.display_text);
-            msgView.removeAllViews();
-            msgView.addView(textView);
-
-        } //end if current crop in SharedPreferences
-        */
     }
+/*
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        // refresh the instructions image; Thanks to Seven7s! http://stackoverflow.com/questions/7203384/changing-image-in-imageview-on-orientation-change-does-not-work
+        ImageView background = (ImageView) findViewById(R.id.background_image);
+
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            background.setImageResource(R.drawable.bcbg_wide);
+        } else {
+            background.setImageResource(R.drawable.bcbg_tall);
+        }
+        background.refreshDrawableState();
+    }
+    */
 
     private class populateSpinners extends AsyncTask<String, Integer, List<String[]>> {
         protected List<String[]> doInBackground(String... param) {
@@ -448,85 +380,6 @@ if(!allEquip.contains(selectEquip)) {
     }//end AsyncTask refreshButtons
 
 
-/*
-    public void refreshButtons () {
-
-        //First I will connect to the layout and set params including space between buttons
-        LinearLayout linLayout = (LinearLayout)findViewById(R.id.clock_controls);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        layoutParams.setMargins(0, 0, 0, 15);
-
-        //Clear existing entries in layout
-        linLayout.removeAllViews();
-
-        //I will also inflate the spacer.xml view for insertion between buttons
-        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        SQLiteHelper db = new SQLiteHelper(this);
-
-        List<String> currentCrops = db.getCurrentCrops();
-
-            List<Long> currentTimes = db.getCurrentTimes();
-            List<String> currentJobs = db.getCurrentJobs();
-
-        //Setting up a listener for the button clicks
-        OnClickListener listener = new OnClickListener(){
-            @Override
-            public void onClick(View view){
-                int buttonTag = Integer.parseInt(view.getTag().toString().trim());
-                stopTime(buttonTag);
-                refreshButtons();
-            }
-        };
-
-        for (int i = 0; i < currentCrops.size(); i++) {
-
-            //Put the date into a readable format
-            Date date = new Date(currentTimes.get(i));
-            DateFormat formatter = new SimpleDateFormat("hh:mm:aa");
-
-            //Parse together string reporting open job
-            String stopProcess = currentJobs.get(i) + " on " + currentCrops.get(i) + " (started " + formatter.format(date)+"): Press to Stop";
-
-            Button stopButton = new Button(this);
-            stopButton.setTag(i);
-            stopButton.setText(stopProcess);
-
-            stopButton.setOnClickListener(listener); //end onclicklistener
-
-            linLayout.addView(stopButton, layoutParams);
-
-            View spacerView = inflater.inflate(R.layout.spacer, null, false);
-            linLayout.addView(spacerView);
-
-        } // end current for
-
-
-/*
-
-        Date date = new Date(time);
-        DateFormat formatter = new SimpleDateFormat("hh:mm:aa");
-        // Codes for re-writing this format available at http://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html
-        //String timeStarted = "Started " + activejob + "ing " + activecrop + " at " + formatter.format(date);
-        String timeStarted = "Started " + selectedjob + " on " + selectedcrop + " at " + formatter.format(date);
-
-// text ******************************************************************************
-
-        //Add onclick
-
-        TextView textView = new TextView(this);
-        textView.setTextSize(20);
-        textView.setText(timeStarted);
-
-//This clears and updates the display text view
-        ScrollView msgView = (ScrollView) findViewById(R.id.display_text);
-        msgView.removeAllViews();
-        msgView.addView(textView);
-
-    }
-*/
-
-
     /* Called when the user clicks the Start button */
     public void startTime(View view) {
 
@@ -558,92 +411,6 @@ if(!allEquip.contains(selectEquip)) {
         String[] params = {selectedcrop, selectedjob, workers};
 
         new toCurrent().execute(params);
-        //first I need to check if there is already an active crop saved to shared preferences
-        //SharedPreferences sharedPref = this.getSharedPreferences(
-        //        "aas.beetclock", Context.MODE_PRIVATE);
-        //SharedPreferences sharedPref = MainActivity.this.getPreferences(Context.MODE_PRIVATE);
-        //SharedPreferences.Editor editor = sharedPref.edit();
-       /*
-        SQLiteHelper db = new SQLiteHelper(this);
-
-            //Get system time in millaseconds and convert to string
-            Long time = System.currentTimeMillis();
-
-            //Get currently selected crop as string
-            Spinner spin = (Spinner) findViewById(R.id.crop_spinner);
-            String selectedcrop = spin.getSelectedItem().toString();
-
-            //Get currently selected job as a string
-            Spinner jobspin = (Spinner) findViewById(R.id.jobs_spinner);
-            String selectedjob = jobspin.getSelectedItem().toString();
-
-
-            List<String> entry = new ArrayList<String>();
-            entry.add(selectedcrop);
-            entry.add(String.valueOf(time));
-            entry.add(selectedjob);
-        //add allEquip only if equipment has been entered
-        if (allEquip.equals("")){
-            entry.add("no equip");
-        }else {
-            entry.add(allEquip);
-        }
-            db.addCurrent(entry);
-
-            //Now i need to refresh the stop buttons displayed on the main page:
-            //refreshButtons();
-        new refreshButtons().execute("");
-*/
-            //Get time, put the time into a human-readable format
-
-
-            /*
-            //This saves the crop and start time values
-            //first clears the old values from the memory
-            editor.remove(SAVED_CROP);
-            editor.remove(SAVED_TIME);
-            editor.remove(SAVED_JOB);
-            editor.remove(SAVED_EQUIP);
-            //Then saves the new values
-            //editor.putString(SAVED_CROP, activecrop);
-            editor.putString(SAVED_CROP, selectedcrop);
-            editor.putString(SAVED_TIME, time_str);
-            editor.putString(SAVED_JOB, selectedjob);
-            editor.putString(SAVED_EQUIP, allEquip);
-            editor.commit();
-
-
-            //Return message with crop and time started
-
-          /*
-            //First, retrieve saved preference values
-            savedcrop = sharedPref.getString(SAVED_CROP, "");
-            String savedtime = sharedPref.getString(SAVED_TIME, "");
-
-            //In order to work with time I need it as a long
-            long longtime = Long.parseLong(savedtime);
-
-
-            //Then, put the time into a human-readable format
-            TextView textView = new TextView(this);
-            textView.setTextSize(20);
-            Date date = new Date(time);
-            DateFormat formatter = new SimpleDateFormat("hh:mm:aa");
-            // Codes for re-writing this format available at http://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html
-            //String timeStarted = "Started " + activejob + "ing " + activecrop + " at " + formatter.format(date);
-            String timeStarted = "Started " + selectedjob + " on " + selectedcrop + " at " + formatter.format(date);
-            textView.setText(timeStarted);
-
-//This clears and updates the display text view
-            ScrollView msgView = (ScrollView) findViewById(R.id.display_text);
-            msgView.removeAllViews();
-            msgView.addView(textView);
-            */
-        //Lets try to create a database!
-        //MySQLiteHelper db = new MySQLiteHelper(this);
-
-        //db.addBook(entry1);
-        //db.addBook(entry2);
 
     } // End Start
 
@@ -691,150 +458,7 @@ if(!allEquip.contains(selectEquip)) {
     public void stopTime(int process) {
 
         new saveFinished().execute(process);
-        /*
-        //first I need to make sure there is already an active crop saved to shared preferences; otherwise the button should do nothing
-        //SharedPreferences sharedPref = this.getSharedPreferences(
-        //        "aas.beetclock", Context.MODE_PRIVATE);
-        //SharedPreferences sharedPref = MainActivity.this.getPreferences(Context.MODE_PRIVATE);
-        //SharedPreferences.Editor editor = sharedPref.edit();
-        //String savedcrop = sharedPref.getString(SAVED_CROP, "");
-        SQLiteHelper db = new SQLiteHelper(this);
-       // List<String> savedcrops = db.getCurrentCrops();
-       // if(savedcrops.size() == 0) {} else {
-        //if(savedcrop.equals("")) {}else {
 
-            //First I will need to get the current time from the system clock
-            Long stoptime = System.currentTimeMillis();
-            //And also retrieve the start time and crop from the database
-            List<String> currentCrops = db.getCurrentCrops();
-                List<Long> currentTimes = db.getCurrentTimes();
-                List<String> currentJobs = db.getCurrentJobs();
-            List<String> currentEquip = db.getCurrentMachinery();
-        String procString = Integer.toString(process);
-        //Remove the stopped process from the database
-        db.deleteCurrent(procString);
-
-            //Now I can calculate time elapsed
-            long elapsed = stoptime - currentTimes.get(process);
-
-            //If more than 1 worker is working, I will multiply by # of workers
-
-            //If string is convertable to int, convert to int
-            int workers = 1;
-            try {
-                workers = Integer.parseInt(workersString);
-            } catch (NumberFormatException nfe) {
-            }
-            long elapsedWork = 0;
-            if(elapsed > 0 && workers > 1){
-                elapsedWork = elapsed * (long)workers;
-            } else {
-                elapsedWork = elapsed;
-            }
-//add entry to times database
-            List<String> entry = new ArrayList<String>();
-            entry.add(currentCrops.get(process));
-            entry.add(String.valueOf(stoptime));
-            entry.add(String.valueOf(elapsedWork));
-            entry.add(currentJobs.get(process));
-            entry.add(currentEquip.get(process));
-
-            db.addTime(entry);
-
-            //I also want to display the elapsed time on screen
-            //The date formatter does not work for elapsed time, so I will need to use a different approach.  Thanks to Yiwei
-            String timeFormat = String.format("%d hrs, %d min, %d sec",
-                    TimeUnit.MILLISECONDS.toHours(elapsed),
-                    TimeUnit.MILLISECONDS.toMinutes(elapsed) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(elapsed)),
-                    TimeUnit.MILLISECONDS.toSeconds(elapsed) -
-                            (TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(elapsed)))
-            );
-
-
-            String timeElapsed = "Worked on " + currentCrops.get(process) + " for " + timeFormat;
-
-        Toast.makeText(getApplicationContext(), timeElapsed, Toast.LENGTH_LONG).show();
-
-/*
-            //Update the display layout with a text view showing time elapsed
-            TextView textView = new TextView(this);
-            textView.setTextSize(20);
-            textView.setText(timeElapsed);
-            ScrollView msgView = (ScrollView) findViewById(R.id.display_text);
-            msgView.removeAllViews();
-            msgView.addView(textView);
-
-
-            String savedtime = sharedPref.getString(SAVED_TIME, "");
-            //In order to work with time I need it as a long
-            long starttime = Long.parseLong(savedtime);
-
-            //Now I can calculate time elapsed
-            long elapsed = stoptime - starttime;
-
-            //If more than 1 worker is working, I will multiply by # of workers
-            EditText workersEdit = (EditText) findViewById(R.id.edit_number_workers);
-            String workersString =  workersEdit.getText().toString();
-            //If string is convertable to int, convert to int
-            int workers = 1;
-            try {
-                workers = Integer.parseInt(workersString);
-            } catch (NumberFormatException nfe) {
-            }
-            long elapsedWork = 0;
-            if(elapsed > 0 && workers > 1){
-                elapsedWork = elapsed * (long)workers;
-            } else {
-                elapsedWork = elapsed;
-            }
-
-            //I will also need to get the job from the job spinner
-            String savedjob = sharedPref.getString(SAVED_JOB, "");
-            String savedEquip = sharedPref.getString(SAVED_EQUIP, "no equip");
-
-            //I can now save the crop, system time and elapsed time to my Times table
-
-            //Start by creating a string list with crop, system time, elapsed, job
-            List<String> entry = new ArrayList<String>();
-            entry.add(savedcrop);
-            entry.add(String.valueOf(stoptime));
-            entry.add(String.valueOf(elapsedWork));
-            entry.add(savedjob);
-            entry.add(savedEquip);
-
-            SQLiteHelper db = new SQLiteHelper(this);
-            db.addTime(entry);
-
-
-            //I also want to display the elapsed time on screen
-            //The date formatter does not work for elapsed time, so I will need to use a different approach.  Thanks to Yiwei
-            String timeFormat = String.format("%d hrs, %d min, %d sec",
-                    TimeUnit.MILLISECONDS.toHours(elapsed),
-                    TimeUnit.MILLISECONDS.toMinutes(elapsed) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(elapsed)),
-                    TimeUnit.MILLISECONDS.toSeconds(elapsed) -
-                            (TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(elapsed)))
-            );
-
-
-            String timeElapsed = "Worked on " + savedcrop + " for " + timeFormat;
-
-
-            //Update the display layout with a text view showing time elapsed
-            TextView textView = new TextView(this);
-            textView.setTextSize(20);
-            textView.setText(timeElapsed);
-            ScrollView msgView = (ScrollView) findViewById(R.id.display_text);
-            msgView.removeAllViews();
-            msgView.addView(textView);
-
-            //Clear the saved crop and start time from memory
-            editor.remove(SAVED_CROP);
-            editor.remove(SAVED_TIME);
-            editor.remove(SAVED_JOB);
-            editor.remove(SAVED_EQUIP);
-            editor.commit();
-            */
-        //} // end else no crop saved to preferences
     } // End Stop
 
 

@@ -46,60 +46,9 @@ public class TimeWorked extends AppCompatActivity {
                 .penaltyFlashScreen()
                 .build());
                 */
-/*
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
 
-            }
-        });
-        */
         //Do on create
-        //Load crop names from Crops table
-        /*
-        SQLiteHelper db = new SQLiteHelper(TimeWorked.this);
-        String nullsearch = null; // Must send function a null string in order to return all results
-        List<String> croplist = db.getCropList(nullsearch);
 
-
-//Initialize crops spinner and populate with items
-        String[] spinarray = new String[croplist.size()];
-        spinarray = croplist.toArray(spinarray);
-
-        //This initializes the spinner with values from crop table
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
-                TimeWorked.this, R.layout.spinnertext, spinarray);
-        spinnerArrayAdapter.setDropDownViewResource(R.layout.spinnertext);
-
-        Spinner crop_update_spinner = (Spinner)findViewById(R.id.crop_spinner_worked);
-        crop_update_spinner.setAdapter(spinnerArrayAdapter);
-
-//Initialize jobs spinner and populate
-        //I also want to populate the jobs spinner with jobs from the jobs table
-        List<String> joblist = db.getJobList();
-        String[] jobsarray = new String[joblist.size()];
-        jobsarray = joblist.toArray(jobsarray);
-        //This initializes the spinner with values from the job table
-        ArrayAdapter<String> jobsArrayAdapter = new ArrayAdapter<String>(
-                this, R.layout.spinnertext, jobsarray);
-        jobsArrayAdapter.setDropDownViewResource(R.layout.spinnertext);
-        Spinner jobs_spinner = (Spinner)findViewById(R.id.jobs_spinner_worked);
-        jobs_spinner.setAdapter(jobsArrayAdapter);
-
-        //Initialize machinery spinner and populate with items
-        List<String> machinelist = db.getMachineList(nullsearch);
-        String[] spinmachine = new String[machinelist.size()];
-        spinmachine = machinelist.toArray(spinmachine);
-        ArrayAdapter<String> machineArrayAdapter = new ArrayAdapter<String>(
-                this, R.layout.spinnertext, spinmachine);
-        machineArrayAdapter.setDropDownViewResource(R.layout.spinnertext);
-
-        Spinner machine_spinner = (Spinner)findViewById(R.id.equip_spinner);
-        machine_spinner.setAdapter(machineArrayAdapter);
-*/
         new populateSpinners().execute("");
 
     }//end on create
@@ -273,36 +222,7 @@ if(hours > 0 && workers > 0){
     String[] toSave = {crop, String.valueOf(timeWorked), job};
 
     new workedDb().execute(toSave);
-    /*
-    //Get saved date OR current time
-    String workTime = "";
-    if(selectedDate != null && !selectedDate.equals("") && !selectedDate.isEmpty()){
-        workTime = selectedDate;
-    } else {
-        workTime = Long.toString(System.currentTimeMillis());
-    }
 
-    //Save to Db, return notification in toast
-    List<String> entry = new ArrayList<String>();
-    entry.add(crop);
-    entry.add(String.valueOf(workTime));
-    entry.add(String.valueOf(timeWorked));
-    entry.add(job);
-    if (allEquip.equals("")){
-        entry.add("no equip");
-    }else {
-        entry.add(allEquip);
-    }
-
-    SQLiteHelper db = new SQLiteHelper(this);
-    db.addTime(entry);
-
-    Toast.makeText(getApplicationContext(), "Work time saved", Toast.LENGTH_SHORT).show();
-} else {
-  //Notify if valid numbers are not entered
-    Toast.makeText(getApplicationContext(), "Enter valid numbers for hours and workers", Toast.LENGTH_SHORT).show();
-
-    */
 }else{
     Toast.makeText(getApplicationContext(), "Invalid number of workers", Toast.LENGTH_SHORT).show();
 }

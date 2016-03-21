@@ -28,13 +28,6 @@ import java.util.Arrays;
 import android.util.Log;
 import android.os.StrictMode;
 import android.content.Intent;
-import android.widget.DatePicker;
-import java.util.Calendar;
-import android.app.Dialog;
-import android.app.DatePickerDialog;
-import android.app.Activity;
-import com.opencsv.CSVWriter;
-import java.io.FileWriter;
 import java.io.File;
 import android.os.Environment;
 
@@ -49,15 +42,6 @@ public class WorkSummary extends AppCompatActivity {
     public String reportDate;
 
     File file = null;
-
-
-    //public final static int DATE_PICKER = 999;
-
-    //private DatePicker datePicker;
-
-    //public int year = 2000;
-    //public int month = 1;
-    //public int day = 1;
 
 
    @Override
@@ -79,55 +63,6 @@ public class WorkSummary extends AppCompatActivity {
                */
 
        new onLoad().execute("");
-
-/*
-        //Obtain since date and set to text field on create
-
-       //SharedPreferences sharedPref = WorkSummary.this.getPreferences(Context.MODE_PRIVATE);
-       //SharedPreferences.Editor editor = sharedPref.edit();
-       SharedPreferences sharedPref = this.getSharedPreferences(
-               "aas.beetclock", Context.MODE_PRIVATE);
-       SharedPreferences.Editor editor = sharedPref.edit();
-
-       reportDate = sharedPref.getString(REPORT_DATE, "0");
-       //String selectedDate = sharedPref.getString(SELECTED_DATE, "");
-       TextView msgView = (TextView) findViewById(R.id.date_text);
-       msgView.setTextSize(20);
-       String dateSince = new String();
-
-//Trying no saved selected date at all
-      // if(selectedDate.equals("")){
-           //If no date selected, display date of last report OR all records since start
-           if(reportDate.equals("")){
-               //If there is no date of last report, retrieve all records ever
-               dateSince = "Retrieve records since you started using BeetClock, OR";
-           }else {
-               //If there is a date of last report, retrieve records since that date
-               Date date = new Date(Long.valueOf(reportDate));
-               DateFormat formatter = new SimpleDateFormat("dd:MMM:yyyy");
-               // Codes for re-writing this format available at http://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html
-               dateSince = "Retrieve records since " + formatter.format(date)+" OR";
-           }//end reporDate else
-       msgView.setText(dateSince);
-
-
-       //Load crop names from Crops table
-       SQLiteHelper db = new SQLiteHelper(WorkSummary.this);
-       String nullsearch = null; // Must send function a null string in order to return all results
-       List<String> croplist = db.getCropList(nullsearch);
-
-//Initialize crops spinner and populate with items
-       String[] spinarray = new String[croplist.size()];
-       spinarray = croplist.toArray(spinarray);
-
-       //This initializes the spinner with values from crop table
-       ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
-               WorkSummary.this, R.layout.spinnertext, spinarray);
-       spinnerArrayAdapter.setDropDownViewResource(R.layout.spinnertext);
-
-       Spinner crop_report_spinner = (Spinner)findViewById(R.id.crop_report_spinner);
-       crop_report_spinner.setAdapter(spinnerArrayAdapter);
-       */
 
    }
 
@@ -206,10 +141,6 @@ public class WorkSummary extends AppCompatActivity {
 
     public void onBackPressed() {
         finish();
-
-        //For some reason I need to explicitly tell it what to do when back is pressed; crashes otherwise
-        //Intent intent = new Intent(this, MainActivity.class);
-        //startActivity(intent);
             }
 
     public void onResume(){
@@ -231,24 +162,6 @@ public class WorkSummary extends AppCompatActivity {
         //Make the selected date public
 
         new onLoad().execute(selection);
-        /*
-        SELECTED_DATE = selection;
-        //Saves the selected date as report_date
-        editor.putString(REPORT_DATE, selection);
-        editor.commit();
-
-//Set text view to reflect selected date
-        TextView msgView = (TextView) findViewById(R.id.date_text);
-        msgView.setTextSize(20);
-        String dateSince = new String();
-
-        Date date = new Date(Long.valueOf(selection));
-        DateFormat formatter = new SimpleDateFormat("dd:MMM:yyyy");
-        // Codes for re-writing this format available at http://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html
-        dateSince = "Retrieve records since " + formatter.format(date) + " OR";
-
-        msgView.setText(dateSince);
-        */
 
     }//end onResult
 
@@ -261,8 +174,6 @@ public class WorkSummary extends AppCompatActivity {
         System.out.println(cropSelect);
 
         new createSummary().execute(cropSelect);
-       //String summary = createSummary();
-
 
     };
 
@@ -284,8 +195,6 @@ public class WorkSummary extends AppCompatActivity {
 
 
     // creates a summary for the selected crop
-   //public String createSummary() {
-
        private class createSummary extends AsyncTask<String, Integer, String> {
            protected String doInBackground(String... param) {
 
@@ -436,10 +345,6 @@ public class WorkSummary extends AppCompatActivity {
 
         return outputs;
     }//end makeSum
-
-
-
-
 
 
     private class createDump extends AsyncTask<String, Integer, String> {

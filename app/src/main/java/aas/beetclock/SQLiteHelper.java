@@ -350,12 +350,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         return rowcount;
 
-        //String query = "";
-        //query = "DELETE FROM " + TABLE_TIMES +" WHERE "+ KEY_TIME + ">="+ selectQuery ;
-        //db.rawQuery(query, null); // Go ahead and delete; return nothing
-        //Delete all rows in the table
-        //db.delete(TABLE_TIMES, null, null);
-
     } // end deleteTimes
 
 

@@ -38,22 +38,6 @@ public class ManageEquipment extends AppCompatActivity {
                 */
 
         new populateSpinners().execute("");
-/*
-        SQLiteHelper db = new SQLiteHelper(ManageEquipment.this);
-        String nullsearch = null;
-
-        //Initialize machinery spinner and populate with items
-        //Load machinery names from Machine table
-        List<String> machinelist = db.getMachineList(nullsearch);
-        String[] spinmachine = new String[machinelist.size()];
-        spinmachine = machinelist.toArray(spinmachine);
-        ArrayAdapter<String> machineArrayAdapter = new ArrayAdapter<String>(
-                ManageEquipment.this, R.layout.spinnertext, spinmachine);
-        machineArrayAdapter.setDropDownViewResource(R.layout.spinnertext);
-
-        Spinner machine_spinner = (Spinner)findViewById(R.id.machine_spinner);
-        machine_spinner.setAdapter(machineArrayAdapter);
-        */
 
     }
 
@@ -114,27 +98,6 @@ public class ManageEquipment extends AppCompatActivity {
             new doAdd().execute(newmachine);
         }
 
-/*
-        //Then I can add the new crop to the Crops table
-        SQLiteHelper db = new SQLiteHelper(this);
-        db.addMachineList(newmachine);
-
-        //And finally I want to update the list of machinery on the spinner
-        String nullsearch = null; // Must send function a null string in order to return all results
-//Initialize machinery spinner and populate with items
-        //Load machinery names from Machine table
-        List<String> machinelist = db.getMachineList(nullsearch);
-        String[] spinmachine = new String[machinelist.size()];
-        spinmachine = machinelist.toArray(spinmachine);
-        ArrayAdapter<String> machineArrayAdapter = new ArrayAdapter<String>(
-                ManageEquipment.this, R.layout.spinnertext, spinmachine);
-        machineArrayAdapter.setDropDownViewResource(R.layout.spinnertext);
-
-        Spinner machine_spinner = (Spinner)findViewById(R.id.machine_spinner);
-        machine_spinner.setAdapter(machineArrayAdapter);
-
-        Toast.makeText(getApplicationContext(), "Equipment added", Toast.LENGTH_SHORT).show();
-        */
     } // End add machine
 
     private class doAdd extends AsyncTask<String, Integer, String> {
@@ -162,27 +125,7 @@ public class ManageEquipment extends AppCompatActivity {
         String selection = spin.getSelectedItem().toString();
 
         new doRemove().execute(selection);
-/*
-        //Now I can call the delete function in SQLiteHelper
-        SQLiteHelper db = new SQLiteHelper(this);
-        db.deleteMachineList(selection);
 
-        //And finally I want to update the list of crops on the spinner
-        String nullsearch = null; // Must send function a null string in order to return all results
-//Initialize machinery spinner and populate with items
-        //Load machinery names from Machine table
-        List<String> machinelist = db.getMachineList(nullsearch);
-        String[] spinmachine = new String[machinelist.size()];
-        spinmachine = machinelist.toArray(spinmachine);
-        ArrayAdapter<String> machineArrayAdapter = new ArrayAdapter<String>(
-                ManageEquipment.this, R.layout.spinnertext, spinmachine);
-        machineArrayAdapter.setDropDownViewResource(R.layout.spinnertext);
-
-        Spinner machine_spinner = (Spinner)findViewById(R.id.machine_spinner);
-        machine_spinner.setAdapter(machineArrayAdapter);
-
-        Toast.makeText(getApplicationContext(), "Equipment deleted", Toast.LENGTH_SHORT).show();
-        */
     }//End delete machine
 
     private class doRemove extends AsyncTask<String, Integer, String> {

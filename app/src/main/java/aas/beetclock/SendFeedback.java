@@ -34,19 +34,6 @@ public class SendFeedback extends AppCompatActivity {
                 .penaltyFlashScreen()
                 .build());
                 */
-/*
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-                    });
-                    */
-        //On create
-
-        //This should allow networking on the main thread, which is otherwise taboo apparently
     }
 
     public void onBackPressed() {
@@ -109,7 +96,7 @@ public class SendFeedback extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), sentMsg, Toast.LENGTH_SHORT).show();
 
         }
-    }
+    }//end AsyncTask emailFeedback
 
 
 }

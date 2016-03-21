@@ -56,15 +56,6 @@ public class SendReport extends AppCompatActivity {
     File file = null;
 
 
-    //public final static int DATE_PICKER = 999;
-
-    //private DatePicker datePicker;
-
-    //public int year = 2000;
-    //public int month = 1;
-    //public int day = 1;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,74 +77,6 @@ public class SendReport extends AppCompatActivity {
         getSupportActionBar().setTitle("Email report");
 
         new onLoad().execute("");
-
-//This should allow networking on the main thread, which is otherwise taboo apparently
-        /*
-        int SDK_INT = android.os.Build.VERSION.SDK_INT;
-        if (SDK_INT > 8)
-        {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-                    .permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-            //your codes here
-
-        }
-        */
-/*
-        //Obtain since date and set to text field on create
-
-        //SharedPreferences sharedPref = WorkSummary.this.getPreferences(Context.MODE_PRIVATE);
-        //SharedPreferences.Editor editor = sharedPref.edit();
-        SharedPreferences sharedPref = this.getSharedPreferences(
-                "aas.beetclock", Context.MODE_PRIVATE);
-
-        String reportDate = sharedPref.getString(REPORT_DATE, "0");
-        //String selectedDate = sharedPref.getString(SELECTED_DATE, "");
-        TextView msgView = (TextView) findViewById(R.id.date_text_report);
-        msgView.setTextSize(20);
-        String dateSince = new String();
-
-//Trying no saved selected date at all
-        // if(selectedDate.equals("")){
-        //If no date selected, display date of last report OR all records since start
-        if(reportDate.equals("")){
-            //If there is no date of last report, retrieve all records ever
-            dateSince = "Retrieve records since you started using BeetClock, OR";
-        }else {
-            //If there is a date of last report, retrieve records since that date
-            Date date = new Date(Long.valueOf(reportDate));
-            DateFormat formatter = new SimpleDateFormat("dd:MMM:yyyy");
-            // Codes for re-writing this format available at http://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html
-            dateSince = "Retrieve records since " + formatter.format(date)+" OR";
-        }//end reporDate else
-        msgView.setText(dateSince);
-
-
-
-        //Retrieve and set previous sender if saved
-        String senderSaved = sharedPref.getString(SAVED_SENDER, "");
-        //String selectedDate = sharedPref.getString(SELECTED_DATE, "");
-        TextView senderView = (TextView) findViewById(R.id.sender_text);
-        senderView.setTextSize(20);
-        String senderText = "";
-        if(senderSaved.equals("")){
-        }else{
-            senderText = ("Send report as " + senderSaved + " OR ");
-        }
-        senderView.setText(senderText);
-
-        //Retrieve and set previous email if saved
-        String recipSaved = sharedPref.getString(SAVED_RECIPIENT, "");
-        //String selectedDate = sharedPref.getString(SELECTED_DATE, "");
-        TextView recipView = (TextView) findViewById(R.id.email_text);
-        recipView.setTextSize(20);
-        String recipText = "";
-        if(recipSaved.equals("")){
-        }else{
-            recipText = "Send report to " + recipSaved + " OR ";
-        }
-        recipView.setText(recipText);
-        */
 
     }
 
@@ -228,9 +151,6 @@ public class SendReport extends AppCompatActivity {
     public void onBackPressed() {
         finish();
 
-        //For some reason I need to explicitly tell it what to do when back is pressed; crashes otherwise
-        //Intent intent = new Intent(this, MainActivity.class);
-        //startActivity(intent);
     }
 
     public void onResume(){
@@ -238,34 +158,6 @@ public class SendReport extends AppCompatActivity {
 
         new onLoad().execute("");
 
-        /*
-        //I want to update the saved sender and address on resume
-        SharedPreferences sharedPref = this.getSharedPreferences(
-                "aas.beetclock", Context.MODE_PRIVATE);
-        //Retrieve and set previous sender if saved
-        String senderSaved = sharedPref.getString(SAVED_SENDER, "");
-        //String selectedDate = sharedPref.getString(SELECTED_DATE, "");
-        TextView senderView = (TextView) findViewById(R.id.sender_text);
-        senderView.setTextSize(20);
-        String senderText = "";
-        if(senderSaved.equals("")){
-        }else{
-            senderText = ("Send report as " + senderSaved + " OR ");
-        }
-        senderView.setText(senderText);
-
-        //Retrieve and set previous email if saved
-        String recipSaved = sharedPref.getString(SAVED_RECIPIENT, "");
-        //String selectedDate = sharedPref.getString(SELECTED_DATE, "");
-        TextView recipView = (TextView) findViewById(R.id.email_text);
-        recipView.setTextSize(20);
-        String recipText = "";
-        if(recipSaved.equals("")){
-        }else{
-            recipText = "Send report to " + recipSaved + " OR ";
-        }
-        recipView.setText(recipText);
-*/
     }//end onResume
 
 
@@ -280,28 +172,7 @@ public class SendReport extends AppCompatActivity {
 
         String selection = data.getStringExtra("selection");
         new onLoad().execute(selection);
-/*
-        SharedPreferences sharedPref = this.getSharedPreferences(
-                "aas.beetclock", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-//Make the selected date public
-        SELECTED_DATE = selection;
-        //Saves the selected date as report_date
-        editor.putString(REPORT_DATE, selection);
-        editor.commit();
 
-//Set text view to reflect selected date
-        TextView msgView = (TextView) findViewById(R.id.date_text_report);
-        msgView.setTextSize(20);
-        String dateSince = new String();
-
-        Date date = new Date(Long.valueOf(selection));
-        DateFormat formatter = new SimpleDateFormat("dd:MMM:yyyy");
-        // Codes for re-writing this format available at http://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html
-        dateSince = "Retrieve records since, " + formatter.format(date) + " OR";
-
-        msgView.setText(dateSince);
-*/
     }//end onResult
 
 
@@ -309,19 +180,6 @@ public class SendReport extends AppCompatActivity {
         //Emails a report to the specified address
         String inputs = "";
         new queryDB().execute(inputs);
-
-
-
-/*
-
-        String sentMsg = new String();
-        if(exceptionMsg.equals("")){
-            sentMsg = "Report sent successfully!";
-        } else {
-            sentMsg = "Error sending report - make sure your recipient address(es) are in the correct format.";
-        }
-        Toast.makeText(getApplicationContext(), sentMsg, Toast.LENGTH_SHORT).show();
-*/
 
     }//end sendReport
 
@@ -387,9 +245,6 @@ public class SendReport extends AppCompatActivity {
             String recordsName = "/data/user/0/aas.beetclock/files/beetclock_records.csv";
             // String filename = "beetclock_report.csv";
             String[] mailin = {sender, address, fullReport, reportName, recordsName};
-            //SendMail sendMail = new SendMail();
-            //sentSuccess monitors whether the message was sent successfully
-            //Boolean sentSuccess = true;
 
             new mailReport().execute(mailin);
         }
@@ -649,9 +504,6 @@ if (success){
                 String hrsSep = "hrs";
                 String minFormat = String.valueOf( TimeUnit.MILLISECONDS.toMinutes(elapsedlist.get(i)) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(elapsedlist.get(i))) );
                 String minSep = "min";
-                //String secFormat = String.valueOf( TimeUnit.MILLISECONDS.toSeconds(elapsedlist.get(i)) -
-                //        (TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(elapsedlist.get(i))) ));
-                //String secSep = "sec";
 //Add a column with the record date
                 String dateFormat = formatter.format(timeslist.get(i));
                 String[] csvsummary = {cropslist.get(i), jobslist.get(i), equiplist.get(i), hrsFormat, minFormat, dateFormat};

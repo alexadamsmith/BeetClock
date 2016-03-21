@@ -82,34 +82,10 @@ public class PopulateSheet extends AppCompatActivity {
         getSupportActionBar().setTitle("Fill NOFA spreadsheet");
 
         //Do on execute:
-
-
-
-        //Set date text to saved date
-        //SharedPreferences sharedPref = this.getSharedPreferences(
-        //        "aas.beetclock", Context.MODE_PRIVATE);
-        //SharedPreferences.Editor editor = sharedPref.edit();
-        //reportDate = sharedPref.getString(REPORT_DATE, "0");
-
-
         //Populate Spinners
         new onLoad().execute("");
 
-        /*
-        SQLiteHelper db = new SQLiteHelper(this);
-        String nullsearch = null; // Must send function a null string in order to return all results
-        List<String> croplist = db.getCropList(nullsearch);
-        String[] spinarray = new String[croplist.size()];
-        spinarray = croplist.toArray(spinarray);
-        //This initializes the spinner with values from crop table
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
-                this, R.layout.spinnertext, spinarray); //android.R.layout.simple_spinner_item
-        spinnerArrayAdapter.setDropDownViewResource(R.layout.spinnertext); //android.R.layout.simple_spinner_item
-        Spinner crop_spinner = (Spinner)findViewById(R.id.crops_spinner);
-        crop_spinner.setAdapter(spinnerArrayAdapter);
-        */
-
-    }// end oncreate
+            }// end oncreate
 
     public void onBackPressed() {
         finish();
@@ -248,17 +224,6 @@ public class PopulateSheet extends AppCompatActivity {
             filesArrayAdapter.setDropDownViewResource(R.layout.spinnertext);
             Spinner files_spinner = (Spinner) findViewById(R.id.files_spinner);
             files_spinner.setAdapter(filesArrayAdapter);
-            /*
-            files_spinner.setOnItemSelectedListener(
-                    new OnItemSelectedListener() {
-                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            listPos = position;
-                            getSheets();
-                        }
-                        public void onNothingSelected(AdapterView<?> parent) {
-                        }
-                    });
-                    */
 //End file result
         } else if (requestCode == SHEET_CODE && resultCode == Activity.RESULT_OK) {
             output = data.getStringArrayExtra(DoScriptExecute.KEY_RESPONSE);
@@ -278,31 +243,6 @@ public class PopulateSheet extends AppCompatActivity {
         //Make the selected date public
 
             new onLoad().execute(selection);
-
-/*
-            SharedPreferences sharedPref = this.getSharedPreferences(
-                    "aas.beetclock", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPref.edit();
-
-        selectedDate = selection;
-
-
-        //Saves the selected date as report_date
-            editor.putString(REPORT_DATE, selection);
-            editor.commit();
-
-//Set text view to reflect selected date
-        TextView msgView = (TextView) findViewById(R.id.date_text);
-        msgView.setTextSize(20);
-        String dateSince = new String();
-
-            Date date = new Date(Long.valueOf(selection));
-            DateFormat formatter = new SimpleDateFormat("dd:MMM:yyyy");
-            // Codes for re-writing this format available at http://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html
-            dateSince = "Retrieve records since, " + formatter.format(date) + " OR";
-
-        msgView.setText(dateSince);
-        */
 //End date result
     }  else if (requestCode == POP_CODE && resultCode == Activity.RESULT_OK) {
             Toast.makeText(getApplicationContext(), "Values written to sheet", Toast.LENGTH_SHORT).show();
@@ -421,10 +361,6 @@ public class PopulateSheet extends AppCompatActivity {
             String[] params = {"popSheet", savedId, parameters[0]};
 
             Intent intent = new Intent(PopulateSheet.this, DoScriptExecute.class);
-            //The script reqires a List<String> with two entries: URL, Value
-            //List<String> params = new ArrayList<String>();
-            //params.add("https://docs.google.com/spreadsheets/d/1o1kjZSo8iioMVpRffHKt1wFcUl31k_mILrGTdEUO7Ko/");
-            //params.add("Edit!");
             intent.putExtra(KEY_PARAMS, params);
             intent.putExtra(KEY_JOBS, jobs);
             intent.putExtra(KEY_EQUIP, equipment);
