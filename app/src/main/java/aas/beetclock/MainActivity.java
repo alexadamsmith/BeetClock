@@ -81,9 +81,9 @@ public class MainActivity extends AppCompatActivity {
         new refreshButtons().execute("");
 
         // set initial background image based on configuration
-        Configuration config = new Configuration();
-        ImageView background = (ImageView) findViewById(R.id.background_image);
-        background.setImageResource(R.drawable.bcbg_tall);
+//        Configuration config = new Configuration();
+//        ImageView background = (ImageView) findViewById(R.id.background_image);
+//        background.setImageResource(R.drawable.bcbg_tall);
 
 
 

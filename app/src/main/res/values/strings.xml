@@ -11,8 +11,10 @@
     <string name="button_start">Start timer</string>
     <string name="button_stop">Stop work</string>
     <string name="button_add">Add</string>
-    <string name="number_workers">Number of workers (default = 1)</string>
+    <string name="number_workers">Number of workers:</string>
+    <string name="workers">(Default = 1)</string>
     <string name="new_timer">Start new timer: </string>
+    <string name="clock_caption">Current time:</string>
 
 
 <!-- CropList strings -->
