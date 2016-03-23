@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -50,7 +51,8 @@ public class PopulateSheet extends AppCompatActivity {
     public final static String FILE_ID = "aas.beetclock.file_id";
     public final static String FILE_NAME = "aas.beetclock.file_name";
 
-    public String[] output;
+    public String[] files;
+    public String[] sheets;
     public String[] ids;
     public String selectedDate;
     public String reportDate;
@@ -213,24 +215,42 @@ public class PopulateSheet extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {  // When result of doScriptExecute is returned
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == FILE_CODE && resultCode == Activity.RESULT_OK) { //Do this if returning a filenames response
-            output = data.getStringArrayExtra(DoScriptExecute.KEY_RESPONSE);
+            files = data.getStringArrayExtra(DoScriptExecute.KEY_RESPONSE);
             ids = data.getStringArrayExtra(DoScriptExecute.KEY_IDS);
-            //!!!Must create another extra response that includes IDs rather than names.  Set active ID for retrieval of sheets
-
+/*
+            //Alphabetize files in spinner
+            List<String> fileList = Arrays.asList(files);
+            java.util.Collections.sort(fileList, new Comparator<String>() {
+                @Override
+                public int compare(String o1, String o2) {
+                    return o1.compareToIgnoreCase(o2);
+                }
+            }); // Alphebetizes while ignoring case
+            String[] fileAlpha = fileList.toArray(new String[0]);
+*/
             //Now I will go ahead and populate the filenames spinner
-            //Initialize categories spinner and populate.  These values will never change.
             ArrayAdapter<String> filesArrayAdapter = new ArrayAdapter<String>(
-                    this, R.layout.spinnertext, output);
+                    this, R.layout.spinnertext, files);
             filesArrayAdapter.setDropDownViewResource(R.layout.spinnertext);
             Spinner files_spinner = (Spinner) findViewById(R.id.files_spinner);
             files_spinner.setAdapter(filesArrayAdapter);
 //End file result
         } else if (requestCode == SHEET_CODE && resultCode == Activity.RESULT_OK) {
-            output = data.getStringArrayExtra(DoScriptExecute.KEY_RESPONSE);
+            sheets = data.getStringArrayExtra(DoScriptExecute.KEY_RESPONSE);
             //Now I will go ahead and populate the filenames spinner
-            //Initialize categories spinner and populate.  These values will never change.
+
+            /*//Alphabetize sheets in spinner
+            List<String> sheetList = Arrays.asList(sheets);
+            java.util.Collections.sort(sheetList, new Comparator<String>() {
+                @Override
+                public int compare(String o1, String o2) {
+                    return o1.compareToIgnoreCase(o2);
+                }
+            }); // Alphebetizes while ignoring case
+            String[] sheetAlpha = sheetList.toArray(new String[0]);
+*/
             ArrayAdapter<String> sheetsArrayAdapter = new ArrayAdapter<String>(
-                    this, R.layout.spinnertext, output);
+                    this, R.layout.spinnertext, sheets);
             sheetsArrayAdapter.setDropDownViewResource(R.layout.spinnertext);
             Spinner sheets_spinner = (Spinner) findViewById(R.id.sheets_spinner);
             sheets_spinner.setAdapter(sheetsArrayAdapter);
@@ -256,6 +276,15 @@ public class PopulateSheet extends AppCompatActivity {
         Spinner fileSpin = (Spinner) findViewById(R.id.files_spinner);
         int position = fileSpin.getSelectedItemPosition();
         String fileName = fileSpin.getSelectedItem().toString();
+       /* // get position in from alphebetized list
+       int position = 0;
+            for (int i = 0; i < files.length; i++){
+            if(fileName.equals(files[i])){
+                position = i;
+            }
+        }
+        */
+
         String fileId = ids[position];
         //Save name and Id of selected
         savedName = fileName;
