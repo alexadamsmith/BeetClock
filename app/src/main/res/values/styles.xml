@@ -15,10 +15,6 @@
         <item name="android:tint">@color/button_text</item>
     </style>
 
-    <style name="clock" parent="@style/Base.TextAppearance.AppCompat.Display2">
-        <!--<item name="android:fontFamily">serif</item>-->
-    </style>
-
     <style name="headline" parent="@style/Base.TextAppearance.AppCompat.Headline">
         <item name="android:fontFamily">serif</item>
     </style>

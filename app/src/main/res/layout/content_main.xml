@@ -22,7 +22,8 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:background="@color/colorBackground">
+    android:background="@color/colorBackground"
+    android:fillViewport="false">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -49,37 +50,6 @@
             android:id="@+id/clock_controls">
 
             <!--Used by onPostExecute function for some reason. Do not delete!-->
-
-        </LinearLayout>
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_main" tools:context=".MainActivity"
-            android:id="@+id/system_clock"
-            android:layout_marginBottom="@dimen/layout_bumper"
-            >
-
-            <TextView
-                android:id="@+id/clock_caption"
-                style="@style/caption"
-                android:text="@string/clock_caption"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal" />
-
-            <DigitalClock
-                android:id="@+id/digital_clock"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                style="@style/clock"
-                android:layout_gravity="center_horizontal" />
-
 
         </LinearLayout>
 
