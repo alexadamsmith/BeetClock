@@ -5,6 +5,8 @@ under a Creative Commons Attribution-ShareAlike 4.0 International License.*/
 
 import android.content.DialogInterface;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -86,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Default background image is tall
         background = (ImageView) findViewById(R.id.background_image);
-        background.setImageResource(R.drawable.bcbg_tall);
+        background.setImageResource(R.drawable.bcbg2_tall);
 
         //set listener for orientation change (image view is declared final)
         view.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
@@ -94,10 +96,12 @@ public class MainActivity extends AppCompatActivity {
             public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft,
                                        int oldTop, int oldRight, int oldBottom) {
                 int orientation = getResources().getConfiguration().orientation;
+//First clear existing bitmap
+
                 if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                    background.setImageResource(R.drawable.bcbg_wide);
+                           background.setImageResource(R.drawable.bcbg2_wide);
                 } else {
-                    background.setImageResource(R.drawable.bcbg_tall);
+                    background.setImageResource(R.drawable.bcbg2_tall);
                 }
             }
         });
@@ -113,7 +117,9 @@ public class MainActivity extends AppCompatActivity {
 
         // set initial background image based on configuration
 
-    }
+    }//End onCreate
+
+
 /*
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);

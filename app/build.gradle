@@ -15,7 +15,7 @@ android {
         versionName "1.0"
         multiDexEnabled = true
     }
-
+/*
     signingConfigs {
         release {
             storeFile file("C:\\Program Files\\Java\\jdk1.8.0_65\\bin\\release-key.keystore")
@@ -30,7 +30,7 @@ android {
             keyPassword "PASSWORD"
         }
     }
-
+*/
 
     buildTypes {
         release {

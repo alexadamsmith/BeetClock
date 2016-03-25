@@ -196,6 +196,7 @@ public class TimeWorked extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "Enter valid number of hours", Toast.LENGTH_LONG).show();
     }
 
+
     EditText workersEdit = (EditText) findViewById(R.id.edit_workers);
     String workersString =  workersEdit.getText().toString();
     //If string is convertable to int, convert to int
@@ -209,7 +210,7 @@ public class TimeWorked extends AppCompatActivity {
     }
 if(hours > 0 && workers > 0){
     //Multiply elapsed (ms) by workers
-    long msElapsed = (long)hours * 3600000;
+    long msElapsed = (long)(hours * 3600000);
     long timeWorked = msElapsed * (long)workers;
 
     //Get values from crop and jobs spinners
@@ -262,7 +263,7 @@ if(hours > 0 && workers > 0){
             db.addTime(entry);
 
 
-            return "";
+            return timeWorked;
         }
 
         protected void onProgressUpdate(Integer... progress) {
@@ -270,7 +271,7 @@ if(hours > 0 && workers > 0){
         }
 
         protected void onPostExecute(String result) {
-            Toast.makeText(getApplicationContext(), "Work time saved", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
              }
     }
 
