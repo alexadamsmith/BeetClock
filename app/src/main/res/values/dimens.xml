@@ -1,6 +1,49 @@
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
+
+
+
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="activity_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <!--Values for buttons-->
+    <dimen name="button_minwidth">88dp</dimen>
+    <dimen name="button_square_min">20dp</dimen>
+    <dimen name="button_minheight">36dp</dimen>
+    <dimen name="button_elevation">2dp</dimen>
+
+    <dimen name="button_padding">16dp</dimen>
+    <dimen name="button_radius">5dp</dimen>
+
+    <!--Values for text-->
+    <dimen name="font_display2">45sp</dimen>
+    <dimen name="font_display1">32sp</dimen>
+    <dimen name="font_headline">24sp</dimen>
+    <dimen name="font_title">20sp</dimen>
+    <dimen name="font_body">14sp</dimen>
+    <!--<dimen name="font_"></dimen>-->
+
+    <!--Values for menus-->
+    <dimen name="menu_width">112dp</dimen>
+    <dimen name="menu_item_height">48dp</dimen>
+    <dimen name="menu_padding">8dp</dimen>
+    <dimen name="menu_padding_bottom">10dp</dimen>
+    <dimen name="menu_elevation">2dp</dimen>
+
+    <!--Other layout values-->
+    <dimen name="layout_bumper">8dp</dimen>
+
+    <!--<dimen name="layout_"></dimen>-->
+
+
+
+    <!-- Default screen margins, per the Android Design guidelines.
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    -->
+
+
+
 </resources>

@@ -271,7 +271,7 @@ if(hours > 0 && workers > 0){
         }
 
         protected void onPostExecute(String result) {
-            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Entry saved", Toast.LENGTH_SHORT).show();
              }
     }
 
