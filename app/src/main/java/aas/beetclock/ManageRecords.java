@@ -118,9 +118,14 @@ public class ManageRecords extends AppCompatActivity {
         //Get content of edit_delete
         EditText editDelete = (EditText) findViewById(R.id.edit_delete);
         String toDelete = editDelete.getText().toString();
+        String delDate = "0";
+
+        if (!deleteSince.equals(null) && !deleteSince.equals("") && !deleteSince.isEmpty()){
+            delDate = deleteSince;
+        }
 
         if(toDelete.equals("delete")) {
-            new doClear().execute(deleteSince);
+            new doClear().execute(delDate);
         }else{
             Toast.makeText(getApplicationContext(), "To delete all records, enter 'delete' above.", Toast.LENGTH_LONG).show();
         }
@@ -135,26 +140,28 @@ public class ManageRecords extends AppCompatActivity {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {  // When result of date picker is returned
         super.onActivityResult(requestCode, resultCode, data);
-        String selectedDate = "0";
+        if(resultCode == RESULT_OK) {
+            String selectedDate = "0";
 
-        String selection = data.getStringExtra("selection");
-        //Make the selected date public
-        if(!selection.isEmpty() && !selection.equals(null) && !selection.equals("")) {
-            selectedDate = selection;
-        }
-        deleteSince = selectedDate; // delete all records since selected date, or all records if none selected
+            String selection = data.getStringExtra("selection");
+            //Make the selected date public
+            if (!selection.isEmpty() && !selection.equals(null) && !selection.equals("")) {
+                selectedDate = selection;
+            }
+            deleteSince = selectedDate; // delete all records since selected date, or all records if none selected
 
 //Set text view to reflect selected date
-        TextView msgView = (TextView) findViewById(R.id.current_date);
-        msgView.setTextSize(16);
-        String dateSince = new String();
+            TextView msgView = (TextView) findViewById(R.id.current_date);
+            msgView.setTextSize(16);
+            String dateSince = new String();
 
-        Date date = new Date(Long.valueOf(selection));
-        DateFormat formatter = new SimpleDateFormat("dd:MMM:yyyy");
-        // Codes for re-writing this format available at http://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html
-        dateSince = "Delete records since " + formatter.format(date) ;
+            Date date = new Date(Long.valueOf(selection));
+            DateFormat formatter = new SimpleDateFormat("dd:MMM:yyyy");
+            // Codes for re-writing this format available at http://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html
+            dateSince = "Delete records since " + formatter.format(date);
 
-        msgView.setText(dateSince);
+            msgView.setText(dateSince);
+        }//end if RESULT_OK
 
     }//end onResult
 

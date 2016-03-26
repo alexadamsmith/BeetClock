@@ -392,6 +392,7 @@ if(!allEquip.contains(selectEquip)) {
 
             for (int i = 0; i < cropArray.length; i++) {
 
+
                 //Put the date into a readable format
                 Date date = new Date(Long.parseLong(timeArray[i]));
                 DateFormat formatter = new SimpleDateFormat("hh:mm:aa");
@@ -410,6 +411,27 @@ if(!allEquip.contains(selectEquip)) {
                 View spacerView = inflater.inflate(R.layout.spacer, null, false);
                 linLayout.addView(spacerView);
 
+/* //In case I want to create tickign clocks on stop buttons
+                Thread t = new Thread() {
+                    @Override
+                    public void run() {
+                        try {
+                            while (!isInterrupted()) {
+                                Thread.sleep(1000);
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        // update TextView here!
+                                    }
+                                });
+                            }
+                        } catch (InterruptedException e) {
+                        }
+                    }
+                };
+
+                t.start();
+*/
             } // end current for
 
         }//end postExecute

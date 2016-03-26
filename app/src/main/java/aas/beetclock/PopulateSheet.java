@@ -257,12 +257,11 @@ public class PopulateSheet extends AppCompatActivity {
 
 //End sheet result
         } else if (requestCode == DATE_CODE && resultCode == Activity.RESULT_OK) {
-
 //get data from date selector
-        String selection = data.getStringExtra("selection");
-        //Make the selected date public
+                String selection = data.getStringExtra("selection");
+                //Make the selected date public
 
-            new onLoad().execute(selection);
+                new onLoad().execute(selection);
 //End date result
     }  else if (requestCode == POP_CODE && resultCode == Activity.RESULT_OK) {
             Toast.makeText(getApplicationContext(), "Values written to sheet", Toast.LENGTH_SHORT).show();

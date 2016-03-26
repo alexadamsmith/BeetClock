@@ -144,22 +144,23 @@ public class TimeWorked extends AppCompatActivity {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {  // When result of date picker is returned
         super.onActivityResult(requestCode, resultCode, data);
-
-        String selection = data.getStringExtra("selection");
-        //Make the selected date public
-        selectedDate = selection;
+if(resultCode == RESULT_OK) {
+    String selection = data.getStringExtra("selection");
+    //Make the selected date public
+    selectedDate = selection;
 
 //Set text view to reflect selected date
-        TextView msgView = (TextView) findViewById(R.id.current_date);
-        msgView.setTextSize(16);
-        String dateSince = new String();
+    TextView msgView = (TextView) findViewById(R.id.current_date);
+    msgView.setTextSize(16);
+    String dateSince = new String();
 
-        Date date = new Date(Long.valueOf(selection));
-        DateFormat formatter = new SimpleDateFormat("dd:MMM:yyyy");
-        // Codes for re-writing this format available at http://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html
-        dateSince = "On " + formatter.format(date) + " OR";
+    Date date = new Date(Long.valueOf(selection));
+    DateFormat formatter = new SimpleDateFormat("dd:MMM:yyyy");
+    // Codes for re-writing this format available at http://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html
+    dateSince = "On " + formatter.format(date) + " OR";
 
-        msgView.setText(dateSince);
+    msgView.setText(dateSince);
+}
 
     }//end onResult
 
