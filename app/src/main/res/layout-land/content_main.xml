@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:layout_height="fill_parent"-->
+    <!--android:background="@color/colorBackground">-->
+
+    <!--<ImageView-->
+        <!--android:id="@+id/background_image"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="fill_parent"-->
+        <!--android:scaleType="centerCrop"-->
+        <!--/>-->
+<!-- android:src="@drawable/bcbg_tall" -->
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@color/colorBackground"
+    android:fillViewport="false">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        tools:showIn="@layout/activity_main" tools:context=".MainActivity"
+        android:padding="@dimen/activity_margin"
+        android:gravity="center_vertical|fill_vertical"
+        android:id="@+id/content_main_body">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:showIn="@layout/activity_main" tools:context=".MainActivity"
+            android:id="@+id/clock_controls">
+
+            <!--Used by onPostExecute function for some reason. Do not delete!-->
+
+        </LinearLayout>
+
+        <TextView
+            style="@style/title"
+            android:text="@string/new_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/layout_bumper" />
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:showIn="@layout/activity_main" tools:context=".MainActivity"
+            android:id="@+id/crop_select"
+            android:layout_marginBottom="@dimen/layout_bumper">
+
+            <TextView
+                style="@style/subhead"
+                android:text="@string/crops"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/crop_select_header" />
+
+            <Spinner
+                android:id="@+id/crop_spinner"
+                style="@style/spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:showIn="@layout/activity_main" tools:context=".MainActivity"
+            android:layout_marginBottom="@dimen/layout_bumper">
+
+            <TextView
+                style="@style/subhead"
+                android:text="@string/jobs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Spinner
+                android:id="@+id/jobs_spinner"
+                style="@style/spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/layout_bumper"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:showIn="@layout/activity_main" tools:context=".Main">
+
+            <TextView
+                style="@style/subhead"
+                android:text="@string/number_workers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+            <EditText android:id="@+id/edit_number_workers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/workers"
+                android:inputType="number"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginBottom="@dimen/layout_bumper">
+
+            <TextView
+                android:id="@+id/equip_title"
+                style="@style/subhead"
+                android:text="@string/equipment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <Spinner
+                    android:id="@+id/equip_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="100"
+                    />
+                <!--android:background="@drawable/border_style"-->
+
+                <ImageButton
+
+                    android:id="@+id/equip_button"
+                    style="@style/buttonGraphic"
+                    android:src="@drawable/ic_action_add"
+                    android:text="@string/button_add"
+                    android:onClick="addEquip"
+                    android:layout_alignParentEnd="false"
+                    android:layout_alignParentStart="false"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorButton"
+                    android:focusable="false"
+                    android:layout_weight="1"
+                    android:minWidth="@dimen/button_square_min"
+                    android:layout_gravity="center_vertical"
+                    android:minHeight="@dimen/button_square_min" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <Button
+            style="@style/buttonTimer"
+            android:text="@string/button_start"
+            android:onClick="startTime"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal" />
+
+
+        <!--
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                tools:showIn="@layout/activity_main" tools:context=".MainActivity"
+                android:id="@+id/display_text">
+
+
+
+
+            </LinearLayout>
+        -->
+
+
+    </LinearLayout>
+
+</ScrollView>
+

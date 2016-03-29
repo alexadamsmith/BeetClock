@@ -4,7 +4,7 @@
     <color name="colorPrimary">#d81b60</color>
     <color name="colorPrimaryDark">#880e4f</color>
     <color name="colorAccent">#4daf4e</color>
-    <color name="colorBackground">#ffffff</color>
+    <color name="colorBackground">#fafafa</color>
 
     <color name="colorButton">#039be5</color>
     <color name="colorButtonBorder">#FF0277BD</color>
@@ -16,6 +16,8 @@
     <color name="menu_bg">#ffffff</color>
 
     <color name="colorTextStd">#333333</color>
+    <color name="background_material_light">#fafafa</color>
+    <color name="background_light">#ffffff</color>
 
 
     <!-- original colorscheme
