@@ -5,6 +5,8 @@ under a Creative Commons Attribution-ShareAlike 4.0 International License.*/
 
 import android.content.DialogInterface;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -19,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.content.SharedPreferences;
 import android.content.Context;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -52,6 +55,11 @@ public class MainActivity extends AppCompatActivity {
 
     public String allEquip = "";
 
+   public FrameLayout frameLayout;
+    public ImageView background;
+    public LayoutInflater inflater;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,9 +75,36 @@ public class MainActivity extends AppCompatActivity {
                 .build());
                 */
 
-        setContentView(R.layout.activity_main);
+
+        inflater = this.getLayoutInflater();
+        frameLayout = new FrameLayout(this);
+        View view = inflater.inflate(R.layout.activity_main, null);
+        frameLayout.addView(view);
+
+        //setContentView(R.layout.activity_main);
+        setContentView(frameLayout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //Default background image is tall
+        background = (ImageView) findViewById(R.id.background_image);
+        background.setImageResource(R.drawable.bcbg2_tall);
+
+        //set listener for orientation change (image view is declared final)
+        view.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft,
+                                       int oldTop, int oldRight, int oldBottom) {
+                int orientation = getResources().getConfiguration().orientation;
+//First clear existing bitmap
+
+                if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                           background.setImageResource(R.drawable.bcbg2_wide);
+                } else {
+                    background.setImageResource(R.drawable.bcbg2_tall);
+                }
+            }
+        });
 
         // Run when the app loads***********************************
 
@@ -81,17 +116,18 @@ public class MainActivity extends AppCompatActivity {
         new refreshButtons().execute("");
 
         // set initial background image based on configuration
-//        Configuration config = new Configuration();
-//        ImageView background = (ImageView) findViewById(R.id.background_image);
-//        background.setImageResource(R.drawable.bcbg_tall);
+
+    }//End onCreate
 
 
-
-
-    }
 /*
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+
+        frameLayout.removeAllViews();
+        LayoutInflater inflater = this.getLayoutInflater();
+        View view = inflater.inflate(R.layout.activity_main, null);
+        frameLayout.addView(view);
 
         // refresh the instructions image; Thanks to Seven7s! http://stackoverflow.com/questions/7203384/changing-image-in-imageview-on-orientation-change-does-not-work
         ImageView background = (ImageView) findViewById(R.id.background_image);
@@ -102,9 +138,9 @@ public class MainActivity extends AppCompatActivity {
             background.setImageResource(R.drawable.bcbg_tall);
         }
         background.refreshDrawableState();
-    }
-    */
 
+    }
+*/
     private class populateSpinners extends AsyncTask<String, Integer, List<String[]>> {
         protected List<String[]> doInBackground(String... param) {
 
@@ -356,6 +392,7 @@ if(!allEquip.contains(selectEquip)) {
 
             for (int i = 0; i < cropArray.length; i++) {
 
+
                 //Put the date into a readable format
                 Date date = new Date(Long.parseLong(timeArray[i]));
                 DateFormat formatter = new SimpleDateFormat("hh:mm:aa");
@@ -374,6 +411,27 @@ if(!allEquip.contains(selectEquip)) {
                 View spacerView = inflater.inflate(R.layout.spacer, null, false);
                 linLayout.addView(spacerView);
 
+/* //In case I want to create tickign clocks on stop buttons
+                Thread t = new Thread() {
+                    @Override
+                    public void run() {
+                        try {
+                            while (!isInterrupted()) {
+                                Thread.sleep(1000);
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        // update TextView here!
+                                    }
+                                });
+                            }
+                        } catch (InterruptedException e) {
+                        }
+                    }
+                };
+
+                t.start();
+*/
             } // end current for
 
         }//end postExecute
