@@ -16,11 +16,11 @@
     </style>
 
     <style name="headline" parent="@style/Base.TextAppearance.AppCompat.Headline">
-        <item name="android:fontFamily">serif</item>
+        <item name="android:typeface">serif</item>
     </style>
 
     <style name="title" parent="@style/Base.TextAppearance.AppCompat.Title">
-        <item name="android:fontFamily">serif</item>
+        <item name="android:typeface">serif</item>
     </style>
 
     <style name="subhead" parent="@style/Base.TextAppearance.AppCompat.Subhead">
@@ -36,7 +36,8 @@
         <!--<item name="android:dropDownWidth">@dimen/menu_width</item>-->
         <item name="android:spinnerMode">dialog</item>
         <item name="android:popupBackground">@color/menu_bg</item>
-        <item name="android:popupElevation">@dimen/menu_elevation</item>
+        <item name="android:background">@color/colorBackground</item>
+        <!--<item name="android:popupElevation">@dimen/menu_elevation</item>-->
         <!--<item name="android:dropDownSpinnerStyle"></item>-->
     </style>
 

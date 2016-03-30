@@ -144,22 +144,23 @@ public class TimeWorked extends AppCompatActivity {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {  // When result of date picker is returned
         super.onActivityResult(requestCode, resultCode, data);
-
-        String selection = data.getStringExtra("selection");
-        //Make the selected date public
-        selectedDate = selection;
+if(resultCode == RESULT_OK) {
+    String selection = data.getStringExtra("selection");
+    //Make the selected date public
+    selectedDate = selection;
 
 //Set text view to reflect selected date
-        TextView msgView = (TextView) findViewById(R.id.current_date);
-        msgView.setTextSize(16);
-        String dateSince = new String();
+    TextView msgView = (TextView) findViewById(R.id.current_date);
+    msgView.setTextSize(16);
+    String dateSince = new String();
 
-        Date date = new Date(Long.valueOf(selection));
-        DateFormat formatter = new SimpleDateFormat("dd:MMM:yyyy");
-        // Codes for re-writing this format available at http://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html
-        dateSince = "On " + formatter.format(date) + " OR";
+    Date date = new Date(Long.valueOf(selection));
+    DateFormat formatter = new SimpleDateFormat("dd:MMM:yyyy");
+    // Codes for re-writing this format available at http://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html
+    dateSince = "On " + formatter.format(date) + " OR";
 
-        msgView.setText(dateSince);
+    msgView.setText(dateSince);
+}
 
     }//end onResult
 
@@ -196,6 +197,7 @@ public class TimeWorked extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "Enter valid number of hours", Toast.LENGTH_LONG).show();
     }
 
+
     EditText workersEdit = (EditText) findViewById(R.id.edit_workers);
     String workersString =  workersEdit.getText().toString();
     //If string is convertable to int, convert to int
@@ -209,7 +211,7 @@ public class TimeWorked extends AppCompatActivity {
     }
 if(hours > 0 && workers > 0){
     //Multiply elapsed (ms) by workers
-    long msElapsed = (long)hours * 3600000;
+    long msElapsed = (long)(hours * 3600000);
     long timeWorked = msElapsed * (long)workers;
 
     //Get values from crop and jobs spinners
@@ -262,7 +264,7 @@ if(hours > 0 && workers > 0){
             db.addTime(entry);
 
 
-            return "";
+            return timeWorked;
         }
 
         protected void onProgressUpdate(Integer... progress) {
@@ -270,7 +272,7 @@ if(hours > 0 && workers > 0){
         }
 
         protected void onPostExecute(String result) {
-            Toast.makeText(getApplicationContext(), "Work time saved", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Entry saved", Toast.LENGTH_SHORT).show();
              }
     }
 

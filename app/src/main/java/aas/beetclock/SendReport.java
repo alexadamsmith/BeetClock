@@ -169,10 +169,10 @@ public class SendReport extends AppCompatActivity {
     //@Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {  // When result of date picker is returned
         super.onActivityResult(requestCode, resultCode, data);
-
-        String selection = data.getStringExtra("selection");
-        new onLoad().execute(selection);
-
+        if(resultCode == RESULT_OK) {
+            String selection = data.getStringExtra("selection");
+            new onLoad().execute(selection);
+        }
     }//end onResult
 
 

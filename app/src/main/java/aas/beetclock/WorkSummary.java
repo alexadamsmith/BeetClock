@@ -153,16 +153,12 @@ public class WorkSummary extends AppCompatActivity {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {  // When result of date picker is returned
         super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK) {
+            String selection = data.getStringExtra("selection");
+            //Make the selected date public
 
-        SharedPreferences sharedPref = this.getSharedPreferences(
-                "aas.beetclock", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-
-        String selection = data.getStringExtra("selection");
-        //Make the selected date public
-
-        new onLoad().execute(selection);
-
+            new onLoad().execute(selection);
+        }
     }//end onResult
 
 
@@ -175,13 +171,13 @@ public class WorkSummary extends AppCompatActivity {
 
         new createSummary().execute(cropSelect);
 
-    };
+    }
 
 
     public void displayRecords(View view){
         new createDump().execute("");
 
-    };
+    }
 
 
     public void openDatePicker(View view){

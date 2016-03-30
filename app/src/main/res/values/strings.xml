@@ -14,7 +14,6 @@
     <string name="number_workers">Number of workers:</string>
     <string name="workers">(Default = 1)</string>
     <string name="new_timer">Start new timer: </string>
-    <!--<string name="clock_caption">Current time:</string>-->
 
 
 <!-- CropList strings -->

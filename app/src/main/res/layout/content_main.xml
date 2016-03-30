@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
-    <!--android:layout_width="fill_parent"-->
-    <!--android:layout_height="fill_parent"-->
-    <!--android:background="@color/colorBackground">-->
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/colorBackground">
 
-    <!--<ImageView-->
-        <!--android:id="@+id/background_image"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="fill_parent"-->
-        <!--android:scaleType="centerCrop"-->
-        <!--/>-->
-<!-- android:src="@drawable/bcbg_tall" -->
+    <ImageView
+    android:id="@+id/background_image"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:scaleType="centerCrop"
+    />
+    <!-- android:src="@drawable/bcbg_tall" -->
+
+
+
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -22,7 +25,6 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:background="@color/colorBackground"
     android:fillViewport="false">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -58,6 +60,7 @@
             android:text="@string/new_timer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@color/colorBackground"
             android:layout_marginBottom="@dimen/layout_bumper" />
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -76,11 +79,11 @@
                 android:text="@string/crops"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/crop_select_header" />
+                android:id="@+id/crop_select_header"
+                android:background="@color/colorBackground"/>
 
             <Spinner
                 android:id="@+id/crop_spinner"
-                style="@style/spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 />
@@ -101,11 +104,11 @@
                 style="@style/subhead"
                 android:text="@string/jobs"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="@color/colorBackground"/>
 
             <Spinner
                 android:id="@+id/jobs_spinner"
-                style="@style/spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 />
@@ -128,6 +131,7 @@
                 android:text="@string/number_workers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@color/colorBackground"
                 />
 
             <EditText android:id="@+id/edit_number_workers"
@@ -135,6 +139,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/workers"
                 android:inputType="number"
+                android:background="@color/colorBackground"
                 />
 
         </LinearLayout>
@@ -151,6 +156,7 @@
                 android:text="@string/equipment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@color/colorBackground"
                 />
 
             <LinearLayout
@@ -206,10 +212,6 @@
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 tools:showIn="@layout/activity_main" tools:context=".MainActivity"
                 android:id="@+id/display_text">
-
-
-
-
             </LinearLayout>
         -->
 
@@ -217,4 +219,7 @@
     </LinearLayout>
 
 </ScrollView>
+
+    </FrameLayout>
+
 
