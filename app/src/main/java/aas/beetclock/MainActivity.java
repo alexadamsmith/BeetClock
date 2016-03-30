@@ -75,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
                 .build());
                 */
 
-
         inflater = this.getLayoutInflater();
         frameLayout = new FrameLayout(this);
         View view = inflater.inflate(R.layout.activity_main, null);
@@ -86,25 +85,28 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //Default background image is tall
-        background = (ImageView) findViewById(R.id.background_image);
-        background.setImageResource(R.drawable.bcbg2_tall);
-
-        //set listener for orientation change (image view is declared final)
-        view.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
-            @Override
-            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft,
-                                       int oldTop, int oldRight, int oldBottom) {
-                int orientation = getResources().getConfiguration().orientation;
-//First clear existing bitmap
-
-                if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                           background.setImageResource(R.drawable.bcbg2_wide);
-                } else {
-                    background.setImageResource(R.drawable.bcbg2_tall);
-                }
-            }
-        });
+        /* Background setter function TEMPORARILY DISABLED until i get a working version of bcbg resource.
+          Also, I'm not sure the orientation listener is necessary if drawable_land resources are provided.-RS*/
+//
+//        //Default background image is tall
+//        background = (ImageView) findViewById(R.id.background_image);
+//        background.setImageResource(R.drawable.bcbg2_tall);
+//
+//        //set listener for orientation change (image view is declared final)
+//        view.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+//            @Override
+//            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft,
+//                                       int oldTop, int oldRight, int oldBottom) {
+//                int orientation = getResources().getConfiguration().orientation;
+////First clear existing bitmap
+//
+//                if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+//                           background.setImageResource(R.drawable.bcbg2_wide);
+//                } else {
+//                    background.setImageResource(R.drawable.bcbg2_tall);
+//                }
+//            }
+//        });
 
         // Run when the app loads***********************************
 
