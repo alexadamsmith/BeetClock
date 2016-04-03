@@ -29,7 +29,7 @@
 
     <style name="caption" parent="@style/Base.TextAppearance.AppCompat.Caption"></style>
 
-    <style name="spinner" parent="@style/Base.Widget.AppCompat.Spinner.Underlined">
+    <style name="spinner" parent="@style/Base.Widget.AppCompat.Spinner">
         <!--<item name="android:minWidth">@dimen/menu_width</item>-->
         <item name="android:minWidth">@dimen/menu_width</item>
         <!--<item name="android:minHeight">@dimen/menu_item_height</item>-->
@@ -48,5 +48,7 @@
         <item name="android:paddingRight">@dimen/menu_padding</item>
         <item name="android:paddingBottom">@dimen/menu_padding_bottom</item>
     </style>
+
+
 
 </resources>
