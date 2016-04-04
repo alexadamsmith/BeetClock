@@ -15,24 +15,17 @@
         <item name="android:tint">@color/button_text</item>
     </style>
 
-    <style name="headline" parent="@style/Base.TextAppearance.AppCompat.Headline">
-        <item name="android:typeface">serif</item>
-    </style>
-
     <style name="title" parent="@style/Base.TextAppearance.AppCompat.Title">
         <item name="android:typeface">serif</item>
     </style>
 
-    <style name="subhead" parent="@style/Base.TextAppearance.AppCompat.Subhead">
-        <!--<item name="android:fontFamily">serif</item>-->
+    <style name="subhead" parent="@style/Base.TextAppearance.AppCompat.Body2">
+
     </style>
 
     <style name="caption" parent="@style/Base.TextAppearance.AppCompat.Caption"></style>
 
     <style name="spinner" parent="@style/Base.Widget.AppCompat.Spinner">
-        <!--<item name="android:minWidth">@dimen/menu_width</item>-->
-        <item name="android:minWidth">@dimen/menu_width</item>
-        <!--<item name="android:minHeight">@dimen/menu_item_height</item>-->
         <!--<item name="android:dropDownWidth">@dimen/menu_width</item>-->
         <item name="android:spinnerMode">dialog</item>
         <item name="android:popupBackground">@color/menu_bg</item>
