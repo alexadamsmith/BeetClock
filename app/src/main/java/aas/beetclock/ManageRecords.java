@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,22 +38,27 @@ public class ManageRecords extends AppCompatActivity {
     File file = null;
     String deleteSince;
 
+    public ImageView background;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_manage_records);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Manage records");
+        getSupportActionBar().setTitle("Manage Records");
 
         new populateSpinners().execute("");
-
+/*Used in 'delete all records since'
         //Set text view to reflect selected date
         TextView msgView = (TextView) findViewById(R.id.current_date);
         msgView.setTextSize(16);
         String dateSince = new String();
         dateSince = "Delete ALL records or delete records since selected date:";
         msgView.setText(dateSince);
+        */
 
         //Enables Strict Mode testing
         /*
@@ -63,6 +69,9 @@ public class ManageRecords extends AppCompatActivity {
                 .penaltyFlashScreen()
                 .build());
                 */
+
+        //Set delete delete since date to zero, deleting all records unless another date selected
+        deleteSince = "0";
     }
 
     public void onBackPressed() {
@@ -111,7 +120,13 @@ public class ManageRecords extends AppCompatActivity {
         }// end onPostExecute
     }// end AsyncTask populateSpinners
 
+    public void deleteIndiv(View view) {
+//When the 'delete individual records button is clicked
+        Intent deleteIntent = new Intent(this, DeleteRecords.class);
+        startActivity(deleteIntent);
+    }// end clear times
 
+/*
     public void clearTimes(View view) {
         //When the delete work records button is pressed
 
@@ -120,7 +135,7 @@ public class ManageRecords extends AppCompatActivity {
         String toDelete = editDelete.getText().toString();
         String delDate = "0";
 
-        if (!deleteSince.equals(null) && !deleteSince.equals("") && !deleteSince.isEmpty()){
+        if (!deleteSince.equals("")){
             delDate = deleteSince;
         }
 
@@ -131,6 +146,7 @@ public class ManageRecords extends AppCompatActivity {
         }
 
     }// end clear times
+    */
 
     public void openDatePicker(View view){
         //Do nothing but open the date picker

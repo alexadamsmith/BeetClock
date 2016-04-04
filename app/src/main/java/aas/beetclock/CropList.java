@@ -1,6 +1,7 @@
 package aas.beetclock;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -8,11 +9,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import aas.beetclock.SQLiteHelper;
 import android.content.Context;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.RelativeLayout;
@@ -26,13 +30,12 @@ import java.util.List;
 
 public class CropList extends AppCompatActivity {
 
+    public ImageView background;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crop_list);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Manage crops");
 
         //Enables Strict Mode testing
         /*
@@ -43,6 +46,10 @@ public class CropList extends AppCompatActivity {
                 .penaltyFlashScreen()
                 .build());
                 */
+        setContentView(R.layout.activity_crop_list);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Manage Crops");
 
 //Load crop names from Crops table
         new populateSpinners().execute("");

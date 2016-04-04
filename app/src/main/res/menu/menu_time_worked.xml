@@ -1,0 +1,24 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".TimeWorked">
+    <item android:id="@+id/timer_bar" android:title="@string/timer_bar"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/summary_bar" android:title="@string/summary_bar"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/report_bar" android:title="@string/report_bar"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/sheet_bar" android:title="@string/sheet_bar"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/crop_bar" android:title="@string/crop_bar"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/job_bar" android:title="@string/job_bar"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/equip_bar" android:title="@string/equip_bar"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/record_bar" android:title="@string/record_bar"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/feedback_bar" android:title="@string/feedback_bar"
+        android:orderInCategory="100" app:showAsAction="never" />
+
+</menu>
+
