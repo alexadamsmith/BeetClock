@@ -7,12 +7,14 @@
     <color name="colorBackground">#E4D1BC</color>
     <color name="colorButton">#ED9E82</color>
     <color name="colorButtonBorder">#CB1C68</color>
+    <color name="colorButtonRem">#817AFF</color>
 
     <color name="button_text">#ffffff</color>
-    <color name="button_text_disabled">#55ffffff</color>
-    <color name="button_disabled">#1effffff</color>
+    <color name="button_text_disabled">#ffffff</color>
+    <color name="button_disabled">#ffffff</color>
 
     <color name="menu_bg">#E4D1BC</color>
+    <color name="action_title">#ffffff</color>
 
     <color name="colorTextStd">#333333</color>
 

@@ -21,11 +21,11 @@ android {
             storeFile file("C:\\Program Files\\Java\\jdk1.8.0_65\\bin\\release-key.keystore")
             storePassword "PASSWORD"
             keyAlias "alias_name"
-            keyPassword "PASSWORD"
+            keyPassword "M0x3y%0"
         }
         debug {
             storeFile file("C:\\Program Files\\Java\\jdk1.8.0_65\\bin\\release-key.keystore")
-            storePassword "PASSWORD"
+            storePassword "M0x3y%0"
             keyAlias "alias_name"
             keyPassword "PASSWORD"
         }

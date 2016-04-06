@@ -1,6 +1,12 @@
 <resources>
 
+    <style name="ActionBarCompat" parent="@style/Base.Widget.AppCompat.ActionBar">
+        <item name="titleTextStyle">@style/titleStyle</item>
+    </style>
 
+    <style name="titleStyle" parent="@style/Base.TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/action_title</item>
+    </style>
 
     <style name="buttonTimer" parent="@style/Base.Widget.AppCompat.Button.Borderless.Colored">
         <item name="android:layout_width">wrap_content</item>

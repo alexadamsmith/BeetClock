@@ -352,6 +352,34 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     } // end deleteTimes
 
+    // Delete current entries matching searchstring, else delete ALL entries
+    public void deleteRecord(String process) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        //First I need to get the IDs associated with each ordered process
+        List<Long> entries = new ArrayList<Long>();
+        String query = "SELECT  " + KEY_ID + " FROM "+TABLE_TIMES;
+        Cursor cursor = db.rawQuery(query, null);
+        Long id = null;
+        if (cursor.moveToFirst()) {
+            do {
+                id = cursor.getLong(0);
+                entries.add(id);
+            } while (cursor.moveToNext());
+        }
+//Now delete record with unique ID associated with process number (i.e. index # in sheet)
+        if (process != null && !process.isEmpty() && !process.equals("null")) {
+            int searchInt = Integer.parseInt(process);
+            long idLong = entries.get(searchInt);
+            String idString = Long.toString(idLong);
+            db.delete(TABLE_TIMES, KEY_ID + "='" + idString + "'", null);
+        }
+        //close
+        db.close();
+        cursor.close();
+    } // end delete current
+
+
 
     //********************************************TABLE_CURRENT************************************
 
@@ -484,7 +512,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         cursor.close();
 
         return entries;
-    } // End get current time
+    } // End get current workers
 
 
     // Delete current entries matching searchstring, else delete ALL entries
@@ -514,7 +542,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         //close
         db.close();
         cursor.close();
-    } // end delete joblist
+    } // end delete current
 
 
     //********************************************LIST TABLES************************************
@@ -709,10 +737,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         //Delete entire table or delete only rows matching search string if search string is not null
-        if (searchStr != null && !searchStr.isEmpty() && !searchStr.equals("null")) {
+        if (searchStr != null && !searchStr.isEmpty() && !searchStr.equals("")) {
             db.delete(TABLE_MACHINE, KEY_MACHINE + "='" + searchStr + "'", null);
         } else {
-            // db.delete(TABLE_CROPS, null, null);
+             db.delete(TABLE_MACHINE, null, null);
         }
         db.close();
     } // end delete croplist

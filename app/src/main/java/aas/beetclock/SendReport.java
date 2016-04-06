@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -19,8 +20,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,11 +53,13 @@ public class SendReport extends AppCompatActivity {
     public final static String SHEET_PARAMS = "aas.beetclock.sheetParams";
 
     public String SELECTED_DATE = new String();
-    public String reportDate;
+    public String reportDate = "0";
     public String senderSaved;
     public String recipSaved;
 
     File file = null;
+
+    public ImageView background;
 
 
     @Override
@@ -69,12 +75,10 @@ public class SendReport extends AppCompatActivity {
                 .penaltyFlashScreen()
                 .build());
                 */
-
-
         setContentView(R.layout.activity_send_report);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Email report");
+        getSupportActionBar().setTitle("Email Report");
 
         new onLoad().execute("");
 
@@ -277,7 +281,7 @@ public class SendReport extends AppCompatActivity {
 
         protected void onPostExecute(Boolean success) {
 if (success){
-    Toast.makeText(getApplicationContext(), "Report send successfully!", Toast.LENGTH_SHORT).show();
+    Toast.makeText(getApplicationContext(), "Report sent successfully", Toast.LENGTH_SHORT).show();
 }else{
     Toast.makeText(getApplicationContext(), "Error sending report - please check email address.", Toast.LENGTH_LONG).show();
 }
@@ -304,16 +308,29 @@ if (success){
         List<String> jobslist = db.getJobs();
         List<String> equiplist = db.getMachine();
 
-        //Retrieve list of ALL crops
-        String nullsearch = null; // Must send function a null string in order to return all results
-        List<String> allcrops = db.getCropList(nullsearch);
+        //Retrieve list of crops without duplicates based on hashset
+        //String nullsearch = null; // Must send function a null string in order to return all results
+        //List<String> allcrops = db.getCropList(nullsearch);
+        List<String> allcrops = db.getCrops();
+        Set<String> hs = new HashSet<>();
+        hs.addAll(allcrops);
+        allcrops.clear();
+        allcrops.addAll(hs);
 
-        //Write list of jobs
-        List<String> alljobs = db.getJobList();
+        //Retrieve list of jobs without duplicates based on hashset
+        List<String> alljobs = db.getJobs();
+        hs.clear();
+        hs.addAll(alljobs);
+        alljobs.clear();
+        alljobs.addAll(hs);
 
-        //List of all equipment
-        List<String> allequip = db.getMachineList(nullsearch);
-        allequip.add("no equip"); //This summarizes work for which no equipment was added
+        //Retrieve list of equipment without duplicates based on hashset
+        List<String> allequip = db.getMachine();
+        hs.clear();
+        hs.addAll(allequip);
+        allequip.clear();
+        allequip.addAll(hs);
+        //allequip.add("no equip"); //This summarizes work for which no equipment was added
 
         //Create list of string[] arrays
         List<String[]> summaries = new ArrayList<String[]>();
@@ -443,6 +460,8 @@ if (success){
         List<String> jobslist = db.getJobs();
         List<String> equiplist = db.getMachine();
 
+        List<Long> timeSort = sortListWithoutModifyingOriginalList(timeslist);
+
         //Retrieve list of ALL crops
         String nullsearch = null; // Must send function a null string in order to return all results
         List<String> allcrops = db.getCropList(nullsearch);
@@ -468,6 +487,10 @@ if (success){
 //Set a start date for the summary
         long startDate = 0;
 
+
+
+
+
         if (SELECTED_DATE.equals("")) {
             //If no date selected, stay at zero OR start at last report date
             if (reportDate.equals("")) {
@@ -485,7 +508,7 @@ if (success){
 //Create header for summary and csv summary tables:
         DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
         // Codes for re-writing this format available at http://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html
-        String startFormat = "BeetClock records beginning "+formatter.format(startDate);
+        String startFormat = "BeetClock records since "+formatter.format(startDate);
         String[] startLine = {startFormat};
         summaries.add(startLine);
         csvSummaries.add(startLine);
@@ -496,24 +519,26 @@ if (success){
         csvSummaries.add(header);
 
 
-        //Go through the records and add each to a list<string[]>
-        for (int i = 0; i < cropslist.size(); i++) {
-            if(timeslist.get(i) > startDate) {
-                //Format work times
-                String hrsFormat = String.valueOf( TimeUnit.MILLISECONDS.toHours(elapsedlist.get(i)) );
-                String hrsSep = "hrs";
-                String minFormat = String.valueOf( TimeUnit.MILLISECONDS.toMinutes(elapsedlist.get(i)) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(elapsedlist.get(i))) );
-                String minSep = "min";
-//Add a column with the record date
-                String dateFormat = formatter.format(timeslist.get(i));
-                String[] csvsummary = {cropslist.get(i), jobslist.get(i), equiplist.get(i), hrsFormat, minFormat, dateFormat};
-                String[] summary = {cropslist.get(i), jobslist.get(i), equiplist.get(i), hrsFormat, hrsSep, minFormat, minSep, dateFormat}; //String.valueOf(worksum)
-                summaries.add(summary);
-                csvSummaries.add(csvsummary);
-            } //end timeslist if
-        } //end all entries for
-        //--if worksum > 0, create string[] array with crop, job, worksum
 
+//Sort entries by date saved and add to dump!
+        for (int i = 0; i < timeSort.size(); i++) {
+            for (int j = 0; j < timeslist.size(); j++) {
+                if (timeSort.get(i).equals(timeslist.get(j)) && timeslist.get(j) > startDate) {
+                    //Format work times
+                    String hrsFormat = String.valueOf( TimeUnit.MILLISECONDS.toHours(elapsedlist.get(j)) );
+                    String hrsSep = " hrs";
+                    String minFormat = String.valueOf( TimeUnit.MILLISECONDS.toMinutes(elapsedlist.get(j)) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(elapsedlist.get(j))) );
+                    String minSep = " min";
+
+//Add a column with the record date
+                    String dateFormat = formatter.format(timeslist.get(j));
+                    String[] csvsummary = {cropslist.get(j), jobslist.get(j), equiplist.get(j), hrsFormat, minFormat, dateFormat};
+                    String[] summary = {cropslist.get(j), jobslist.get(j), equiplist.get(j), hrsFormat, hrsSep, minFormat, minSep, dateFormat}; //String.valueOf(worksum)
+                    summaries.add(summary);
+                    csvSummaries.add(csvsummary);
+                                    }
+            }//end j for
+        }//end i for
 
         //File localDir = new File(this.getFilesDir(), "");
         file = new File(this.getFilesDir(), "beetclock_records.csv");
@@ -550,6 +575,12 @@ if (success){
 
 
     }// end full work dump
+
+    private <E extends Comparable<E>> List<E> sortListWithoutModifyingOriginalList(List<E> list){
+        List<E> newList = new ArrayList<E>(list);
+        Collections.sort(newList);
+        return newList;
+    }
 
 
 

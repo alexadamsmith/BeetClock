@@ -187,7 +187,8 @@ public class DoScriptExecute extends AppCompatActivity { //previously just an ac
                         editor.apply();
                     }
                 } else if (resultCode == RESULT_CANCELED) {
-                    mOutputText.setText("Account unspecified.");
+
+                    finish();
                 }
                 break;
             case REQUEST_AUTHORIZATION:
@@ -357,6 +358,8 @@ public class DoScriptExecute extends AppCompatActivity { //previously just an ac
                 requestParams.add(parameters);
             } else if (parameters[0].equals("getSheets")) {
                 requestParams.add(parameters);
+            } else if (parameters[0].equals("getEquip")) {
+                requestParams.add(parameters);
             } else if (parameters[0].equals("popSheet")) {
 
                 String[] values = inputs.get(3);
@@ -393,6 +396,8 @@ public class DoScriptExecute extends AppCompatActivity { //previously just an ac
                 function = "sheetNames";
             } else if (parameters[0].equals("popSheet")) {
                 function = "popSheet";
+            } else if (parameters[0].equals("getEquip")) {
+                function = "getEquip";
             }
 
             // Create an execution request object.
