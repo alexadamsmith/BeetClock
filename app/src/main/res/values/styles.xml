@@ -1,12 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <style name="ActionBarCompat" parent="@style/Base.Widget.AppCompat.ActionBar">
-        <item name="titleTextStyle">@style/titleStyle</item>
-    </style>
-
-    <style name="titleStyle" parent="@style/Base.TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textColor">@color/action_title</item>
-    </style>
 
     <style name="buttonTimer" parent="@style/Base.Widget.AppCompat.Button.Borderless.Colored">
         <item name="android:layout_width">wrap_content</item>
@@ -22,24 +15,17 @@
         <item name="android:tint">@color/button_text</item>
     </style>
 
-    <style name="headline" parent="@style/Base.TextAppearance.AppCompat.Headline">
-        <item name="android:typeface">serif</item>
-    </style>
-
     <style name="title" parent="@style/Base.TextAppearance.AppCompat.Title">
         <item name="android:typeface">serif</item>
     </style>
 
-    <style name="subhead" parent="@style/Base.TextAppearance.AppCompat.Subhead">
-        <!--<item name="android:fontFamily">serif</item>-->
+    <style name="subhead" parent="@style/Base.TextAppearance.AppCompat.Body2">
+
     </style>
 
     <style name="caption" parent="@style/Base.TextAppearance.AppCompat.Caption"></style>
 
-    <style name="spinner" parent="@style/Base.Widget.AppCompat.Spinner.Underlined">
-        <!--<item name="android:minWidth">@dimen/menu_width</item>-->
-        <item name="android:minWidth">@dimen/menu_width</item>
-        <!--<item name="android:minHeight">@dimen/menu_item_height</item>-->
+    <style name="spinner" parent="@style/Base.Widget.AppCompat.Spinner">
         <!--<item name="android:dropDownWidth">@dimen/menu_width</item>-->
         <item name="android:spinnerMode">dialog</item>
         <item name="android:popupBackground">@color/menu_bg</item>
@@ -57,55 +43,5 @@
     </style>
 
 
-    <!-- Original styles -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-
-        <item name="android:textViewStyle">@style/SerifTextViewStyle</item>
-        <item name="android:buttonStyle">@style/SerifButtonStyle</item>
-        <item name="android:scrollViewStyle">@style/SerifScrollStyle</item>
-        <item name="android:editTextStyle">@style/SerifEditText</item>
-
-        <item name="actionOverflowMenuStyle">@style/CMOptionsMenu</item>
-
-
-    </style>
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
-
-
-
-    <style name="CMOptionsMenu" parent="Widget.AppCompat.PopupMenu.Overflow">
-        <item name="android:popupBackground">@color/colorBackground</item>
-    </style>
-
-    <style name="SerifTextViewStyle" parent="android:Widget.TextView">
-        <item name="android:typeface">serif</item>
-        <item name="android:textColor">@color/colorTextStd</item>
-    </style>
-
-    <style name="SerifButtonStyle" parent="android:Widget.Button">
-        <item name="android:typeface">serif</item>
-        <item name="android:background">@drawable/button_style</item>
-        <item name="android:textSize">16dp</item>
-        <item name="android:textColor">@color/colorTextStd</item>
-    </style>
-
-    <style name="SerifScrollStyle" parent="android:Widget.ScrollView">
-        <item name="android:typeface">serif</item>
-        <item name="android:textColor">@color/colorTextStd</item>
-    </style>
-
-    <style name="SerifEditText" parent="android:Widget.EditText">
-        <item name="android:typeface">serif</item>
-        <item name="android:textColor">@color/colorTextStd</item>
-    </style>
 
 </resources>

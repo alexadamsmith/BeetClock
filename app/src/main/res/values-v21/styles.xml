@@ -1,0 +1,11 @@
+<resources>
+
+    <style name="title" parent="@style/Base.TextAppearance.AppCompat.Title">
+        <item name="android:fontFamily">serif</item>
+    </style>
+
+    <style name="spinner" parent="@style/Base.Widget.AppCompat.Spinner.Underlined">
+        <item name="android:popupElevation">@dimen/menu_elevation</item>
+    </style>
+
+</resources>

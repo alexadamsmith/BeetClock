@@ -221,8 +221,7 @@
 
                         android:id="@+id/equip_button_remove"
                         style="@style/buttonGraphic"
-                        android:src="@drawable/ic_action_rem"
-                        android:text="@string/button_add"
+                        android:src="@drawable/ic_remove_black_24dp"
                         android:onClick="remEquip"
                         android:layout_alignParentEnd="false"
                         android:layout_alignParentStart="false"
@@ -230,7 +229,7 @@
                         android:layout_alignParentLeft="false"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@color/colorButtonRem"
+                        android:background="@color/colorButton"
                         android:focusable="false"
                         android:layout_weight="1"
                         android:minWidth="@dimen/button_square_min"

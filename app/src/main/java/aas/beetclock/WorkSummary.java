@@ -183,13 +183,13 @@ public class WorkSummary extends AppCompatActivity {
 
         new createSummary().execute(cropSelect);
 
-    };
+    }
 
 
     public void displayRecords(View view){
         new createDump().execute("");
 
-    };
+    }
 
 
     public void openDatePicker(View view){
