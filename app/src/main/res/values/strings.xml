@@ -32,6 +32,8 @@
     <string name="button_deletemachine">Delete equipment</string>
 
 
+    <string name="button_indiv">Delete individual records</string>
+
 <!-- Mange records strings-->
     <string name="export">Export records:</string>
     <string name="export_exp">Saves all records to a .csv file in the \"Downloads\" folder</string>
@@ -42,6 +44,9 @@
     <string name="button_import">Import records</string>
     <string name="edit_delete">To delete records, enter \"delete\"</string>
     <string name="button_cleartimes">Delete records</string>
+    <string name="title_getEquip">Get equipment from NOFA spreadsheet</string>
+    <string name="exp_getEquip">This will erase all existing equipment</string>
+    <string name="button_getEquip">Get equipment</string>
 
 
     <!-- PopulateSheet strings -->
@@ -49,10 +54,10 @@
     <string name="chooseSheet">Choose sheet in file:</string>
     <string name="chooseCrop">Choose crop to send:</string>
     <string name="button_getSheets">Open file</string>
-    <string name="button_popSheet">Populate sheet</string>
+    <string name="button_popSheet">Write to sheet</string>
 
     <!-- WorkSummary and SendReport strings -->
-    <string name="button_makesummary">View work summary</string>
+    <string name="button_makesummary">View crop summary</string>
     <string name="button_makerecords">View all records</string>
 
     <string name="button_sendreport">Send report</string>
@@ -61,8 +66,9 @@
     <string name="cropsSum">Select a crop to summarize</string>
 
     <!-- Menu Strings -->
+    <string name="timer_bar">Work timer</string>
     <string name="crop_bar">Manage crops</string>
-    <string name="summary_bar">View work summaries</string>
+    <string name="summary_bar">View records</string>
     <string name="report_bar">Email report</string>
     <string name="sheet_bar">Fill NOFA spreadsheet</string>
     <string name="feedback_bar">Submit feedback</string>
@@ -76,7 +82,8 @@
     <string name="edit_workers">Enter number of workers</string>
     <string name="current_date">On current date, or...</string>
     <string name="button_Save">Save work</string>
-    <string name="hours_worked">Enter number of hours worked</string>
+    <string name="hours_worked">Hours worked:</string>
+    <string name="hours_hint"># Hours</string>
     <string name="workers_worked">Number of workers (default = 1)</string>
 
     <string name="title_activity_display_summary">DisplaySummary</string>
@@ -85,7 +92,7 @@
     <string name="title_activity_pick_date">PickDate</string>
 
     <string name="title_activity_send_feedback">SendFeedback</string>
-    <string name="button_sendFeedback">Submit feedback about BeetClock</string>
+    <string name="button_sendFeedback">Submit feedback</string>
     <string name="edit_feedback">Enter your comments here</string>
     <string name="edit_feedbackEmail">Enter your email if you want a reply</string>
 
@@ -104,6 +111,7 @@
     <string name="title_activity_manage_jobs">ManageJobs</string>
     <string name="title_activity_manage_equipment">ManageEquipment</string>
     <string name="title_activity_manage_records">ManageRecords</string>
+    <string name="title_activity_delete_records">DeleteRecords</string>
 
 
 </resources>

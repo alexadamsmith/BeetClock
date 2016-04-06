@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/colorBackground">
+
+    <ImageView
+        android:id="@+id/background_image"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bcbg"
+        />
+
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,7 +22,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:background="@color/colorBackground">
+    >
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -17,7 +32,6 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:orientation="vertical"
-        android:background="@color/colorBackground"
         android:focusable="true"
         android:focusableInTouchMode="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -30,14 +44,15 @@
             android:orientation="horizontal"
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_send_report" tools:context=".SendReport">
-            />
+            tools:showIn="@layout/activity_send_report" tools:context=".SendReport"
+            android:layout_marginBottom="@dimen/layout_bumper">
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:textSize="16dp"
-                android:id="@+id/date_text_report">
+                android:id="@+id/date_text_report"
+                android:background="@color/colorBackground">
 
             </TextView>
 
@@ -50,8 +65,8 @@
             android:orientation="horizontal"
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_send_report" tools:context=".SendReport">
-            />
+            tools:showIn="@layout/activity_send_report" tools:context=".SendReport"
+            android:layout_marginBottom="@dimen/layout_bumper">
 
             <Button
                 android:layout_width="wrap_content"
@@ -65,12 +80,6 @@
 
         </LinearLayout>
 
-        <FrameLayout
-            android:layout_width="fill_parent"
-            android:layout_height="15dp"></FrameLayout>
-
-
-
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
             xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -78,28 +87,26 @@
             android:orientation="horizontal"
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_send_report" tools:context=".SendReport">
-            />
+            tools:showIn="@layout/activity_send_report" tools:context=".SendReport"
+            android:layout_marginBottom="@dimen/layout_bumper">
 
             <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:textSize="16dp"
-                android:id="@+id/sender_text">
+                android:id="@+id/sender_text"
+                android:background="@color/colorBackground">
 
             </TextView>
 
         </LinearLayout>
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
             android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_send_report" tools:context=".SendReport">
-            />
+            android:background="@color/colorBackground"
+            >
 
             <EditText android:id="@+id/edit_sender"
                 android:layout_width="match_parent"
@@ -109,11 +116,8 @@
                 android:typeface="serif"
                 android:textColor="@color/colorTextStd"/>
 
-        </LinearLayout>
 
-        <FrameLayout
-            android:layout_width="fill_parent"
-            android:layout_height="15dp"></FrameLayout>
+        </LinearLayout>
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
@@ -122,32 +126,26 @@
             android:orientation="horizontal"
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_send_report" tools:context=".SendReport">
-            />
+            tools:showIn="@layout/activity_send_report" tools:context=".SendReport"
+            android:layout_marginBottom="@dimen/layout_bumper">
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:textSize="16dp"
-                android:id="@+id/email_text">
+                android:id="@+id/email_text"
+                android:background="@color/colorBackground">
 
             </TextView>
 
         </LinearLayout>
 
-        <FrameLayout
-            android:layout_width="fill_parent"
-            android:layout_height="10dp"></FrameLayout>
-
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
             android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_send_report" tools:context=".SendReport">
-            />
+            android:background="@color/colorBackground"
+            >
 
             <EditText android:id="@+id/edit_address"
                 android:layout_width="match_parent"
@@ -155,36 +153,21 @@
                 android:textSize="16dp"
                 android:hint="@string/report_address"
                 android:typeface="serif"
-                android:textColor="@color/colorTextStd"/>
+                android:textColor="@color/colorTextStd"
+                />
 
         </LinearLayout>
 
-        <FrameLayout
-            android:layout_width="fill_parent"
-            android:layout_height="15dp"></FrameLayout>
 
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_send_report" tools:context=".SendReport">
-            />
             <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                style="@style/buttonTimer"
                 android:text="@string/button_sendreport"
                 android:onClick="sendReport"
-                android:typeface="serif"
-                android:textColor="@color/colorTextStd"
-                android:textSize="16dp"
-                android:background="@drawable/button_style"/>
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal" />
 
-        </LinearLayout>
 
     </LinearLayout>
 
 </ScrollView>
+    </FrameLayout>

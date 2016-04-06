@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -19,9 +20,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,6 +35,7 @@ import android.content.Intent;
 import java.io.File;
 import android.os.Environment;
 
+import com.google.common.collect.Lists;
 
 
 public class WorkSummary extends AppCompatActivity {
@@ -38,29 +43,30 @@ public class WorkSummary extends AppCompatActivity {
     public final static String DISPLAY_SUMMARY = "aas.beetclock.SUMMARY";
     public final static String REPORT_DATE = "aas.beetclock.Report_Date";
 
-    public String SELECTED_DATE = new String();
     public String reportDate;
 
     File file = null;
 
+    public ImageView background;
 
-   @Override
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Enables Strict Mode testing
+        /*
+        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+                .detectAll()
+                .penaltyLog()
+                        //.penaltyDialog()
+                .penaltyFlashScreen()
+                .build());
+                */
         setContentView(R.layout.activity_work_summary);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("View summaries");
-
-       //Enables Strict Mode testing
-       /*
-       StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
-               .detectAll()
-               .penaltyLog()
-                       //.penaltyDialog()
-               .penaltyFlashScreen()
-               .build());
-               */
+        getSupportActionBar().setTitle("View records");
 
        new onLoad().execute("");
 
@@ -84,10 +90,16 @@ public class WorkSummary extends AppCompatActivity {
 
 //Set saved date as default reportDate
             reportDate = sharedPref.getString(REPORT_DATE, "0");
-//Get crop list from DB
+//Get non-duplicated list of crops from timer entries
             SQLiteHelper db = new SQLiteHelper(WorkSummary.this);
-            String nullsearch = null; // Must send function a null string in order to return all results
-            List<String> croplist = db.getCropList(nullsearch);
+            List<String> croplist = db.getCrops();
+             Set<String> hs = new HashSet<>();
+            hs.addAll(croplist);
+            croplist.clear();
+            croplist.addAll(hs);
+
+
+
             java.util.Collections.sort(croplist, new Comparator<String>() {
                 @Override
                 public int compare(String o1, String o2) {
@@ -107,7 +119,7 @@ public class WorkSummary extends AppCompatActivity {
             String[] spinarray = new String[croplist.size()];
             spinarray = croplist.toArray(spinarray);
 
-            //This initializes the spinner with values from crop table
+            //This initializes the spinner with crop names
             ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
                     WorkSummary.this, R.layout.spinnertext, spinarray);
             spinnerArrayAdapter.setDropDownViewResource(R.layout.spinnertext);
@@ -202,21 +214,28 @@ public class WorkSummary extends AppCompatActivity {
        String[] equipArray = summary.get(1);
        String[] timesArray = summary.get(2);
        String[] timeTotal = summary.get(3);
-       float totalDec = Float.valueOf(timeTotal[0]);
-       String totalHours = String.format("%.2f", totalDec / 3600000);
+               Long totTime = Long.parseLong(timeTotal[0]);
+               String hrsFormat = String.valueOf(TimeUnit.MILLISECONDS.toHours(totTime));
+               String hrsSep = " hrs ";
+               String minFormat = String.valueOf(TimeUnit.MILLISECONDS.toMinutes(totTime) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(totTime)));
+               String minSep = " min";
+               String totalTime = hrsFormat+hrsSep+minFormat+minSep;
+       //float totalDec = Float.valueOf(timeTotal[0]);
+       //String totalHours = String.format("%.2f", totalDec / 3600000);
         //NOW I can create a string to print using the for loop below on the list of string[] arrays
         StringBuilder liststring = new StringBuilder();
         String sep = ": ";
        //Starting with the total
-       liststring.append("Total time for "+cropSelect+": "+totalHours).append(" hours");
+       liststring.append("Total time for "+cropSelect+": "+totalTime);
        liststring.append(System.getProperty("line.separator"));
+               liststring.append(System.getProperty("line.separator"));
 
         for (int i = 0; i < jobsArray.length; i++) {
 //Adding both crop and job
             liststring.append(jobsArray[i]);
             liststring.append(sep).append("with ").append(equipArray[i]);
             liststring.append(sep).append(timesArray[i]);
-            liststring.append(" hours");
+            liststring.append(System.getProperty("line.separator"));
             liststring.append(System.getProperty("line.separator"));
         } // end jobsArray for
 
@@ -257,10 +276,30 @@ public class WorkSummary extends AppCompatActivity {
         List<Long> elapsedlist = db.getElapsed();
         List<String> jobslist = db.getJobs();
         List<String> equiplist = db.getMachine();
-//Getting a list of ALL jobs
-        List<String> alljobs = db.getJobList();
-        List<String> allequip = db.getMachineList(nullsearch);
-        allequip.add("no equip"); //This summarizes work for which no equipment was added
+
+//Removing duplicates from jobs and equipment lists using a hashset
+        List<String> alljobs = db.getJobs();
+        Set<String> hs = new HashSet<>();
+        hs.addAll(alljobs);
+        alljobs.clear();
+        alljobs.addAll(hs);
+        //Sort all jobs list
+        java.util.Collections.sort(alljobs, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return o1.compareToIgnoreCase(o2);
+            }
+        }); // Alphebetizes while ignoring case
+
+        List<String> allequip = db.getMachine();
+        hs.clear();
+        hs.addAll(allequip);
+        allequip.clear();
+        allequip.addAll(hs);
+
+        //List<String> alljobs = db.getJobList();
+        //List<String> allequip = db.getMachineList(nullsearch);
+        //allequip.add("no equip"); //This summarizes work for which no equipment was added
 
         System.out.println("Cropslist");
         System.out.println(cropslist.size());
@@ -311,11 +350,16 @@ public class WorkSummary extends AppCompatActivity {
                 //--if worksum > 0, add job and summary to array
 //We want zeros for all jobs w/o an entry
                 if (worksum > 0) {
-                    String hours = String.format("%.2f", (float) worksum / 3600000); // Should produce hours to 2 decimal places
+                    String hrsFormat = String.valueOf(TimeUnit.MILLISECONDS.toHours(worksum));
+                    String hrsSep = " hrs ";
+                    String minFormat = String.valueOf(TimeUnit.MILLISECONDS.toMinutes(worksum) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(worksum)));
+                    String minSep = " min";
+                    String elapsed = hrsFormat+hrsSep+minFormat+minSep;
+                    //String hours = String.format("%.2f", (float) worksum / 3600000); // Should produce hours to 2 decimal places
                     //Adding job and time to lists
                     String thisJob = alljobs.get(j);
                     String thisEquip = allequip.get(i);
-                    sumTimes.add(hours);
+                    sumTimes.add(elapsed);
                     sumJobs.add(thisJob);
                     sumEquip.add(thisEquip);
                 }
@@ -356,6 +400,9 @@ public class WorkSummary extends AppCompatActivity {
         List<String> jobslist = db.getJobs();
         List<String> equiplist = db.getMachine();
 
+
+            List<Long> timeSort = sortListWithoutModifyingOriginalList(timeslist);
+
         //Create list of string[] arrays
         List<String[]> summaries = new ArrayList<String[]>();
 
@@ -369,46 +416,38 @@ public class WorkSummary extends AppCompatActivity {
 //Set a start date for the summary
         long startDate = 0;
 
-        if (SELECTED_DATE.equals("")) {
-            //If no date selected, stay at zero OR start at last report date
             if (reportDate.equals("")) {
                 //If there is no date of last report, stay at zero
             } else {
                 //If there is a date of last report, start there
                 startDate = Long.parseLong(reportDate);
             }
-        } else {  //If there is a selected date, set as start date
-            startDate = Long.parseLong(SELECTED_DATE);
-        }//end selected date else
 
 //Enter start date as first line of summary
         DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
         // Codes for re-writing this format available at http://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html
-        String startFormat = "BeetClock records beginning "+formatter.format(startDate);
+        String startFormat = "BeetClock records since "+formatter.format(startDate);
         String[] startLine = {startFormat};
         summaries.add(startLine);
 
-                //Go through the records and add each to a list<string[]>
-                for (int i = 0; i < cropslist.size(); i++) {
-                    if(timeslist.get(i) > startDate) {
+//Sort entries by date saved and add to dump!
+            for (int i = 0; i < timeSort.size(); i++) {
+                for (int j = 0; j < timeslist.size(); j++) {
+                    if (timeSort.get(i).equals(timeslist.get(j)) && timeslist.get(j) > startDate) {
                         //Format work times
-                        String hrsFormat = String.valueOf( TimeUnit.MILLISECONDS.toHours(elapsedlist.get(i)) );
+                        String hrsFormat = String.valueOf( TimeUnit.MILLISECONDS.toHours(elapsedlist.get(j)) );
                         String hrsSep = " hrs";
-                        String minFormat = String.valueOf( TimeUnit.MILLISECONDS.toMinutes(elapsedlist.get(i)) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(elapsedlist.get(i))) );
+                        String minFormat = String.valueOf( TimeUnit.MILLISECONDS.toMinutes(elapsedlist.get(j)) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(elapsedlist.get(j))) );
                         String minSep = " min";
-                        String secFormat = String.valueOf( TimeUnit.MILLISECONDS.toSeconds(elapsedlist.get(i)) -
-                                (TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(elapsedlist.get(i))) ));
-                        String secSep = " sec";
+
 //Add a column with the record date
-                        String dateFormat = formatter.format(timeslist.get(i));
-                        String timeFormat = hrsFormat+hrsSep+" "+minFormat+minSep+" "+secFormat+secSep;
+                        String dateFormat = formatter.format(timeslist.get(j));
 
-                        String[] summary = {cropslist.get(i), jobslist.get(i), equiplist.get(i), timeFormat, dateFormat}; //String.valueOf(worksum)
+                        String[] summary = {cropslist.get(j), jobslist.get(j), equiplist.get(j), hrsFormat, hrsSep, minFormat, minSep, dateFormat}; //String.valueOf(worksum)
                         summaries.add(summary);
-                    } //end timeslist if
-                } //end all entries for
-                //--if worksum > 0, create string[] array with crop, job, worksum
-
+                    }
+                }//end j for
+            }//end i for
 
         //NOW I can create a string to print using the for loop below on the list of string[] arrays
         StringBuilder liststring = new StringBuilder();
@@ -422,6 +461,7 @@ public class WorkSummary extends AppCompatActivity {
                     liststring.append(summaries.get(i)[j]);
                 }
             } // end for array length
+            liststring.append(System.getProperty("line.separator"));
             liststring.append(System.getProperty("line.separator"));
 
         } // end list for
@@ -445,7 +485,11 @@ public class WorkSummary extends AppCompatActivity {
     } // end AsyncTask Create Dump
 
 
-
+    private <E extends Comparable<E>> List<E> sortListWithoutModifyingOriginalList(List<E> list){
+        List<E> newList = new ArrayList<E>(list);
+        Collections.sort(newList);
+        return newList;
+    }
 
 
 

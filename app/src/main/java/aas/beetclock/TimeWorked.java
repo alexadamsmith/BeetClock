@@ -3,6 +3,7 @@ package aas.beetclock;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -10,9 +11,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,22 +26,24 @@ import android.widget.Toast;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 public class TimeWorked extends AppCompatActivity {
 
     public String selectedDate;
     public String allEquip = "";
 
+    public ImageView background;
+    public boolean isDateReturn = false;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_time_worked);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Enter time worked");
 
         //Enables Strict Mode testing
         /*
@@ -46,6 +54,11 @@ public class TimeWorked extends AppCompatActivity {
                 .penaltyFlashScreen()
                 .build());
                 */
+        setContentView(R.layout.activity_time_worked);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Time Worked");
+
 
         //Do on create
 
@@ -53,7 +66,98 @@ public class TimeWorked extends AppCompatActivity {
 
     }//end on create
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_time_worked, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.crop_bar) {
+            // return true;
+            Intent cropIntent = new Intent(this, CropList.class);
+            startActivity(cropIntent);
+            //finish();
+        }
+        if (id == R.id.job_bar) {
+            // return true;
+            Intent cropIntent = new Intent(this, ManageJobs.class);
+            startActivity(cropIntent);
+            //finish();
+        }
+        if (id == R.id.equip_bar) {
+            // return true;
+            Intent cropIntent = new Intent(this, ManageEquipment.class);
+            startActivity(cropIntent);
+            //finish();
+        }
+        if (id == R.id.record_bar) {
+            // return true;
+            Intent cropIntent = new Intent(this, ManageRecords.class);
+            startActivity(cropIntent);
+            //finish();
+        }
+
+        if (id == R.id.summary_bar) {
+            Intent summaryIntent = new Intent(this, WorkSummary.class);
+            startActivity(summaryIntent);
+            //finish();
+        }
+
+        if (id == R.id.report_bar) {
+            Intent reportIntent = new Intent(this, SendReport.class);
+            startActivity(reportIntent);
+            //finish();
+        }
+
+        if (id == R.id.sheet_bar) {
+            Intent sheetIntent = new Intent(this, PopulateSheet.class);
+            startActivity(sheetIntent);
+            //finish();
+        }
+
+        if (id == R.id.feedback_bar) {
+            Intent feedbackIntent = new Intent(this, SendFeedback.class);
+            startActivity(feedbackIntent);
+            //finish();
+        }
+
+        if (id == R.id.timer_bar) {
+            Intent workedIntent = new Intent(this, MainActivity.class);
+            startActivity(workedIntent);
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    public void onResume()
+    {  // After a pause OR at startup
+        super.onResume();
+
+        //Repopulate spinners UNLESS returning from date selection
+if(isDateReturn){
+    isDateReturn = false;
+} else {
+    new populateSpinners().execute("");
+}
+    }// end on resume
+
+
+
+
     public void onBackPressed() {
+        //Intent workedIntent = new Intent(this, MainActivity.class);
+        //startActivity(workedIntent);
         finish();
     }
 
@@ -161,7 +265,8 @@ if(resultCode == RESULT_OK) {
 
     msgView.setText(dateSince);
 }
-
+        //Prevents spinner refresh when returning from date selection
+isDateReturn = true;
     }//end onResult
 
     public void addEquip(View view) {
@@ -170,15 +275,64 @@ if(resultCode == RESULT_OK) {
         String selectEquip = equipSpin.getSelectedItem().toString();
         //Only add equip if not already contained in string
         if(!allEquip.contains(selectEquip)) {
-
-                if(!allEquip.equals("")){
-                    allEquip = allEquip + ", "+ selectEquip ;
-                } else {
-                    allEquip = selectEquip;
-                }
+            if(!allEquip.equals("")){
+                allEquip = allEquip + ", "+ selectEquip ;
+            } else {
+                allEquip = selectEquip;
+            }
         }
-        Toast.makeText(getApplicationContext(), "Doing job with "+allEquip, Toast.LENGTH_SHORT).show();
-    }
+
+        //Set text view to reflect selected equipment
+        TextView equipView = (TextView) findViewById(R.id.equip_title);
+        equipView.setTextSize(16);
+        if(!allEquip.equals("")){
+            String equipText = "Change equipment (now using "+allEquip+")";
+            equipView.setText(equipText);
+        }
+
+        // Toast.makeText(getApplicationContext(), "Doing job with "+allEquip, Toast.LENGTH_SHORT).show();
+    } // end addEquip
+
+    public void remEquip(View view) {
+        //Get currently selected equipment as a string
+        Spinner equipSpin = (Spinner) findViewById(R.id.equip_spinner);
+        String selectEquip = equipSpin.getSelectedItem().toString();
+        //parse selectedEquip to an array
+        List<String> equips = Arrays.asList(allEquip.split("\\s*,\\s*"));
+
+        for (int i = 0; i < equips.size(); i++){
+            if(equips.get(i).contains(selectEquip)) {
+                equips.set(i, "");
+            }
+        }
+
+        StringBuilder liststring = new StringBuilder();
+        String sep = ", ";
+        for (int i = 0; i < equips.size(); i++) {
+            if(i>0 && !equips.get(i).equals("") && !(i==1 && equips.get(0).equals("")) ) {
+                liststring.append(sep).append(equips.get(i));
+            } else {
+                liststring.append(equips.get(i));
+            }
+        } // end for array length
+        allEquip = liststring.toString();
+
+        //Set text view to reflect selected equipment
+        TextView equipView = (TextView) findViewById(R.id.equip_title);
+        equipView.setTextSize(16);
+        if(!allEquip.equals("")){
+            String equipText = "Change equipment (now using "+allEquip+")";
+            equipView.setText(equipText);
+        }else{
+            String equipText = "Add equipment (optional):";
+            equipView.setText(equipText);
+        }
+
+    } // end remEquip
+
+
+
+
 
     public void saveWork (View view){ // When save work button is clicked
 
@@ -241,12 +395,17 @@ if(hours > 0 && workers > 0){
             String job = parameters[2];
 
             //Get saved date OR current time
-            String workTime = "";
+            Long preTime = null;
+
+            //Need to introduce small random numbers to prevent saved dates from being identical
+            Random rand = new Random();
+            int randint = rand.nextInt(50) + 1;
             if(selectedDate != null && !selectedDate.equals("") && !selectedDate.isEmpty()){
-                workTime = selectedDate;
+                preTime = Long.parseLong(selectedDate)+ (long)randint;
             } else {
-                workTime = Long.toString(System.currentTimeMillis());
+                preTime = System.currentTimeMillis();
             }
+            String workTime = Long.toString(preTime);
 
             //Save to Db, return notification in toast
             List<String> entry = new ArrayList<String>();
