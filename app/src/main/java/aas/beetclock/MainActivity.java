@@ -35,6 +35,7 @@ import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+
 import android.widget.DigitalClock;
 import java.util.concurrent.TimeUnit;
 import android.widget.ScrollView;
@@ -55,10 +56,8 @@ public class MainActivity extends AppCompatActivity {
 
     public String allEquip = "";
 
-   public FrameLayout frameLayout;
-    public ImageView background;
-    public LayoutInflater inflater;
 
+    public ImageView background;
 
 
     @Override
@@ -74,7 +73,12 @@ public class MainActivity extends AppCompatActivity {
                 .penaltyFlashScreen()
                 .build());
                 */
+        setContentView(R.layout.activity_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("BeetClock");
 
+/*
         inflater = this.getLayoutInflater();
         frameLayout = new FrameLayout(this);
         View view = inflater.inflate(R.layout.activity_main, null);
@@ -84,29 +88,32 @@ public class MainActivity extends AppCompatActivity {
         setContentView(frameLayout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("BeetClock");
 
-        /* Background setter function TEMPORARILY DISABLED until i get a working version of bcbg resource.
-          Also, I'm not sure the orientation listener is necessary if drawable_land resources are provided.-RS*/
-//
-//        //Default background image is tall
-//        background = (ImageView) findViewById(R.id.background_image);
-//        background.setImageResource(R.drawable.bcbg2_tall);
-//
-//        //set listener for orientation change (image view is declared final)
-//        view.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
-//            @Override
-//            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft,
-//                                       int oldTop, int oldRight, int oldBottom) {
-//                int orientation = getResources().getConfiguration().orientation;
-////First clear existing bitmap
-//
-//                if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-//                           background.setImageResource(R.drawable.bcbg2_wide);
-//                } else {
-//                    background.setImageResource(R.drawable.bcbg2_tall);
-//                }
-//            }
-//        });
+
+
+//Figure out how to set the color of the activity title
+
+        //Default background image is tall
+        background = (ImageView) findViewById(R.id.background_image);
+        background.setImageResource(R.drawable.bcbg2_tall);
+
+        //set listener for orientation change (image view is declared final)
+        view.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft,
+                                       int oldTop, int oldRight, int oldBottom) {
+                int orientation = getResources().getConfiguration().orientation;
+//First clear existing bitmap
+
+                if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                    background.setImageResource(R.drawable.bcbg2_wide);
+                } else {
+                    background.setImageResource(R.drawable.bcbg2_tall);
+                }
+            }
+        });
+        */
 
         // Run when the app loads***********************************
 
@@ -281,6 +288,7 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.timeworked_bar) {
             Intent workedIntent = new Intent(this, TimeWorked.class);
             startActivity(workedIntent);
+            //finish();
         }
 
         return super.onOptionsItemSelected(item);
@@ -325,8 +333,56 @@ if(!allEquip.contains(selectEquip)) {
         allEquip = selectEquip;
     }
 }
-        Toast.makeText(getApplicationContext(), "Doing job with "+allEquip, Toast.LENGTH_SHORT).show();
+
+        //Set text view to reflect selected equipment
+        TextView equipView = (TextView) findViewById(R.id.equip_title);
+        equipView.setTextSize(16);
+        if(!allEquip.equals("")){
+            String equipText = "Change equipment (now using "+allEquip+")";
+            equipView.setText(equipText);
+        }
+
+       // Toast.makeText(getApplicationContext(), "Doing job with "+allEquip, Toast.LENGTH_SHORT).show();
     } // end addEquip
+
+    public void remEquip(View view) {
+        //Get currently selected equipment as a string
+        Spinner equipSpin = (Spinner) findViewById(R.id.equip_spinner);
+        String selectEquip = equipSpin.getSelectedItem().toString();
+        //parse selectedEquip to an array
+        List<String> equips = Arrays.asList(allEquip.split("\\s*,\\s*"));
+
+        for (int i = 0; i < equips.size(); i++){
+            if(equips.get(i).contains(selectEquip)) {
+                //For some reason I cannot simply remove list element I; illegal operation
+                equips.set(i, "");
+            }
+        }
+
+        StringBuilder liststring = new StringBuilder();
+        String sep = ", ";
+        for (int i = 0; i < equips.size(); i++) {
+            // do not add sep if item is blank or if prev item is first and blank
+                if(i>0 && !equips.get(i).equals("") && !(i==1 && equips.get(0).equals("")) ) {
+                    liststring.append(sep).append(equips.get(i));
+                } else {
+                    liststring.append(equips.get(i));
+                }
+            } // end for array length
+        allEquip = liststring.toString();
+
+        //Set text view to reflect selected equipment
+        TextView equipView = (TextView) findViewById(R.id.equip_title);
+        equipView.setTextSize(16);
+        if(!allEquip.equals("")){
+            String equipText = "Change equipment (now using "+allEquip+")";
+            equipView.setText(equipText);
+        }else{
+            String equipText = "Add equipment (optional):";
+            equipView.setText(equipText);
+        }
+
+    } // end remEquip
 
 
     private class refreshButtons extends AsyncTask<String, Integer, List<String[]>> {
@@ -369,7 +425,7 @@ if(!allEquip.contains(selectEquip)) {
             //First I will connect to the layout and set params including space between buttons
             LinearLayout linLayout = (LinearLayout)findViewById(R.id.clock_controls);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            layoutParams.setMargins(0, 0, 0, 15);
+            layoutParams.setMargins(0, 0, 0, 8);
 
             //Clear existing entries in layout
             linLayout.removeAllViews();
@@ -400,7 +456,7 @@ if(!allEquip.contains(selectEquip)) {
                 DateFormat formatter = new SimpleDateFormat("hh:mm:aa");
 
                 //Parse together string reporting open job
-                String stopProcess = jobArray[i] + " on " + cropArray[i] + " (started " + formatter.format(date)+"): Press to Stop";
+                String stopProcess = jobArray[i] + " " + cropArray[i] + " (started " + formatter.format(date)+"): Press to Stop";
 
                 Button stopButton = new Button(MainActivity.this);
                 stopButton.setTag(i);

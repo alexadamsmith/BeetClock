@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -19,14 +20,26 @@ import java.util.List;
 
 public class ManageJobs extends AppCompatActivity {
 
+    public ImageView background;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Enables Strict Mode testing
+        /*
+        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+                .detectAll()
+                .penaltyLog()
+                        //.penaltyDialog()
+                .penaltyFlashScreen()
+                .build());
+                */
         setContentView(R.layout.activity_manage_jobs);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Manage jobs");
-
+        getSupportActionBar().setTitle("Manage Jobs");
         //Enables Strict Mode testing
         /*
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()

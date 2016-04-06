@@ -12,18 +12,18 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 import java.io.IOException;
 
 public class SendFeedback extends AppCompatActivity {
 
+    public ImageView background;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_send_feedback);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Send feedback");
 
         //Enables Strict Mode testing
         /*
@@ -34,6 +34,10 @@ public class SendFeedback extends AppCompatActivity {
                 .penaltyFlashScreen()
                 .build());
                 */
+        setContentView(R.layout.activity_send_feedback);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Send Feedback");
     }
 
     public void onBackPressed() {
