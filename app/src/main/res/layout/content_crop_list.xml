@@ -70,9 +70,6 @@
             android:layout_height="wrap_content"
             android:text="@string/button_addcrop"
             android:onClick="addCrop"
-            android:typeface="serif"
-            android:textColor="@color/colorTextStd"
-            android:textSize="16dp"
             android:background="@drawable/button_style"/>
 
     </LinearLayout>
@@ -112,10 +109,7 @@
             android:layout_height="wrap_content"
             android:text="@string/button_deletecrop"
             android:onClick="deleteCrop"
-            android:typeface="serif"
-            android:textColor="@color/colorTextStd"
-            android:textSize="16dp"
-            android:background="@drawable/button_style"/>
+            android:background="@drawable/button_style" />
 
     </LinearLayout>
 

@@ -7,11 +7,12 @@
 
     <!--Values for buttons-->
     <dimen name="button_minwidth">88dp</dimen>
-    <dimen name="button_square_min">20dp</dimen>
+    <dimen name="button_square_min">36dp</dimen>
     <dimen name="button_minheight">36dp</dimen>
     <dimen name="button_elevation">2dp</dimen>
 
-    <dimen name="button_padding">16dp</dimen>
+    <dimen name="button_padding_special">16dp</dimen>
+    <dimen name="button_padding">8dp</dimen>
     <dimen name="button_radius">5dp</dimen>
 
     <!--Values for text-->
@@ -35,6 +36,8 @@
     <!--Other layout values-->
     <dimen name="layout_bumper">8dp</dimen>
     <dimen name="layout_bumper_wide">24dp</dimen>
+    <dimen name="key_padding">16dp</dimen>
+    <dimen name="key_menu_padding">8dp</dimen>
 
     <!--<dimen name="layout_"></dimen>-->
 

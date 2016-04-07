@@ -32,7 +32,7 @@
             android:shape="rectangle">
 
             <padding
-                android:padding="@dimen/button_padding" />
+                />
         </shape>
     </item>
 

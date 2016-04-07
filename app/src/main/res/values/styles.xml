@@ -4,15 +4,20 @@
     <style name="buttonTimer" parent="@style/Base.Widget.AppCompat.Button.Borderless.Colored">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">@dimen/button_padding</item>
+        <item name="android:padding">@dimen/button_padding_special</item>
         <!--<item name="android:background">@drawable/button_timer</item>-->
         <item name="android:background">@color/colorAccent</item>
         <item name="android:textColor">@color/button_text</item>
         <item name="android:typeface">sans</item>
     </style>
 
-    <style name="buttonGraphic" parent="@style/Base.Widget.AppCompat.ImageButton">
-        <item name="android:tint">@color/button_text</item>
+    <style name="buttonGraphic" parent="@style/Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:layout_width">@dimen/button_square_min</item>
+        <item name="android:layout_height">@dimen/button_square_min</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:tint">@color/colorButton</item>
+        <!--<item name="android:background">?android:attr/selectableItemBackground</item>-->
+
     </style>
 
     <style name="title" parent="@style/Base.TextAppearance.AppCompat.Title">
@@ -35,11 +40,22 @@
     </style>
 
     <style name="spinner_item" parent="@style/Base.Widget.AppCompat.TextView.SpinnerItem">
-        <item name="android:layout_gravity">center_vertical</item>
-        <item name="android:paddingTop">@dimen/menu_padding</item>
+        <item name="android:gravity">center_vertical</item>
         <item name="android:paddingLeft">@dimen/menu_padding</item>
         <item name="android:paddingRight">@dimen/menu_padding</item>
-        <item name="android:paddingBottom">@dimen/menu_padding_bottom</item>
+    </style>
+
+    <style name="menu_box_trans">
+        <item name="android:background">@color/translucent_bg</item>
+        <item name="android:padding">@dimen/key_padding</item>
+        <item name="android:layout_margin">@dimen/key_padding</item>
+    </style>
+
+    <style name="Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">?android:attr/listDivider</item>
+        <item name="android:layout_marginBottom">@dimen/layout_bumper</item>
     </style>
 
 

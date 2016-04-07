@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!--All background image-related stuff temporarily disabled -R -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/colorBackground">
 
-<!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
-    <!--android:layout_width="fill_parent"-->
-    <!--android:layout_height="fill_parent"-->
-    <!--android:background="@color/colorBackground">-->
-
-<!--<ImageView-->
-    <!--android:id="@+id/background_image"-->
-    <!--android:layout_width="fill_parent"-->
-    <!--android:layout_height="fill_parent"-->
-    <!--android:scaleType="centerCrop" />-->
+    <ImageView
+        android:id="@+id/background_image"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bcbg"
+        />
 
 <!--PARENT VIEW-->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -30,11 +30,12 @@
 
     <!--Main content container-->
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="@dimen/activity_margin"
-        android:gravity="center_vertical|fill_vertical">
+        android:gravity="center_vertical|fill_vertical"
+        style="@style/menu_box_trans">
 
         <!--Main title-->
         <TextView
@@ -144,7 +145,7 @@
                 style="@style/subhead" />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 >
@@ -159,14 +160,8 @@
 
                 <ImageButton
                     android:onClick="addEquip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:src="@drawable/ic_action_add"
                     android:contentDescription="@string/button_add"
-                    android:background="@color/colorButton"
-                    android:minWidth="@dimen/button_square_min"
-                    android:minHeight="@dimen/button_square_min"
-                    android:layout_gravity="center_vertical"
                     style="@style/buttonGraphic" />
 
             </LinearLayout>
@@ -200,4 +195,4 @@
 
 </ScrollView>
 
-<!--</FrameLayout>-->
+</FrameLayout>
