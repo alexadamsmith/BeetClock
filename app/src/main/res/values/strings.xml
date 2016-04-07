@@ -24,12 +24,14 @@
     <string name="button_addcrop">Add crop</string>
     <string name="button_addjob">Add job</string>
     <string name="button_addmachine">Add equipment</string>
-    <string name="new_crop">Enter name of crop to add</string>
+    <string name="new_crop">Enter crop name, ex: Beets</string>
     <string name="new_job">Enter name of job to add</string>
-    <string name="new_machine">Enter name of equipment to add</string>
+    <string name="new_machine">Enter name, ex: Tiller</string>
     <string name="button_deletecrop">Delete crop</string>
     <string name="button_deletejob">Delete job</string>
     <string name="button_deletemachine">Delete equipment</string>
+    <string name="crop_add_title">Add a crop</string>
+    <string name="crop_delete_title">Delete a crop</string>
 
 
     <string name="button_indiv">Delete individual records</string>

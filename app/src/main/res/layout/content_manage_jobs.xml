@@ -1,144 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/colorBackground">
-
-    <ImageView
-        android:id="@+id/background_image"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/bcbg"
-        />
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="fill_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    android:layout_height="fill_parent"
-    android:orientation="vertical"
-    >
+    tools:showIn="@layout/activity_manage_jobs" tools:context="aas.beetclock.ManageJobs"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
+    <!--main content container-->
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:showIn="@layout/activity_manage_jobs" tools:context="aas.beetclock.ManageJobs">
+        android:layout_margin="@dimen/activity_margin"
+        >
 
-
+        <!--add job menu-->
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
-            android:orientation="horizontal"
             android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_manage_jobs" tools:context=".ManageJobs"
+            android:orientation="vertical"
             android:layout_marginBottom="@dimen/layout_bumper">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add a new job"
+                style="@style/title"
+                android:layout_marginBottom="@dimen/layout_bumper" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Job category:"
+                style="@style/subhead"/>
 
             <Spinner
                 android:id="@+id/categories_spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:typeface="serif"
-                android:textSize="16dp"
-                android:popupBackground="@color/colorBackground"/>
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="wrap_content"
-                android:orientation="vertical"
-                android:layout_height="wrap_content"
-                android:background="@color/colorBackground"
-                >
-            <EditText android:id="@+id/edit_newjob"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/new_job"
-                android:typeface="serif"
-                android:textSize="16dp"
-                android:textColor="@color/colorTextStd"
-                />
+                android:layout_marginRight="@dimen/layout_bumper"
+                android:layout_marginBottom="@dimen/layout_bumper"
+                style="@style/spinner"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Job name:"
+                style="@style/subhead"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText android:id="@+id/edit_newjob"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="@dimen/menu_item_width5"
+                    android:inputType="textCapSentences"
+                    android:singleLine="true"
+                    android:hint="@string/new_job"
+                    android:layout_weight="1" />
+
+                <ImageButton
+                    android:onClick="addJob"
+                    android:src="@drawable/ic_action_add"
+                    android:contentDescription="@string/button_addjob"
+                    style="@style/buttonGraphic" />
+
             </LinearLayout>
+
         </LinearLayout>
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        <View
             android:layout_width="match_parent"
-            android:orientation="horizontal"
             android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_manage_jobs" tools:context=".ManageJobs"
+            style="@style/divider"/>
+
+        <!--delete job menu-->
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_marginBottom="@dimen/layout_bumper">
 
-            <Button
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/button_addjob"
-                android:onClick="addJob"
-                android:typeface="serif"
-                android:textColor="@color/colorTextStd"
-                android:textSize="16dp"
-                android:background="@drawable/button_style"/>
+                android:text="Delete a job"
+                style="@style/title"
+                android:layout_marginBottom="@dimen/layout_bumper" />
 
-        </LinearLayout>
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_manage_jobs" tools:context=".ManageJobs"
-            android:layout_marginBottom="@dimen/layout_bumper">
-
-            <Spinner
-                android:id="@+id/jobs_spinner"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:typeface="serif"
-                android:textSize="16dp"
-                android:popupBackground="@color/colorBackground"/>
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/jobs_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="@dimen/layout_bumper"
+                    style="@style/spinner" />
+
+                <ImageButton
+                    android:onClick="deleteJob"
+                    android:src="@drawable/ic_delete"
+                    android:contentDescription="@string/button_deletejob"
+                    style="@style/buttonGraphic" />
+
+            </LinearLayout>
 
         </LinearLayout>
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_manage_jobs" tools:context=".ManageJobs"
-            android:layout_marginBottom="@dimen/layout_bumper">
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/button_deletejob"
-                android:onClick="deleteJob"
-                android:typeface="serif"
-                android:textColor="@color/colorTextStd"
-                android:textSize="16dp"
-                android:background="@drawable/button_style"/>
-
-        </LinearLayout>
-
 
     </LinearLayout>
 
-
 </ScrollView>
-</FrameLayout>

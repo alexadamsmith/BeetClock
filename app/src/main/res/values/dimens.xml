@@ -6,7 +6,8 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <!--Values for buttons-->
-    <dimen name="button_minwidth">88dp</dimen>
+    <dimen name="button_minwidth">64dp</dimen>
+    <dimen name="button_minwidth_raised">88dp</dimen>
     <dimen name="button_square_min">36dp</dimen>
     <dimen name="button_minheight">36dp</dimen>
     <dimen name="button_elevation">2dp</dimen>
@@ -27,6 +28,7 @@
     <dimen name="menu_item_width">56dp</dimen>
     <dimen name="menu_item_width2">112dp</dimen>
     <dimen name="menu_item_width3">168dp</dimen>
+    <dimen name="menu_item_width5">280dp</dimen>
     <dimen name="menu_item_height">48dp</dimen>
     <dimen name="menu_padding">16dp</dimen>
     <dimen name="menu_padding_bottom">20dp</dimen>

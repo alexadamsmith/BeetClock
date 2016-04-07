@@ -4,6 +4,10 @@
         <!--<item name="android:fontFamily">serif</item>-->
     </style>
 
+    <style name="buttonTimer" parent="@style/Base.Widget.AppCompat.Button.Colored">
+        <item name="android:elevation">@dimen/button_elevation</item>
+    </style>
+
     <style name="spinner" parent="@style/Base.Widget.AppCompat.Spinner.Underlined">
         <item name="android:popupElevation">@dimen/menu_elevation</item>
     </style>

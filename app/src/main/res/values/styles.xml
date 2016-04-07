@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="buttonTimer" parent="@style/Base.Widget.AppCompat.Button.Borderless.Colored">
+    <style name="buttonTimer" parent="@style/Base.Widget.AppCompat.Button.Colored">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">@dimen/button_minheight</item>
+        <item name="android:minWidth">@dimen/button_minwidth_raised</item>
         <item name="android:padding">@dimen/button_padding_special</item>
-        <!--<item name="android:background">@drawable/button_timer</item>-->
+        <item name="android:layout_margin">@dimen/button_padding</item>
         <item name="android:background">@color/colorAccent</item>
         <item name="android:textColor">@color/button_text</item>
         <item name="android:typeface">sans</item>
     </style>
 
-    <style name="buttonGraphic" parent="@style/Base.Widget.AppCompat.Button.Borderless">
+    <style name="buttonGraphic" parent="@style/Base.Widget.AppCompat.Button.Borderless.Colored">
         <item name="android:layout_width">@dimen/button_square_min</item>
         <item name="android:layout_height">@dimen/button_square_min</item>
         <item name="android:layout_gravity">center</item>
@@ -51,7 +53,7 @@
         <item name="android:layout_margin">@dimen/key_padding</item>
     </style>
 
-    <style name="Divider">
+    <style name="divider">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
         <item name="android:background">?android:attr/listDivider</item>

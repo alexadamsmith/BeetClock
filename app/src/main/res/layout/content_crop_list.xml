@@ -1,122 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/colorBackground">
-
-    <ImageView
-        android:id="@+id/background_image"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/bcbg"
-        />
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="fill_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_crop_list" tools:context="aas.beetclock.CropList"
+    android:layout_width="match_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_crop_list" tools:context="aas.beetclock.CropList">
-
+    <!--main content container-->
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
-        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorBackground"
-        android:layout_marginBottom="@dimen/layout_bumper">
+        android:orientation="vertical"
+        android:layout_margin="@dimen/activity_margin">
 
-        <EditText android:id="@+id/edit_newcrop"
+        <!--add menu-->
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBackground"
+            android:layout_marginBottom="@dimen/layout_bumper">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/crop_add_title"
+                style="@style/title"
+                android:layout_marginBottom="@dimen/layout_bumper"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <EditText android:id="@+id/edit_newcrop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="@dimen/menu_item_width5"
+                android:inputType="textCapSentences"
+                android:singleLine="true"
+                android:hint="@string/new_crop"
+                android:layout_weight="1"
+                android:layout_marginRight="@dimen/layout_bumper" />
+
+            <ImageButton
+                android:onClick="addCrop"
+                android:src="@drawable/ic_action_add"
+                android:contentDescription="@string/button_addcrop"
+                style="@style/buttonGraphic" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/divider"/>
+
+        <!--delete menu-->
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="@string/new_crop"
-            android:typeface="serif"
-            android:textSize="16dp"
-            android:textColor="@color/colorTextStd"
-            />
-    </LinearLayout>
+            android:orientation="vertical"
+            android:layout_marginBottom="@dimen/layout_bumper">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:showIn="@layout/activity_crop_list" tools:context=".CropList"
-        android:layout_marginBottom="@dimen/layout_bumper">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/crop_delete_title"
+                style="@style/title"
+                android:layout_marginBottom="@dimen/layout_bumper"/>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/button_addcrop"
-            android:onClick="addCrop"
-            android:background="@drawable/button_style"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-    </LinearLayout>
+                <Spinner
+                    android:id="@+id/crop_update_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="@dimen/layout_bumper"
+                    style="@style/spinner" />
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:showIn="@layout/activity_crop_list" tools:context=".CropList"
-        android:layout_marginBottom="@dimen/layout_bumper">
+                <ImageButton
+                    android:onClick="deleteCrop"
+                    android:src="@drawable/ic_delete"
+                    android:contentDescription="@string/button_deletecrop"
+                    style="@style/buttonGraphic" />
 
-        <Spinner
-            android:id="@+id/crop_update_spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:typeface="serif"
-            android:textSize="16dp"
-            android:popupBackground="@color/colorBackground"
-        />
-    </LinearLayout>
+            </LinearLayout>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:showIn="@layout/activity_crop_list" tools:context=".CropList"
-        android:layout_marginBottom="@dimen/layout_bumper">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/button_deletecrop"
-            android:onClick="deleteCrop"
-            android:background="@drawable/button_style" />
+        </LinearLayout>
 
     </LinearLayout>
-
-
-
-</LinearLayout>
 
 
 </ScrollView>
-    </FrameLayout>

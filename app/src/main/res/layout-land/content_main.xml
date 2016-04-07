@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<!--background image-->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -21,52 +22,57 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:fillViewport="false"
     tools:showIn="@layout/activity_main" tools:context=".MainActivity"
     >
     <!--android:background="@drawable/bg_placeholder"-->
 
-    <!--Main content container-->
+    <!--horizontal layout-->
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/activity_margin"
+        android:gravity="center_vertical|fill_vertical">
+
+    <!--Main column-->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/main_column"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="@dimen/activity_margin"
         android:gravity="center_vertical|fill_vertical"
-        style="@style/menu_box_trans">
+        style="@style/menu_box_trans"
+        android:minWidth="@dimen/menu_item_width5">
 
         <!--Main title-->
         <TextView
-            android:id="@+id/main_title"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/new_timer"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
             android:layout_marginBottom="@dimen/layout_bumper"
             style="@style/title" />
 
         <!--Crop selector-->
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/crop_menu"
-            android:layout_width="@dimen/menu_item_width3"
+            android:id="@+id/crop_select"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_below="@id/main_title"
-            android:layout_marginRight="@dimen/layout_bumper_wide"
             android:layout_marginBottom="@dimen/layout_bumper">
 
             <TextView
+                android:id="@+id/crop_select_header"
                 android:text="@string/crops"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/subhead" />
 
             <Spinner
                 android:id="@+id/crop_spinner"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/spinner" />
 
@@ -74,14 +80,10 @@
 
         <!--Job selector-->
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/job_menu"
-            android:layout_width="@dimen/menu_item_width3"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_below="@+id/crop_menu"
-            android:layout_marginRight="@dimen/layout_bumper_wide"
-            android:layout_marginBottom="@dimen/layout_bumper"
-            >
+            android:layout_marginBottom="@dimen/layout_bumper">
 
             <TextView
                 android:text="@string/jobs"
@@ -91,7 +93,7 @@
 
             <Spinner
                 android:id="@+id/jobs_spinner"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/spinner"
                 />
@@ -100,14 +102,9 @@
 
         <!--Workers selector-->
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/worker_menu"
-            android:layout_width="@dimen/menu_item_width3"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_toRightOf="@id/crop_menu"
-            android:layout_toEndOf="@id/crop_menu"
-            android:layout_below="@id/main_title"
-            android:layout_marginRight="@dimen/layout_bumper_wide"
             android:layout_marginBottom="@dimen/layout_bumper">
 
             <TextView
@@ -127,14 +124,9 @@
 
         <!--Equipment selector-->
         <LinearLayout
-            android:id="@+id/equip_menu"
-            android:layout_width="@dimen/menu_item_width3"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_toRightOf="@id/crop_menu"
-            android:layout_toEndOf="@id/crop_menu"
-            android:layout_below="@id/worker_menu"
-            android:layout_marginRight="@dimen/layout_bumper_wide"
             android:layout_marginBottom="@dimen/layout_bumper">
 
             <TextView
@@ -145,17 +137,16 @@
                 style="@style/subhead" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 >
 
                 <Spinner
                     android:id="@+id/equip_spinner"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginRight="@dimen/layout_bumper"
                     style="@style/spinner" />
 
                 <ImageButton
@@ -167,31 +158,44 @@
             </LinearLayout>
 
         </LinearLayout>
+        <!--end equip selector-->
 
-        <!--Start button-->
-        <Button
-            android:id="@+id/start_button"
-            android:onClick="startTime"
-            android:text="@string/button_start"
-            android:layout_toRightOf="@id/worker_menu"
-            android:layout_toEndOf="@id/worker_menu"
-            android:layout_below="@id/main_title"
-            style="@style/buttonTimer"/>
+        </LinearLayout>
+        <!--end main column-->
 
-        <!--Container for timer buttons generated by onPostExecute function. Do not delete!-->
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/clock_controls"
+        <!--right column-->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_toRightOf="@id/worker_menu"
-            android:layout_toEndOf="@id/worker_menu"
-            android:layout_below="@id/start_button"
-            >
-            <!--Timer buttons go here-->
+            android:layout_toRightOf="@id/main_column"
+            android:layout_toEndOf="@id/main_column"
+            android:gravity="left|fill_vertical"
+            android:padding="@dimen/key_padding">
+
+            <!--Start button-->
+            <Button
+                android:id="@+id/start_button"
+                android:onClick="startTime"
+                android:text="@string/button_start"
+                style="@style/buttonTimer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <!--Container for timer buttons generated by onPostExecute function. Do not delete!-->
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/clock_controls"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <!--Timer buttons go here-->
+            </LinearLayout>
+
         </LinearLayout>
+        <!--end right column-->
 
     </RelativeLayout>
+    <!--end horizontal layout-->
 
 </ScrollView>
 
