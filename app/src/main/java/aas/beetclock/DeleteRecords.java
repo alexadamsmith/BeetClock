@@ -65,21 +65,25 @@ public class DeleteRecords extends AppCompatActivity {
             Integer[] indexArray = new Integer[times.size()];
             indexArray = indexList.toArray(indexArray);
 
-            for (int i = 0; i < sortArray.length; i++) {
-                System.out.println("Sort:"+sortArray[i]);
-            }
-            for (int i = 0; i < timeArray.length; i++) {
-                System.out.println("Time:"+timeArray);
-            }
-
             //Get jobs for all records
             List<String> jobs = db.getJobs();
             String[] jobArray = new String[jobs.size()];
             jobArray = jobs.toArray(jobArray);
 
+            //Get elapsed time for all records
+            List<Long> elapsed = db.getElapsed();
+            List<String> elapsedStr = new ArrayList<>();
+            for (int i = 0; i < elapsed.size(); i++){
+                String hrsFormat = String.valueOf(TimeUnit.MILLISECONDS.toHours(elapsed.get(i)));
+                String minFormat = String.valueOf(TimeUnit.MILLISECONDS.toMinutes(elapsed.get(i)) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(elapsed.get(i))));
+                String timeElapsed = hrsFormat+" hrs "+minFormat+" min";
+                elapsedStr.add(timeElapsed);
+            }
+
             String[] sortCrop = new String[cropArray.length];
             String[] sortJob = new String[jobArray.length];
             String[] indexSort = new String[jobArray.length];
+            String[] sortElapsed = new String[elapsedStr.size()];
             List<String[]> allCurrent = new ArrayList<>();
             //Sort entries by date saved and add to dump!
             for (int i = 0; i < sortArray.length; i++) {
@@ -87,6 +91,7 @@ public class DeleteRecords extends AppCompatActivity {
                     if (sortArray[i].equals(timeArray[j])) {
                         sortCrop[i] = cropArray[j];
                         sortJob[i] = jobArray[j];
+                        sortElapsed[i] = elapsedStr.get(j);
                         indexSort[i] = Integer.toString(indexArray[j]);
                     }
                 }
@@ -95,6 +100,7 @@ public class DeleteRecords extends AppCompatActivity {
             allCurrent.add(sortCrop);
             allCurrent.add(sortArray);
             allCurrent.add(sortJob);
+            allCurrent.add(sortElapsed);
             allCurrent.add(indexSort);
             return allCurrent;
         }//end doInBackground
@@ -129,7 +135,8 @@ public class DeleteRecords extends AppCompatActivity {
             String[] cropArray = allCurrent.get(0);
             String[] timeArray = allCurrent.get(1);
             String[] jobArray = allCurrent.get(2);
-            String[] index = allCurrent.get(3);
+            String[] elapsedArray = allCurrent.get(3);
+            String[] index = allCurrent.get(4);
 
             for (int i = 0; i < cropArray.length; i++) {
 
@@ -139,7 +146,7 @@ public class DeleteRecords extends AppCompatActivity {
                 DateFormat formatter = new SimpleDateFormat("dd:MMM:yyyy");
 
                 //Parse together string reporting open job
-                String stopProcess = jobArray[i] +" "+ cropArray[i] + " on " + formatter.format(date)+": Press to Delete";
+                String stopProcess = jobArray[i] +" "+ cropArray[i] + " on " + formatter.format(date)+" for "+elapsedArray[i]+": Press to Delete";
 
                 Button stopButton = new Button(DeleteRecords.this);
                 stopButton.setTag(Integer.parseInt(index[i]));//This assigns a button index based on the original position in the retrieved records
@@ -214,6 +221,7 @@ public class DeleteRecords extends AppCompatActivity {
     private <E extends Comparable<E>> List<E> sortListWithoutModifyingOriginalList(List<E> list){
         List<E> newList = new ArrayList<E>(list);
         Collections.sort(newList);
+        Collections.reverse(newList);
         return newList;
     }
 
