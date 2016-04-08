@@ -49,7 +49,9 @@
                     android:onClick="addMachine"
                     android:src="@drawable/ic_action_add"
                     android:contentDescription="@string/button_addmachine"
-                    style="@style/buttonGraphic" />
+                    style="@style/buttonGraphic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
@@ -93,7 +95,9 @@
                     android:onClick="deleteMachine"
                     android:src="@drawable/ic_delete"
                     android:contentDescription="@string/button_deletemachine"
-                    style="@style/buttonGraphic" />
+                    style="@style/buttonGraphic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
@@ -136,7 +140,9 @@
                     android:src="@drawable/ic_input"
                     android:contentDescription="@string/title_getEquip"
                     android:layout_gravity="center_vertical"
-                    style="@style/buttonGraphic" />
+                    style="@style/buttonGraphic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
 
             </LinearLayout>

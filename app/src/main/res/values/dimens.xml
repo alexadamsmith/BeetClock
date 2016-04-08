@@ -40,6 +40,7 @@
     <dimen name="layout_bumper_wide">24dp</dimen>
     <dimen name="key_padding">16dp</dimen>
     <dimen name="key_menu_padding">8dp</dimen>
+    <dimen name="indent">24dp</dimen>
 
     <!--<dimen name="layout_"></dimen>-->
 

@@ -271,7 +271,9 @@
                 android:text="@string/button_Save"
                 android:onClick="saveWork"
                 android:gravity="center_horizontal"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 

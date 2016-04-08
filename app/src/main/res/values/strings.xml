@@ -34,22 +34,25 @@
     <string name="crop_delete_title">Delete a crop</string>
 
 
-    <string name="button_indiv">Delete individual records</string>
+
 
 <!-- Mange records strings-->
     <string name="export">Export records:</string>
     <string name="export_exp">Saves all records to a .csv file in the \"Downloads\" folder</string>
     <string name="button_export">Export all records to file</string>
     <string name="importrecords">Import records:</string>
-    <string name="importrecords_exp">Import from records file in \"Downloads\" folder.  This will clear all existing entries!</string>
-    <string name="edit_import">To import records, enter \"import\"</string>
+    <string name="importrecords_exp">Import records from a .csv file in the \"Downloads\" folder.</string>
+    <string name="edit_import">To authorize import, type \"import\" here</string>
     <string name="button_import">Import records</string>
     <string name="edit_delete">To delete records, enter \"delete\"</string>
-    <string name="button_cleartimes">Delete records</string>
+    <string name="delete_rec">Delete records</string>
     <string name="title_getEquip">Get equipment from NOFA spreadsheet</string>
     <string name="exp_getEquip">This will erase all existing equipment</string>
     <string name="button_getEquip">Get equipment</string>
-
+    <string name="delete_indiv">Delete individual records</string>
+    <string name="import_warning">Warning: Import will clear all existing entries!</string>
+    <string name="import_select">Select a file to import:</string>
+    <string name="import_confirm">Confirm import:</string>
 
     <!-- PopulateSheet strings -->
     <string name="chooseFile">Choose file in Google Drive:</string>

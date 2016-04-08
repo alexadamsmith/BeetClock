@@ -288,7 +288,7 @@ String filename = "BeetClockRecords"+formatter.format(date)+".csv";
 
         //Get content of edit_delete
         EditText editImport = (EditText) findViewById(R.id.edit_import);
-        String toImport = editImport.getText().toString();
+        String toImport = editImport.getText().toString().toLowerCase();
 
         if(toImport.equals("import")) {
             //First delete existing records

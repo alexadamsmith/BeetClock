@@ -3,7 +3,7 @@
 
     <color name="colorPrimary">#d81b60</color>
     <color name="colorPrimaryDark">#880e4f</color>
-    <color name="colorAccent">#4daf4e</color>
+    <color name="colorAccent">#4caf50</color>
     <color name="colorBackground">#fafafa</color>
     <color name="translucent_bg">#88fafafa</color>
 
@@ -19,8 +19,8 @@
     <color name="colorTextStd">#333333</color>
     <color name="background_material_light">#fafafa</color>
     <color name="background_light">#ffffff</color>
-    <color name="material_ltblue_700">#0288d1</color>
-    <color name="material_ltblue_500">#03a9f4</color>
+
+    <color name="warning">#ff3d00</color>
 
 
     <!-- original colorscheme

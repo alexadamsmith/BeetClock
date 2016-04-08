@@ -6,7 +6,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_crop_list" tools:context="aas.beetclock.CropList"
     android:layout_width="match_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <!--main content container-->
@@ -19,9 +19,8 @@
         <!--add menu-->
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="wrap_content"
-            android:orientation="vertical"
             android:layout_height="wrap_content"
-            android:background="@color/colorBackground"
+            android:orientation="vertical"
             android:layout_marginBottom="@dimen/layout_bumper">
 
             <TextView
@@ -50,7 +49,9 @@
                 android:onClick="addCrop"
                 android:src="@drawable/ic_action_add"
                 android:contentDescription="@string/button_addcrop"
-                style="@style/buttonGraphic" />
+                style="@style/buttonGraphic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
             </LinearLayout>
 
@@ -93,7 +94,9 @@
                     android:onClick="deleteCrop"
                     android:src="@drawable/ic_delete"
                     android:contentDescription="@string/button_deletecrop"
-                    style="@style/buttonGraphic" />
+                    style="@style/buttonGraphic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 

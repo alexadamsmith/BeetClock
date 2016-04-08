@@ -69,7 +69,9 @@
                     android:onClick="addJob"
                     android:src="@drawable/ic_action_add"
                     android:contentDescription="@string/button_addjob"
-                    style="@style/buttonGraphic" />
+                    style="@style/buttonGraphic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
@@ -111,7 +113,9 @@
                     android:onClick="deleteJob"
                     android:src="@drawable/ic_delete"
                     android:contentDescription="@string/button_deletejob"
-                    style="@style/buttonGraphic" />
+                    style="@style/buttonGraphic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 

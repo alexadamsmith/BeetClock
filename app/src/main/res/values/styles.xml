@@ -14,19 +14,27 @@
     </style>
 
     <style name="buttonGraphic" parent="@style/Base.Widget.AppCompat.Button.Borderless.Colored">
-        <item name="android:layout_width">@dimen/button_square_min</item>
-        <item name="android:layout_height">@dimen/button_square_min</item>
-        <item name="android:layout_gravity">center</item>
+        <item name="android:minWidth">@dimen/button_square_min</item>
+        <item name="android:minHeight">@dimen/button_square_min</item>
+        <item name="android:gravity">center</item>
         <item name="android:tint">@color/colorButton</item>
         <!--<item name="android:background">?android:attr/selectableItemBackground</item>-->
+    </style>
+
+    <style name="buttonFlat" parent="@style/Base.Widget.AppCompat.Button.Borderless.Colored">
+        <item name="android:minWidth">@dimen/button_minwidth</item>
+        <item name="android:minHeight">@dimen/button_minheight</item>
+        <item name="android:textColor">@color/colorAccent</item>
 
     </style>
 
     <style name="title" parent="@style/Base.TextAppearance.AppCompat.Title">
-        <item name="android:typeface">serif</item>
     </style>
 
     <style name="subhead" parent="@style/Base.TextAppearance.AppCompat.Body2">
+    </style>
+
+    <style name="body" parent="@style/Base.TextAppearance.AppCompat.Body1">
 
     </style>
 
@@ -58,6 +66,17 @@
         <item name="android:layout_height">1dp</item>
         <item name="android:background">?android:attr/listDivider</item>
         <item name="android:layout_marginBottom">@dimen/layout_bumper</item>
+    </style>
+
+    <style name="warning_box">
+        <item name="android:padding">@dimen/key_menu_padding</item>
+        <item name="android:background">@drawable/warning_box</item>
+        <item name="android:layout_marginLeft">@dimen/indent</item>
+        <item name="android:layout_marginRight">@dimen/indent</item>
+    </style>
+
+    <style name="warning_text" parent="@style/Base.TextAppearance.AppCompat.Body2">
+        <item name="android:textColor">@color/warning</item>
     </style>
 
 
