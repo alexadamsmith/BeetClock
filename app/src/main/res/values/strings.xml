@@ -44,7 +44,7 @@
     <string name="button_import">Import records</string>
     <string name="edit_delete">To delete records, enter \"delete\"</string>
     <string name="button_cleartimes">Delete records</string>
-    <string name="title_getEquip">Get equipment from NOFA spreadsheet</string>
+    <string name="title_getEquip">Get equipment from NOFA workbook</string>
     <string name="exp_getEquip">This will erase all existing equipment</string>
     <string name="button_getEquip">Get equipment</string>
 
@@ -54,7 +54,7 @@
     <string name="chooseSheet">Choose sheet in file:</string>
     <string name="chooseCrop">Choose crop to send:</string>
     <string name="button_getSheets">Open file</string>
-    <string name="button_popSheet">Write to sheet</string>
+    <string name="button_popSheet">Write to workbook</string>
 
     <!-- WorkSummary and SendReport strings -->
     <string name="button_makesummary">View crop summary</string>
@@ -70,7 +70,7 @@
     <string name="crop_bar">Manage crops</string>
     <string name="summary_bar">View records</string>
     <string name="report_bar">Email report</string>
-    <string name="sheet_bar">Fill NOFA spreadsheet</string>
+    <string name="sheet_bar">Fill NOFA workbook</string>
     <string name="feedback_bar">Submit feedback</string>
     <string name="timeworked_bar">Enter time worked</string>
     <string name="job_bar">Manage jobs</string>

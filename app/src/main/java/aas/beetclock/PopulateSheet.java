@@ -82,7 +82,7 @@ public class PopulateSheet extends AppCompatActivity {
         setContentView(R.layout.activity_populate_sheet);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Fill NOFA Spreadsheet");
+        getSupportActionBar().setTitle("Fill NOFA Workbook");
 
         //Do on execute:
         //Populate Spinners
@@ -310,7 +310,7 @@ public class PopulateSheet extends AppCompatActivity {
                             }
 //End date result
     }  else if (requestCode == POP_CODE && resultCode == Activity.RESULT_OK) {
-            Toast.makeText(getApplicationContext(), "Values written to sheet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Values written to workbook", Toast.LENGTH_SHORT).show();
         }//End populate result
 
         }//end onActivityResult

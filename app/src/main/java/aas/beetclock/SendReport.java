@@ -118,7 +118,7 @@ public class SendReport extends AppCompatActivity {
             TextView msgView = (TextView) findViewById(R.id.date_text_report);
             msgView.setTextSize(16);
             String dateSince = new String();
-            if(reportDate.equals("")){
+            if(reportDate.equals("0")){
                 //If there is no date of last report, retrieve all records ever
                 dateSince = "Retrieve records since you started using BeetClock, OR ";
             }else {
