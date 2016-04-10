@@ -146,8 +146,13 @@ public class ManageJobs extends AppCompatActivity {
         //First I will need to retrieve the selected value from the crops spinner; that's the crop that will be deleted
         Spinner spin = (Spinner) findViewById(R.id.jobs_spinner);
         String selection = spin.getSelectedItem().toString();
-
-        new doRemove().execute(selection);
+        if(selection.contains("Harvest:") || selection.contains("Seeding/Transplant:")){
+            //Prevent from deleting in harvest and seeding categories
+            Toast.makeText(getApplicationContext(), "Cannot delete jobs in this category", Toast.LENGTH_LONG).show();
+        }else {
+//Otherwise remove job
+            new doRemove().execute(selection);
+        }
 
     }//end delete job
 

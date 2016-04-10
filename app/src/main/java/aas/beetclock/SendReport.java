@@ -118,7 +118,7 @@ public class SendReport extends AppCompatActivity {
             TextView msgView = (TextView) findViewById(R.id.date_text_report);
             msgView.setTextSize(16);
             String dateSince = new String();
-            if(reportDate.equals("")){
+            if(reportDate.equals("0")){
                 //If there is no date of last report, retrieve all records ever
                 dateSince = "Retrieve records since you started using BeetClock, OR ";
             }else {
@@ -371,12 +371,15 @@ if (success){
             System.out.println(equiplist.get(i));
         }
 
-//Loop through all machinery
-        for (int h = 0; h < allequip.size(); h++) {
-            System.out.println(allequip.get(h));
             //Loop through all crops
             for (int i = 0; i < allcrops.size(); i++) {
-                //-For each crop, loop through all jobs
+                //Begin sum for each crop
+                long cropsum = 0;
+                //Loop through all machinery
+                for (int h = 0; h < allequip.size(); h++) {
+                    System.out.println(allequip.get(h));
+
+                //Loop through all jobs
                 for (int j = 0; j < alljobs.size(); j++) {
                     //--For each crop, job combo, loop through all entries
 
@@ -390,6 +393,8 @@ if (success){
                             worksum += Long.valueOf(elapsedlist.get(k));
                         }
                     } //end all entries for
+                    //Add worksum to cropsum
+                    cropsum = cropsum + worksum;
                     //--if worksum > 0, create string[] array with crop, job, worksum
                     if (worksum > 0) {
                         String hrsFormat = String.valueOf(TimeUnit.MILLISECONDS.toHours(worksum));
@@ -405,8 +410,25 @@ if (success){
                         csvSummaries.add(csvsummary);
                     }
                 } // end all jobs for
+                }//end all equip for
+                //Writing crop summaries
+                String hrsFormat = String.valueOf(TimeUnit.MILLISECONDS.toHours(cropsum));
+                String hrsSep = " hrs ";
+                String minFormat = String.valueOf(TimeUnit.MILLISECONDS.toMinutes(cropsum) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(cropsum)));
+                String minSep = " min";
+
+                //Add summary line to text output
+                summaries.add(spacer);
+                String[] cropTot = {"Total for "+allcrops.get(i)+" "+hrsFormat+hrsSep+minFormat+minSep};
+                summaries.add(cropTot);
+                summaries.add(spacer);
+
+                //Add summary line to CSV
+                String[] csvTot = {allcrops.get(i),"total:","",hrsFormat,minFormat};
+                csvSummaries.add(csvTot);
+                csvSummaries.add(spacer);
             } // end all crops for
-        }//end all equip for
+
 
 
         //I will write the summary to a .csv file using openCSV
