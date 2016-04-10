@@ -42,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="@dimen/activity_margin"
+        android:layout_margin="@dimen/activity_margin"
         android:gravity="center_vertical|fill_vertical"
         style="@style/menu_box_trans"
         android:minWidth="@dimen/menu_item_width5">
@@ -153,7 +153,9 @@
                     android:onClick="addEquip"
                     android:src="@drawable/ic_action_add"
                     android:contentDescription="@string/button_add"
-                    style="@style/buttonGraphic" />
+                    style="@style/buttonGraphic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 

@@ -3,6 +3,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="activity_margin">16dp</dimen>
+    <dimen name="activity_margin_wide">32dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
     <!--Values for buttons-->
@@ -29,6 +30,7 @@
     <dimen name="menu_item_width2">112dp</dimen>
     <dimen name="menu_item_width3">168dp</dimen>
     <dimen name="menu_item_width5">280dp</dimen>
+    <dimen name="menu_item_width8">448dp</dimen>
     <dimen name="menu_item_height">48dp</dimen>
     <dimen name="menu_padding">16dp</dimen>
     <dimen name="menu_padding_bottom">20dp</dimen>

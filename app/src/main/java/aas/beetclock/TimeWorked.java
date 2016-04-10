@@ -255,7 +255,6 @@ if(resultCode == RESULT_OK) {
 
 //Set text view to reflect selected date
     TextView msgView = (TextView) findViewById(R.id.current_date);
-    msgView.setTextSize(16);
     String dateSince = new String();
 
     Date date = new Date(Long.valueOf(selection));

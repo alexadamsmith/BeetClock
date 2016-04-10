@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<!--background image-->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -12,19 +13,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-            android:src="@drawable/bcbg"
-        />
+        android:src="@drawable/bcbg" />
 
 <!--PARENT VIEW-->
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
+        tools:showIn="@layout/activity_main" tools:context=".MainActivity"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:showIn="@layout/activity_main" tools:context=".MainActivity"
-        android:layout_gravity="right|center_vertical">
+        android:orientation="vertical">
         <!--android:background="@drawable/bg_placeholder"-->
 
         <!--Main content container-->
@@ -40,12 +39,11 @@
                 android:id="@+id/clock_controls"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
                 <!--Timer buttons go here-->
             </LinearLayout>
 
-            <!--Main title-->
+            <!--Menu title-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -62,7 +60,6 @@
                 android:layout_marginBottom="@dimen/layout_bumper">
 
                 <TextView
-                    android:id="@+id/crop_select_header"
                     android:text="@string/crops"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -93,8 +90,7 @@
                     android:id="@+id/jobs_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/spinner"
-                    />
+                    style="@style/spinner" />
 
             </LinearLayout>
 
@@ -109,8 +105,7 @@
                     android:text="@string/number_workers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/subhead"
-                    />
+                    style="@style/subhead" />
 
                 <EditText android:id="@+id/edit_number_workers"
                     android:layout_width="wrap_content"
@@ -134,11 +129,11 @@
                     android:layout_height="wrap_content"
                     style="@style/subhead" />
 
+                <!--horizontal container-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    >
+                    android:orientation="horizontal">
 
                     <Spinner
                         android:id="@+id/equip_spinner"
@@ -152,9 +147,10 @@
                         android:onClick="addEquip"
                         android:src="@drawable/ic_action_add"
                         android:contentDescription="@string/button_add"
-                        style="@style/buttonGraphic"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        style="@style/buttonGraphic" />
 
                 </LinearLayout>
 
@@ -164,10 +160,10 @@
             <Button
                 android:onClick="startTime"
                 android:text="@string/button_start"
-                android:layout_gravity="center_horizontal"
-                style="@style/buttonTimer"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                style="@style/buttonTimer" />
 
         </LinearLayout>
 

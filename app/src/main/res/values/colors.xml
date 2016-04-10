@@ -5,7 +5,7 @@
     <color name="colorPrimaryDark">#880e4f</color>
     <color name="colorAccent">#4caf50</color>
     <color name="colorBackground">#fafafa</color>
-    <color name="translucent_bg">#88fafafa</color>
+    <color name="translucent_bg">#c8fafafa</color>
 
     <color name="colorButton">#03a9f4</color>
     <color name="colorButtonPressed">#0288d1</color>

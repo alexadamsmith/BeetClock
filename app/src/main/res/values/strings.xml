@@ -11,6 +11,7 @@
     <string name="button_start">Start timer</string>
     <string name="button_stop">Stop work</string>
     <string name="button_add">Add</string>
+    <string name="button_remove">Remove</string>
     <string name="number_workers">Number of workers:</string>
     <string name="workers">(Default = 1)</string>
     <string name="new_timer">Start new timer: </string>
@@ -58,7 +59,8 @@
     <!-- PopulateSheet strings -->
     <string name="chooseFile">Choose file in Google Drive:</string>
     <string name="chooseSheet">Choose sheet in file:</string>
-    <string name="chooseCrop">Choose crop to send:</string>
+    <string name="chooseCrop">Add records for crop...</string>
+    <string name="chooseStartDate">Starting from date...</string>
     <string name="button_getSheets">Open file</string>
     <string name="button_popSheet">Write to workbook</string>
 
@@ -87,20 +89,30 @@
     <string name="edit_hours">Enter number of hours worked</string>
     <string name="edit_workers">Enter number of workers</string>
     <string name="current_date">On current date, or...</string>
-    <string name="button_Save">Save work</string>
+    <string name="button_Save">Log job</string>
     <string name="hours_worked">Hours worked:</string>
     <string name="hours_hint"># Hours</string>
     <string name="workers_worked">Number of workers (default = 1)</string>
+    <string name="title_jobLog">Log completed job:</string>
 
     <string name="title_activity_display_summary">DisplaySummary</string>
-    <string name="report_sender">Enter name of sender</string>
-    <string name="report_address">Enter address of recipient</string>
+
+    <!--email report-->
+    <string name="label_reportStart">Choose your report start date:</string>
+    <string name="label_reportSender">Send as...</string>
+    <string name="label_reportRecipient">Mail to...</string>
+    <string name="report_sender">Enter your name and organization</string>
+    <string name="report_address">report_recipient@example.com</string>
     <string name="title_activity_pick_date">PickDate</string>
 
+    <!--send feedback-->
     <string name="title_activity_send_feedback">SendFeedback</string>
     <string name="button_sendFeedback">Submit feedback</string>
-    <string name="edit_feedback">Enter your comments here</string>
-    <string name="edit_feedbackEmail">Enter your email if you want a reply</string>
+    <string name="edit_feedback">Tell us what you think about BeetClock!</string>
+    <string name="edit_feedbackEmail">myname@example.com</string>
+    <string name="title_feedbackEmail">Email:</string>
+    <string name="title_feedbackContent">Comments:</string>
+
 
     <string name="title_activity_edit_sheet">Edit Sheet</string>
     <string name="title_activity_sign_in">SignIn</string>

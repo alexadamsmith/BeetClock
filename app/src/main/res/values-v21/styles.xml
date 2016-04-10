@@ -6,6 +6,12 @@
 
     <style name="buttonTimer" parent="@style/Base.Widget.AppCompat.Button.Colored">
         <item name="android:elevation">@dimen/button_elevation</item>
+        <!--<item name="android:colorButtonNormal">@color/colorAccent</item>-->
+    </style>
+
+    <style name="buttonRaised" parent="@style/Base.Widget.AppCompat.Button.Colored">
+        <item name="android:elevation">@dimen/button_elevation</item>
+        <!--<item name="android:colorButtonNormal">@color/colorButton</item>-->
     </style>
 
     <style name="spinner" parent="@style/Base.Widget.AppCompat.Spinner.Underlined">

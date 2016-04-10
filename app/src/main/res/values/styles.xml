@@ -16,6 +16,7 @@
     <style name="buttonGraphic" parent="@style/Base.Widget.AppCompat.Button.Borderless.Colored">
         <item name="android:minWidth">@dimen/button_square_min</item>
         <item name="android:minHeight">@dimen/button_square_min</item>
+        <item name="android:padding">@dimen/button_padding</item>
         <item name="android:gravity">center</item>
         <item name="android:tint">@color/colorButton</item>
         <!--<item name="android:background">?android:attr/selectableItemBackground</item>-->
@@ -25,7 +26,17 @@
         <item name="android:minWidth">@dimen/button_minwidth</item>
         <item name="android:minHeight">@dimen/button_minheight</item>
         <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:drawablePadding">@dimen/key_padding</item>
+    </style>
 
+    <style name="buttonRaised" parent="@style/Base.Widget.AppCompat.Button.Colored">
+        <item name="android:minWidth">@dimen/button_minwidth</item>
+        <item name="android:minHeight">@dimen/button_minheight</item>
+        <item name="android:padding">@dimen/button_padding</item>
+        <item name="android:background">@color/colorButton</item>
+        <item name="android:textColor">@color/button_text</item>
+        <item name="android:tint">@color/button_text</item>
+        <item name="android:drawablePadding">@dimen/key_padding</item>
     </style>
 
     <style name="title" parent="@style/Base.TextAppearance.AppCompat.Title">
@@ -35,8 +46,9 @@
     </style>
 
     <style name="body" parent="@style/Base.TextAppearance.AppCompat.Body1">
-
     </style>
+
+    <style name="input" parent="@style/Base.TextAppearance.AppCompat.Subhead"></style>
 
     <style name="caption" parent="@style/Base.TextAppearance.AppCompat.Caption"></style>
 
@@ -57,7 +69,10 @@
 
     <style name="menu_box_trans">
         <item name="android:background">@color/translucent_bg</item>
-        <item name="android:padding">@dimen/key_padding</item>
+        <item name="android:paddingTop">@dimen/key_padding</item>
+        <item name="android:paddingBottom">@dimen/key_padding</item>
+        <item name="android:paddingLeft">@dimen/key_menu_padding</item>
+        <item name="android:paddingRight">@dimen/key_menu_padding</item>
         <item name="android:layout_margin">@dimen/key_padding</item>
     </style>
 

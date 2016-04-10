@@ -6,7 +6,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_crop_list" tools:context="aas.beetclock.CropList"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
     <!--main content container-->
@@ -18,7 +18,7 @@
 
         <!--add menu-->
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginBottom="@dimen/layout_bumper">
@@ -31,27 +31,27 @@
                 android:layout_marginBottom="@dimen/layout_bumper"/>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-            <EditText android:id="@+id/edit_newcrop"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="@dimen/menu_item_width5"
-                android:inputType="textCapSentences"
-                android:singleLine="true"
-                android:hint="@string/new_crop"
-                android:layout_weight="1"
-                android:layout_marginRight="@dimen/layout_bumper" />
+                <EditText android:id="@+id/edit_newcrop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="@dimen/menu_item_width5"
+                    android:inputType="textCapSentences"
+                    android:singleLine="true"
+                    android:hint="@string/new_crop"
+                    android:layout_weight="1"
+                    android:layout_marginRight="@dimen/layout_bumper" />
 
-            <ImageButton
-                android:onClick="addCrop"
-                android:src="@drawable/ic_action_add"
-                android:contentDescription="@string/button_addcrop"
-                style="@style/buttonGraphic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                <ImageButton
+                    android:onClick="addCrop"
+                    android:src="@drawable/ic_action_add"
+                    android:contentDescription="@string/button_addcrop"
+                    style="@style/buttonGraphic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
@@ -96,7 +96,8 @@
                     android:contentDescription="@string/button_deletecrop"
                     style="@style/buttonGraphic"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical" />
 
             </LinearLayout>
 
