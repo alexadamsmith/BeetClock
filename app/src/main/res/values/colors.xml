@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="colorPrimary">#981C4F</color>
-    <color name="colorPrimaryDark">#981C4F</color>
-    <color name="colorAccent">#CB1C68</color>
-    <color name="colorBackground">#E4D1BC</color>
-    <color name="colorButton">#ED9E82</color>
-    <color name="colorButtonBorder">#CB1C68</color>
-    <color name="colorButtonRem">#817AFF</color>
+    <color name="colorPrimary">#d81b60</color>
+    <color name="colorPrimaryDark">#880e4f</color>
+    <color name="colorAccent">#4caf50</color>
+    <color name="colorBackground">#fafafa</color>
+    <color name="translucent_bg">#c8fafafa</color>
+
+    <color name="colorButton">#03a9f4</color>
+    <color name="colorButtonPressed">#0288d1</color>
 
     <color name="button_text">#ffffff</color>
-    <color name="button_text_disabled">#ffffff</color>
-    <color name="button_disabled">#ffffff</color>
+    <color name="button_text_disabled">#55ffffff</color>
+    <color name="button_disabled">#1effffff</color>
 
-    <color name="menu_bg">#E4D1BC</color>
-    <color name="action_title">#ffffff</color>
+    <color name="menu_bg">#ffffff</color>
 
     <color name="colorTextStd">#333333</color>
+    <color name="background_material_light">#fafafa</color>
+    <color name="background_light">#ffffff</color>
+
+    <color name="warning">#ff3d00</color>
+
 
     <!-- original colorscheme
-    <color name="colorPrimary">#981C4F</color>
-    <color name="colorPrimaryDark">#981C4F</color>
-    <color name="colorAccent">#CB1C68</color>
-    <color name="colorBackground">#E4D1BC</color>
-    <color name="colorButton">#ED9E82</color>
-    <color name="colorButtonBorder">#CB1C68</color>
-    <color name="colorTextStd">#333333</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
     -->
 </resources>

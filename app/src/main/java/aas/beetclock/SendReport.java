@@ -116,26 +116,24 @@ public class SendReport extends AppCompatActivity {
         protected void onPostExecute(String param) {
 //Set text with saved report date
             TextView msgView = (TextView) findViewById(R.id.date_text_report);
-            msgView.setTextSize(16);
             String dateSince = new String();
             if(reportDate.equals("0")){
                 //If there is no date of last report, retrieve all records ever
-                dateSince = "Retrieve records since you started using BeetClock, OR ";
+                dateSince = "Include all records since you started using BeetClock, OR ";
             }else {
                 //If there is a date of last report, retrieve records since that date
                 Date date = new Date(Long.valueOf(reportDate));
                 DateFormat formatter = new SimpleDateFormat("dd:MMM:yyyy");
                 // Codes for re-writing this format available at http://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html
-                dateSince = "Retrieve records since " + formatter.format(date)+" OR";
+                dateSince = "Include records since " + formatter.format(date)+" OR";
             }//end reporDate else
             msgView.setText(dateSince);
 //Set text with saved sender
             TextView senderView = (TextView) findViewById(R.id.sender_text);
-            senderView.setTextSize(16);
             String senderText = "";
             if(senderSaved.equals("")){
             }else{
-                senderText = ("Send report as " + senderSaved + " OR ");
+                senderText = ("Saved sender: " + senderSaved + " OR ");
             }
             senderView.setText(senderText);
  //Set text with saved address
@@ -144,7 +142,7 @@ public class SendReport extends AppCompatActivity {
             String recipText = "";
             if(recipSaved.equals("")){
             }else{
-                recipText = "Send report to " + recipSaved + " OR ";
+                recipText = "Saved recipient: " + recipSaved + " OR ";
             }
             recipView.setText(recipText);
 

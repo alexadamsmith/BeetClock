@@ -11,10 +11,11 @@
     <string name="button_start">Start timer</string>
     <string name="button_stop">Stop work</string>
     <string name="button_add">Add</string>
+    <string name="button_remove">Remove</string>
     <string name="number_workers">Number of workers:</string>
     <string name="workers">(Default = 1)</string>
     <string name="new_timer">Start new timer: </string>
-    <string name="clock_caption">Current time:</string>
+
 
 
 <!-- CropList strings -->
@@ -25,35 +26,41 @@
     <string name="button_addcrop">Add crop</string>
     <string name="button_addjob">Add job</string>
     <string name="button_addmachine">Add equipment</string>
-    <string name="new_crop">Enter name of crop to add</string>
+    <string name="new_crop">Enter crop name, ex: Beets</string>
     <string name="new_job">Enter name of job to add</string>
-    <string name="new_machine">Enter name of equipment to add</string>
+    <string name="new_machine">Enter name, ex: Tiller</string>
     <string name="button_deletecrop">Delete crop</string>
     <string name="button_deletejob">Delete job</string>
     <string name="button_deletemachine">Delete equipment</string>
+    <string name="crop_add_title">Add a crop</string>
+    <string name="crop_delete_title">Delete a crop</string>
 
 
-    <string name="button_indiv">Delete individual records</string>
+
 
 <!-- Mange records strings-->
     <string name="export">Export records:</string>
     <string name="export_exp">Saves all records to a .csv file in the \"Downloads\" folder</string>
     <string name="button_export">Export all records to file</string>
     <string name="importrecords">Import records:</string>
-    <string name="importrecords_exp">Import from records file in \"Downloads\" folder.  This will clear all existing entries!</string>
-    <string name="edit_import">To import records, enter \"import\"</string>
+    <string name="importrecords_exp">Import records from a .csv file in the \"Downloads\" folder.</string>
+    <string name="edit_import">To authorize import, type \"import\" here</string>
     <string name="button_import">Import records</string>
     <string name="edit_delete">To delete records, enter \"delete\"</string>
     <string name="button_cleartimes">Delete records</string>
     <string name="title_getEquip">Get equipment from NOFA workbook</string>
     <string name="exp_getEquip">This will erase all existing equipment</string>
     <string name="button_getEquip">Get equipment</string>
-
+    <string name="delete_indiv">Delete individual records</string>
+    <string name="import_warning">Warning: Import will clear all existing entries!</string>
+    <string name="import_select">Select a file to import:</string>
+    <string name="import_confirm">Confirm import:</string>
 
     <!-- PopulateSheet strings -->
     <string name="chooseFile">Choose file in Google Drive:</string>
     <string name="chooseSheet">Choose sheet in file:</string>
-    <string name="chooseCrop">Choose crop to send:</string>
+    <string name="chooseCrop">Add records for crop...</string>
+    <string name="chooseStartDate">Starting from date...</string>
     <string name="button_getSheets">Open file</string>
     <string name="button_popSheet">Write to workbook</string>
 
@@ -82,20 +89,30 @@
     <string name="edit_hours">Enter number of hours worked</string>
     <string name="edit_workers">Enter number of workers</string>
     <string name="current_date">On current date, or...</string>
-    <string name="button_Save">Save work</string>
+    <string name="button_Save">Log job</string>
     <string name="hours_worked">Hours worked:</string>
     <string name="hours_hint"># Hours</string>
     <string name="workers_worked">Number of workers (default = 1)</string>
+    <string name="title_jobLog">Log completed job:</string>
 
     <string name="title_activity_display_summary">DisplaySummary</string>
-    <string name="report_sender">Enter name of sender</string>
-    <string name="report_address">Enter address of recipient</string>
+
+    <!--email report-->
+    <string name="label_reportStart">Choose your report start date:</string>
+    <string name="label_reportSender">Send as...</string>
+    <string name="label_reportRecipient">Mail to...</string>
+    <string name="report_sender">Enter your name and organization</string>
+    <string name="report_address">report_recipient@example.com</string>
     <string name="title_activity_pick_date">PickDate</string>
 
+    <!--send feedback-->
     <string name="title_activity_send_feedback">SendFeedback</string>
     <string name="button_sendFeedback">Submit feedback</string>
-    <string name="edit_feedback">Enter your comments here</string>
-    <string name="edit_feedbackEmail">Enter your email if you want a reply</string>
+    <string name="edit_feedback">Tell us what you think about BeetClock!</string>
+    <string name="edit_feedbackEmail">myname@example.com</string>
+    <string name="title_feedbackEmail">Email:</string>
+    <string name="title_feedbackContent">Comments:</string>
+
 
     <string name="title_activity_edit_sheet">Edit Sheet</string>
     <string name="title_activity_sign_in">SignIn</string>

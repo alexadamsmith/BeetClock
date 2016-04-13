@@ -163,8 +163,7 @@ public class PopulateSheet extends AppCompatActivity {
             */
             //Set text
             TextView msgView = (TextView) findViewById(R.id.date_text);
-            msgView.setTextSize(16);
-            dateSince = "Retrieve all records since you started using BeetClock, OR ";
+            dateSince = "Write all records since you started using BeetClock, OR ";
             msgView.setText(dateSince);
 
             //Get all files on drive if no file is preselected
@@ -180,11 +179,7 @@ public class PopulateSheet extends AppCompatActivity {
                 intent.putExtra(KEY_TIMES, blank);
                 startActivityForResult(intent, FILE_CODE);
 
-                //Set file text
-                TextView textView = (TextView) findViewById(R.id.file_text);
-                textView.setTextSize(16);
-                textView.setText("Choose file in Google Drive:");
-            } else {
+                } else {
                 //Get file names
                 Intent intent = new Intent(PopulateSheet.this, DoScriptExecute.class);
                 //I will need to use two blank arrays to fill in for the jobs and values
@@ -203,16 +198,10 @@ public class PopulateSheet extends AppCompatActivity {
                 intent2.putExtra(KEY_EQUIP, blank);
                 intent2.putExtra(KEY_TIMES, blank);
                 startActivityForResult(intent2, SHEET_CODE);
-
-                //Set text
-                TextView textView = (TextView) findViewById(R.id.file_text);
-                textView.setTextSize(16);
-                textView.setText("Choose file in Google Drive:");
-            }// end saveid if
-
-
+                }// end saveid if
 
         }// end onPostExecute
+
     }// end AsyncTask populateSpinners
 
 
@@ -303,9 +292,8 @@ public class PopulateSheet extends AppCompatActivity {
 
                 Date date = new Date(Long.valueOf(reportDate));
                 DateFormat formatter = new SimpleDateFormat("dd:MMM:yyyy");
-                String dateSince = "Retrieve records since " + formatter.format(date);
+                String dateSince = "Write records since " + formatter.format(date);
             TextView msgView = (TextView) findViewById(R.id.date_text);
-            msgView.setTextSize(16);
             msgView.setText(dateSince);
                             }
 //End date result

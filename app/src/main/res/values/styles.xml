@@ -1,45 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="ActionBarCompat" parent="@style/Base.Widget.AppCompat.ActionBar">
-        <item name="titleTextStyle">@style/titleStyle</item>
-    </style>
-
-    <style name="titleStyle" parent="@style/Base.TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textColor">@color/action_title</item>
-    </style>
-
-    <style name="buttonTimer" parent="@style/Base.Widget.AppCompat.Button.Borderless.Colored">
+    <style name="buttonTimer" parent="@style/Base.Widget.AppCompat.Button.Colored">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">@dimen/button_padding</item>
-        <!--<item name="android:background">@drawable/button_timer</item>-->
+        <item name="android:minHeight">@dimen/button_minheight</item>
+        <item name="android:minWidth">@dimen/button_minwidth_raised</item>
+        <item name="android:padding">@dimen/button_padding_special</item>
+        <item name="android:layout_margin">@dimen/button_padding</item>
         <item name="android:background">@color/colorAccent</item>
         <item name="android:textColor">@color/button_text</item>
         <item name="android:typeface">sans</item>
     </style>
 
-    <style name="buttonGraphic" parent="@style/Base.Widget.AppCompat.ImageButton">
-        <item name="android:tint">@color/button_text</item>
+    <style name="buttonGraphic" parent="@style/Base.Widget.AppCompat.Button.Borderless.Colored">
+        <item name="android:minWidth">@dimen/button_square_min</item>
+        <item name="android:minHeight">@dimen/button_square_min</item>
+        <item name="android:padding">@dimen/button_padding</item>
+        <item name="android:gravity">center</item>
+        <item name="android:tint">@color/colorButton</item>
+        <!--<item name="android:background">?android:attr/selectableItemBackground</item>-->
     </style>
 
-    <style name="headline" parent="@style/Base.TextAppearance.AppCompat.Headline">
-        <item name="android:typeface">serif</item>
+    <style name="buttonFlat" parent="@style/Base.Widget.AppCompat.Button.Borderless.Colored">
+        <item name="android:minWidth">@dimen/button_minwidth</item>
+        <item name="android:minHeight">@dimen/button_minheight</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:drawablePadding">@dimen/key_padding</item>
+    </style>
+
+    <style name="buttonRaised" parent="@style/Base.Widget.AppCompat.Button.Colored">
+        <item name="android:minWidth">@dimen/button_minwidth</item>
+        <item name="android:minHeight">@dimen/button_minheight</item>
+        <item name="android:padding">@dimen/button_padding</item>
+        <item name="android:background">@color/colorButton</item>
+        <item name="android:textColor">@color/button_text</item>
+        <item name="android:tint">@color/button_text</item>
+        <item name="android:drawablePadding">@dimen/key_padding</item>
     </style>
 
     <style name="title" parent="@style/Base.TextAppearance.AppCompat.Title">
-        <item name="android:typeface">serif</item>
     </style>
 
-    <style name="subhead" parent="@style/Base.TextAppearance.AppCompat.Subhead">
-        <!--<item name="android:fontFamily">serif</item>-->
+    <style name="subhead" parent="@style/Base.TextAppearance.AppCompat.Body2">
     </style>
+
+    <style name="body" parent="@style/Base.TextAppearance.AppCompat.Body1">
+    </style>
+
+    <style name="input" parent="@style/Base.TextAppearance.AppCompat.Subhead"></style>
 
     <style name="caption" parent="@style/Base.TextAppearance.AppCompat.Caption"></style>
 
-    <style name="spinner" parent="@style/Base.Widget.AppCompat.Spinner.Underlined">
-        <!--<item name="android:minWidth">@dimen/menu_width</item>-->
-        <item name="android:minWidth">@dimen/menu_width</item>
-        <!--<item name="android:minHeight">@dimen/menu_item_height</item>-->
+    <style name="spinner" parent="@style/Base.Widget.AppCompat.Spinner">
         <!--<item name="android:dropDownWidth">@dimen/menu_width</item>-->
         <item name="android:spinnerMode">dialog</item>
         <item name="android:popupBackground">@color/menu_bg</item>
@@ -49,63 +62,38 @@
     </style>
 
     <style name="spinner_item" parent="@style/Base.Widget.AppCompat.TextView.SpinnerItem">
-        <item name="android:layout_gravity">center_vertical</item>
-        <item name="android:paddingTop">@dimen/menu_padding</item>
+        <item name="android:gravity">center_vertical</item>
         <item name="android:paddingLeft">@dimen/menu_padding</item>
         <item name="android:paddingRight">@dimen/menu_padding</item>
-        <item name="android:paddingBottom">@dimen/menu_padding_bottom</item>
+    </style>
+
+    <style name="menu_box_trans">
+        <item name="android:background">@color/translucent_bg</item>
+        <item name="android:paddingTop">@dimen/key_padding</item>
+        <item name="android:paddingBottom">@dimen/key_padding</item>
+        <item name="android:paddingLeft">@dimen/key_menu_padding</item>
+        <item name="android:paddingRight">@dimen/key_menu_padding</item>
+        <item name="android:layout_margin">@dimen/key_padding</item>
+    </style>
+
+    <style name="divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">?android:attr/listDivider</item>
+        <item name="android:layout_marginBottom">@dimen/layout_bumper</item>
+    </style>
+
+    <style name="warning_box">
+        <item name="android:padding">@dimen/key_menu_padding</item>
+        <item name="android:background">@drawable/warning_box</item>
+        <item name="android:layout_marginLeft">@dimen/indent</item>
+        <item name="android:layout_marginRight">@dimen/indent</item>
+    </style>
+
+    <style name="warning_text" parent="@style/Base.TextAppearance.AppCompat.Body2">
+        <item name="android:textColor">@color/warning</item>
     </style>
 
 
-    <!-- Original styles -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-
-        <item name="android:textViewStyle">@style/SerifTextViewStyle</item>
-        <item name="android:buttonStyle">@style/SerifButtonStyle</item>
-        <item name="android:scrollViewStyle">@style/SerifScrollStyle</item>
-        <item name="android:editTextStyle">@style/SerifEditText</item>
-
-        <item name="actionOverflowMenuStyle">@style/CMOptionsMenu</item>
-
-
-    </style>
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
-
-
-
-    <style name="CMOptionsMenu" parent="Widget.AppCompat.PopupMenu.Overflow">
-        <item name="android:popupBackground">@color/colorBackground</item>
-    </style>
-
-    <style name="SerifTextViewStyle" parent="android:Widget.TextView">
-        <item name="android:typeface">serif</item>
-        <item name="android:textColor">@color/colorTextStd</item>
-    </style>
-
-    <style name="SerifButtonStyle" parent="android:Widget.Button">
-        <item name="android:typeface">serif</item>
-        <item name="android:background">@drawable/button_style</item>
-        <item name="android:textSize">16dp</item>
-        <item name="android:textColor">@color/colorTextStd</item>
-    </style>
-
-    <style name="SerifScrollStyle" parent="android:Widget.ScrollView">
-        <item name="android:typeface">serif</item>
-        <item name="android:textColor">@color/colorTextStd</item>
-    </style>
-
-    <style name="SerifEditText" parent="android:Widget.EditText">
-        <item name="android:typeface">serif</item>
-        <item name="android:textColor">@color/colorTextStd</item>
-    </style>
 
 </resources>

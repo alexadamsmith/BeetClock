@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="buttonFlat" parent="@style/Base.Widget.AppCompat.Button.Borderless.Colored">
+        <item name="android:drawableTint">@color/colorButton</item>
+    </style>
+
+    <style name="buttonRaised" parent="@style/Base.Widget.AppCompat.Button.Colored">
+        <item name="android:drawableTint">@color/button_text</item>
+    </style>
+
+</resources>

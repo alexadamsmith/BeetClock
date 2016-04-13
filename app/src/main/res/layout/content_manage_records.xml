@@ -1,319 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/colorBackground">
-
-    <ImageView
-        android:id="@+id/background_image"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/bcbg"
-        />
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="fill_parent"
+    tools:showIn="@layout/activity_manage_records" tools:context="aas.beetclock.ManageRecords"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    android:layout_height="fill_parent"
-    android:orientation="vertical"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
+    <!--content container-->
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:showIn="@layout/activity_manage_records" tools:context="aas.beetclock.ManageRecords">
+        android:layout_margin="@dimen/activity_margin">
 
+        <!--delete records menu-->
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
-            android:orientation="horizontal"
             android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_manage_records" tools:context=".ManageRecords"
+            android:orientation="vertical"
             android:layout_marginBottom="@dimen/layout_bumper">
+
+            <TextView
+                android:text="@string/delete_indiv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/title"
+                android:layout_marginBottom="@dimen/layout_bumper" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/button_indiv"
+                android:text="@string/delete_indiv"
                 android:onClick="deleteIndiv"
-                android:typeface="serif"
-                android:textColor="@color/colorTextStd"
-                android:textSize="16dp"
-                android:background="@drawable/button_style"/>
+                style="@style/buttonFlat"/>
 
         </LinearLayout>
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        <View
             android:layout_width="match_parent"
-            android:orientation="horizontal"
             android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_manage_records" tools:context=".ManageRecords"
+            style="@style/divider"/>
+
+        <!--Export records menu-->
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_marginBottom="@dimen/layout_bumper">
 
             <TextView
                 android:text="@string/export"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:background="@color/colorBackground"/>
-
-        </LinearLayout>
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_manage_records" tools:context=".ManageRecords"
-            android:layout_marginBottom="@dimen/layout_bumper">
+                android:layout_marginBottom="@dimen/layout_bumper"
+                style="@style/title"/>
 
             <TextView
                 android:text="@string/export_exp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16dp"
-                android:background="@color/colorBackground"/>
-
-        </LinearLayout>
-
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_manage_records" tools:context=".ManageRecords"
-                    android:layout_marginBottom="@dimen/layout_bumper">
-
+                style="@style/body" />
 
                     <Button
-                        style="@style/buttonTimer"
-                        android:text="@string/button_export"
                         android:onClick="exportDb"
-                        android:gravity="center_horizontal"
-                        android:layout_gravity="center_horizontal" />
+                        android:text="@string/button_export"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_publish"
+                        android:drawablePadding="@dimen/layout_bumper"
+                        style="@style/buttonFlat" />
 
         </LinearLayout>
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        <View
             android:layout_width="match_parent"
-            android:orientation="horizontal"
             android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_manage_records" tools:context=".ManageRecords"
+            style="@style/divider"/>
+
+        <!--import records menu-->
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_marginBottom="@dimen/layout_bumper">
 
             <TextView
                 android:text="@string/importrecords"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:background="@color/colorBackground"/>
-
-        </LinearLayout>
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_manage_records" tools:context=".ManageRecords"
-            android:layout_marginBottom="@dimen/layout_bumper">
+                android:layout_marginBottom="@dimen/layout_bumper"
+                style="@style/title" />
 
             <TextView
                 android:text="@string/importrecords_exp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16dp"
-                android:background="@color/colorBackground"/>
+                android:layout_marginBottom="@dimen/layout_bumper"
+                style="@style/body" />
 
-        </LinearLayout>
+            <TextView
+                android:text="@string/import_select"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/layout_bumper"
+                style="@style/subhead" />
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_manage_records" tools:context=".ManageRecords"
-            android:layout_marginBottom="@dimen/layout_bumper">
-
-            <Spinner
+             <Spinner
                 android:id="@+id/bcfiles_spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:typeface="serif"
-                android:textSize="20dp"
-                android:popupBackground="@color/colorBackground"/>
+                android:layout_marginBottom="@dimen/layout_bumper"
+                style="@style/spinner" />
 
-        </LinearLayout>
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="wrap_content"
-            android:orientation="vertical"
-            android:layout_height="wrap_content"
-            android:background="@color/colorBackground"
-            android:layout_marginBottom="@dimen/layout_bumper">
-
-            <EditText android:id="@+id/edit_import"
-                android:layout_width="match_parent"
+            <TextView
+                android:text="@string/import_confirm"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_marginBottom="@dimen/layout_bumper"
+                style="@style/subhead" />
+
+            <!--warning box-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/layout_bumper"
+                style="@style/warning_box">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/layout_bumper"
+                    android:src="@drawable/ic_error_outline"
+                    android:tint="@color/warning" />
+
+                <TextView
+                    android:text="@string/import_warning"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/warning_text"
+                    android:layout_gravity="center_vertical" />
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/edit_import"
                 android:hint="@string/edit_import"
-                android:textSize="16dp"
-                android:typeface="serif"
-                android:textColor="@color/colorTextStd"
-                                />
-        </LinearLayout>
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_manage_records" tools:context=".ManageRecords"
-            android:layout_marginBottom="@dimen/layout_bumper">
-
-            <Button
-                style="@style/buttonTimer"
-                android:text="@string/button_import"
-                android:onClick="importDb"
-                android:gravity="center_horizontal"
-                android:layout_gravity="center_horizontal" />
-
-        </LinearLayout>
-<!--
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_manage_records" tools:context=".ManageRecords"
-            android:layout_marginBottom="@dimen/layout_bumper">
-
-            <TextView
-                android:text="@string/clearRecords"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:background="@color/colorBackground"/>
-
-        </LinearLayout>
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_manage_records" tools:context=".ManageRecord"
-            android:layout_marginBottom="@dimen/layout_bumper">
->
-
-            <TextView
-                android:id="@+id/current_date"
-                android:text="@string/current_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16dp"
-                android:background="@color/colorBackground"/>
-
-        </LinearLayout>
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_manage_records" tools:context=".ManageRecord"
-            android:layout_marginBottom="@dimen/layout_bumper">
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/button_pickDate"
-                android:onClick="openDatePicker"
-                android:typeface="serif"
-                android:textColor="@color/colorTextStd"
-                android:textSize="16dp"
-                android:background="@drawable/button_style"/>
-
-        </LinearLayout>
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="wrap_content"
-            android:orientation="vertical"
-            android:layout_height="wrap_content"
-            android:background="@color/colorBackground"
-            android:layout_marginBottom="@dimen/layout_bumper">
-
-            <EditText android:id="@+id/edit_delete"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/indent"
+                android:minWidth="@dimen/menu_item_width5"
+                android:inputType="textCapWords"
+                android:singleLine="true"
                 android:layout_weight="1"
-                android:hint="@string/edit_delete"
-                android:textSize="16dp"
-                android:typeface="serif"
-                android:textColor="@color/colorTextStd"
-                                />
-        </LinearLayout>
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_manage_records" tools:context=".ManageRecords"
-            android:layout_marginBottom="@dimen/layout_bumper">
+                android:textColor="@color/colorAccent" />
 
             <Button
-                style="@style/buttonTimer"
-                android:text="@string/button_cleartimes"
-                android:onClick="clearTimes"
-                android:gravity="center_horizontal"
-                android:layout_gravity="center_horizontal" />
+                android:onClick="importDb"
+                android:text="@string/button_import"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_file_download"
+                android:drawablePadding="@dimen/layout_bumper"
+                style="@style/buttonFlat" />
 
         </LinearLayout>
--->
 
-</LinearLayout>
+    </LinearLayout>
 
+</ScrollView>
 
-    </ScrollView>
-    </FrameLayout>

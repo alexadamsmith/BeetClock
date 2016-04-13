@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--background image-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/colorBackground">
+
+    <ImageView
+        android:id="@+id/background_image"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bcbg"
+        />
+
+<!--PARENT VIEW-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:fillViewport="false"
+    tools:showIn="@layout/activity_main" tools:context=".MainActivity"
+    >
+    <!--android:background="@drawable/bg_placeholder"-->
+
+    <!--horizontal layout-->
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/activity_margin"
+        android:gravity="center_vertical|fill_vertical">
+
+    <!--Main column-->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/main_column"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/activity_margin"
+        android:gravity="center_vertical|fill_vertical"
+        style="@style/menu_box_trans"
+        android:minWidth="@dimen/menu_item_width5">
+
+        <!--Main title-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/new_timer"
+            android:layout_marginBottom="@dimen/layout_bumper"
+            style="@style/title" />
+
+        <!--Crop selector-->
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/crop_select"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="@dimen/layout_bumper">
+
+            <TextView
+                android:id="@+id/crop_select_header"
+                android:text="@string/crops"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/subhead" />
+
+            <Spinner
+                android:id="@+id/crop_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/spinner" />
+
+        </LinearLayout>
+
+        <!--Job selector-->
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="@dimen/layout_bumper">
+
+            <TextView
+                android:text="@string/jobs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/subhead" />
+
+            <Spinner
+                android:id="@+id/jobs_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/spinner"
+                />
+
+        </LinearLayout>
+
+        <!--Workers selector-->
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="@dimen/layout_bumper">
+
+            <TextView
+                android:text="@string/number_workers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/subhead"
+                />
+
+            <EditText android:id="@+id/edit_number_workers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/workers"
+                android:inputType="number" />
+
+        </LinearLayout>
+
+        <!--Equipment selector-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="@dimen/layout_bumper">
+
+            <TextView
+                android:id="@+id/equip_title"
+                android:text="@string/equipment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/subhead" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <Spinner
+                    android:id="@+id/equip_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    style="@style/spinner" />
+
+                <ImageButton
+                    android:onClick="addEquip"
+                    android:src="@drawable/ic_action_add"
+                    android:contentDescription="@string/button_add"
+                    style="@style/buttonGraphic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <!--end equip selector-->
+
+        </LinearLayout>
+        <!--end main column-->
+
+        <!--right column-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_toRightOf="@id/main_column"
+            android:layout_toEndOf="@id/main_column"
+            android:gravity="left|fill_vertical"
+            android:padding="@dimen/key_padding">
+
+            <!--Start button-->
+            <Button
+                android:id="@+id/start_button"
+                android:onClick="startTime"
+                android:text="@string/button_start"
+                style="@style/buttonTimer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <!--Container for timer buttons generated by onPostExecute function. Do not delete!-->
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/clock_controls"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <!--Timer buttons go here-->
+            </LinearLayout>
+
+        </LinearLayout>
+        <!--end right column-->
+
+    </RelativeLayout>
+    <!--end horizontal layout-->
+
+</ScrollView>
+
+</FrameLayout>
