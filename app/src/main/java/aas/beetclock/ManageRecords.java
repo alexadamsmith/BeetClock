@@ -85,14 +85,16 @@ public class ManageRecords extends AppCompatActivity {
             List<String> recordsFiles = new ArrayList<>();
 
             File directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-            for (File f : directory.listFiles()) {
-                if (f.isFile()) {
-                    String name = f.getName();
-                    if (name.contains("BeetClockRecords")){
-                        recordsFiles.add(name);
+            if (directory.listFiles().length > 0) {
+                for (File f : directory.listFiles()) {
+                    if (f.isFile()) {
+                        String name = f.getName();
+                        if (name.contains("BeetClockRecords")) {
+                            recordsFiles.add(name);
+                        }
                     }
-                }
-            }//end for file
+                }//end for file
+            }//end if file
 
             //Convert to array and send to populate spinner on postexecute
             String[] recordsArray = new String[recordsFiles.size()];
@@ -255,7 +257,7 @@ String filename = "BeetClockRecords"+formatter.format(date)+".csv";
 
         //File localDir = new File(this.getFilesDir(), "");
         file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), filename);
-        // System.out.println(file.getAbsolutePath());
+
 
         try {
             CSVWriter writer;
@@ -286,20 +288,19 @@ String filename = "BeetClockRecords"+formatter.format(date)+".csv";
 
     public void importDb(View view) {
 
-        //Get content of edit_delete
+        //Get content of edit_import
         EditText editImport = (EditText) findViewById(R.id.edit_import);
         String toImport = editImport.getText().toString().toLowerCase();
-
-        if(toImport.equals("import")) {
+        //Get spinner content
+        Spinner spin = (Spinner) findViewById(R.id.bcfiles_spinner);
+        if(toImport.equals("import") && spin.getSelectedItem() !=null ) {
             //First delete existing records
             new doClear().execute("0");
-
             //Then import new records
-            Spinner spin = (Spinner) findViewById(R.id.bcfiles_spinner);
             String selection = spin.getSelectedItem().toString();
             new doImport().execute(selection);
         }else{
-            Toast.makeText(getApplicationContext(), "To import records, enter 'import' above.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "To import records, select a file and enter 'import' above.", Toast.LENGTH_LONG).show();
         }
 
 
@@ -321,17 +322,6 @@ try {
     CSVReader csvReader = new CSVReader(new FileReader(dlFile));
     //List content = csvReader.readAll();
     records = csvReader.readAll();
-
-    //for (Object object : content) {
-    for (int i = 0; i < records.size();i++) {
-        String[] record = records.get(i);
-
-        System.out.println(record[0]
-                + " # " + record[1]
-                + " #  " + record[2]
-                + " #  " + record[3]
-                + " #  " + record[4]);
-    }
     csvReader.close();
 } catch(Exception e){
 }//end read records

@@ -106,7 +106,6 @@ public class SendMail {
             //msg.setContent(args[2],"text/html; charset=utf-8");
             //msg.setText(args[2]);
             Transport.send(msg);
-            System.out.println("---Done---");
        // } //catch (SMTPAddressFailedException fail){
           //  sendSuccess = false;
         //} catch (MessagingException mex) {

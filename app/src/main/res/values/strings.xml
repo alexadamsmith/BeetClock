@@ -44,7 +44,7 @@
     <string name="button_export">Export all records to file</string>
     <string name="importrecords">Import records:</string>
     <string name="importrecords_exp">Import records from a .csv file in the \"Downloads\" folder.</string>
-    <string name="edit_import">To authorize import, type \"import\" here</string>
+    <string name="edit_import">To import, type \"import\" here</string>
     <string name="button_import">Import records</string>
     <string name="edit_delete">To delete records, enter \"delete\"</string>
     <string name="button_cleartimes">Delete records</string>
@@ -58,7 +58,7 @@
 
     <!-- PopulateSheet strings -->
     <string name="chooseFile">Choose file in Google Drive:</string>
-    <string name="chooseSheet">Choose sheet in file:</string>
+    <string name="chooseSheet">Choose crop budget sheet in file:</string>
     <string name="chooseCrop">Add records for crop...</string>
     <string name="chooseStartDate">Starting from date...</string>
     <string name="button_getSheets">Open file</string>
@@ -74,13 +74,13 @@
     <string name="cropsSum">Select a crop to summarize</string>
 
     <!-- Menu Strings -->
-    <string name="timer_bar">Work timer</string>
+    <string name="timer_bar">Job timer</string>
     <string name="crop_bar">Manage crops</string>
     <string name="summary_bar">View records</string>
     <string name="report_bar">Email report</string>
     <string name="sheet_bar">Fill NOFA workbook</string>
     <string name="feedback_bar">Submit feedback</string>
-    <string name="timeworked_bar">Enter time worked</string>
+    <string name="timeworked_bar">Log completed job</string>
     <string name="job_bar">Manage jobs</string>
     <string name="equip_bar">Manage equipment</string>
     <string name="record_bar">Manage records</string>
@@ -101,7 +101,7 @@
     <string name="label_reportStart">Choose your report start date:</string>
     <string name="label_reportSender">Send as...</string>
     <string name="label_reportRecipient">Mail to...</string>
-    <string name="report_sender">Enter your name and organization</string>
+    <string name="report_sender">Enter your name</string>
     <string name="report_address">report_recipient@example.com</string>
     <string name="title_activity_pick_date">PickDate</string>
 

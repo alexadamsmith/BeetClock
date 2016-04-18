@@ -135,7 +135,6 @@ public class WorkSummary extends AppCompatActivity {
                 //If there is no date of last report, retrieve all records ever
                 Date date = new Date(Long.valueOf(reportDate));
                 DateFormat formatter = new SimpleDateFormat("dd:MMM:yyyy");
-                System.out.println("Saved report date:"+formatter.format(date));
 
                 dateSince = "Retrieve records since you started using BeetClock, OR";
             }else {
@@ -143,7 +142,7 @@ public class WorkSummary extends AppCompatActivity {
                 Date date = new Date(Long.valueOf(reportDate));
                 DateFormat formatter = new SimpleDateFormat("dd:MMM:yyyy");
                 // Codes for re-writing this format available at http://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html
-                System.out.println("Saved report date:"+formatter.format(date));
+
                 dateSince = "Retrieve records since " + formatter.format(date)+" OR";
             }//end reporDate else
             msgView.setText(dateSince);
@@ -178,12 +177,12 @@ public class WorkSummary extends AppCompatActivity {
 
         //Get selected crop from spinner
         Spinner spin = (Spinner) findViewById(R.id.crop_report_spinner);
-        String cropSelect = spin.getSelectedItem().toString();
-        System.out.println(cropSelect);
 
-        new createSummary().execute(cropSelect);
-
-    }
+if(spin.getSelectedItem() != null) {
+    String cropSelect = spin.getSelectedItem().toString();
+    new createSummary().execute(cropSelect);
+}
+    } // end displayReport
 
 
     public void displayRecords(View view){
@@ -297,24 +296,6 @@ public class WorkSummary extends AppCompatActivity {
         allequip.clear();
         allequip.addAll(hs);
 
-        //List<String> alljobs = db.getJobList();
-        //List<String> allequip = db.getMachineList(nullsearch);
-        //allequip.add("no equip"); //This summarizes work for which no equipment was added
-
-        System.out.println("Cropslist");
-        System.out.println(cropslist.size());
-        System.out.println("Jobslist");
-        System.out.println(jobslist.size());
-        System.out.println("Timeslist");
-        System.out.println(timeslist.size());
-        System.out.println("Elapsedlist");
-        System.out.println(elapsedlist.size());
-        System.out.println("Alljobs");
-        System.out.println(alljobs.size());
-        System.out.println("Allequipment");
-        System.out.println(equiplist.size());
-
-
 //Retrieve the date of the last report
         //SharedPreferences sharedPref = WorkSummary.this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences sharedPref = this.getSharedPreferences(
@@ -333,15 +314,15 @@ public class WorkSummary extends AppCompatActivity {
         }//end selected date else
 
 //Loop through all machinery
-        for (int i = 0; i < allequip.size(); i++) {
-            //Loop through all jobs
             for (int j = 0; j < alljobs.size(); j++) {
                 //--For each crop,loop through all entries
+                for (int i = 0; i < allequip.size(); i++) {
+                    //Loop through all jobs
                 long worksum = 0;
                 for (int k = 0; k < cropslist.size(); k++) {
                     //---if crop and job match combo, sum elapsed time as worksum
                     if (cropslist.get(k).equals(crop) && jobslist.get(k).contains(alljobs.get(j)) &&
-                            equiplist.get(k).contains(allequip.get(i)) && timeslist.get(k) > startDate) {
+                            equiplist.get(k).equals(allequip.get(i)) && timeslist.get(k) > startDate) {
                         //worksum.add(elapsedlist.get(i));
                         worksum += elapsedlist.get(k);
                         totalTime += elapsedlist.get(k);
@@ -364,20 +345,14 @@ public class WorkSummary extends AppCompatActivity {
                     sumEquip.add(thisEquip);
                 }
 
-            } // end all jobs for
-        } // end all equip for
+            } // end all equip for
+        } // end all jobs for
 
             String[] jobsArray = sumJobs.toArray(new String[0]);
             String[] equipArray = sumEquip.toArray(new String[0]);
         String[] timesArray = sumTimes.toArray(new String[0]);
         String[] totalArray = {String.valueOf(totalTime)};
 
-        //Test this summary: print all job time pairs
-        for (int i = 0; i < jobsArray.length; i++) {
-            System.out.println(jobsArray[i]);
-            System.out.println(equipArray[i]);
-            System.out.println(timesArray[i]);
-        }
         outputs.add(jobsArray);
             outputs.add(equipArray);
         outputs.add(timesArray);

@@ -20,9 +20,9 @@
             android:id="@+id/datePicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:calendarViewShown="true"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="@dimen/layout_bumper" />
+            android:layout_marginBottom="@dimen/layout_bumper"
+            android:calendarViewShown="false"/>
 
         <Button
             android:onClick="donePicking"

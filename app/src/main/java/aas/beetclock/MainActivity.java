@@ -325,14 +325,17 @@ public class MainActivity extends AppCompatActivity {
         //Get currently selected equipment as a string
         Spinner equipSpin = (Spinner) findViewById(R.id.equip_spinner);
         String selectEquip = equipSpin.getSelectedItem().toString();
-        //Only add equip if not already contained in string
-if(!allEquip.contains(selectEquip)) {
+        //Only add equip if another tractor / implement is not already present
+if((allEquip.contains("Tractor") && selectEquip.contains("Tractor")) || (allEquip.contains("Implement") && selectEquip.contains("Implement"))) {
+//If trying to add duplicate tractor or implement, popup error
+    Toast.makeText(getApplicationContext(), "Only one tractor and one implement allowed per job", Toast.LENGTH_LONG).show();
+}else{
     if(!allEquip.equals("")){
         allEquip = allEquip + ", "+ selectEquip ;
     } else {
         allEquip = selectEquip;
     }
-}
+}//does not contain selectequip for
 
         //Set text view to reflect selected equipment
         TextView equipView = (TextView) findViewById(R.id.equip_title);
@@ -469,27 +472,6 @@ if(!allEquip.contains(selectEquip)) {
                 View spacerView = inflater.inflate(R.layout.spacer, null, false);
                 linLayout.addView(spacerView);
 
-/* //In case I want to create tickign clocks on stop buttons
-                Thread t = new Thread() {
-                    @Override
-                    public void run() {
-                        try {
-                            while (!isInterrupted()) {
-                                Thread.sleep(1000);
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        // update TextView here!
-                                    }
-                                });
-                            }
-                        } catch (InterruptedException e) {
-                        }
-                    }
-                };
-
-                t.start();
-*/
             } // end current for
 
         }//end postExecute

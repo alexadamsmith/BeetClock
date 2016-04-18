@@ -1,20 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/colorBackground">
-
-    <ImageView
-        android:id="@+id/background_image"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/bcbg"
-        />
-
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -24,42 +9,42 @@
         android:orientation="vertical"
         >
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin"
-            android:paddingBottom="@dimen/activity_vertical_margin"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:context="aas.beetclock.GetEquipment">
+    <!--content container-->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_margin"
+        android:orientation="vertical">
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <!--warning box-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/layout_bumper"
+            style="@style/warning_box">
+
+            <ImageView
                 android:layout_width="wrap_content"
-                android:orientation="vertical"
                 android:layout_height="wrap_content"
-                android:background="@color/colorBackground"
-                android:layout_marginBottom="@dimen/layout_bumper">
+                android:layout_marginRight="@dimen/layout_bumper"
+                android:src="@drawable/ic_error_outline"
+                android:tint="@color/warning" />
 
-                <TextView
-                    style="@style/subhead"
-                    android:text="@string/exp_getEquip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorBackground"/>
+            <TextView
+                android:text="@string/exp_getEquip"
+                style="@style/warning_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorBackground"/>
 
-            </LinearLayout>
+        </LinearLayout>
+
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:layout_height="wrap_content"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 tools:context=".GetEquipment"
                 android:layout_marginBottom="@dimen/layout_bumper">
 
@@ -74,12 +59,9 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:layout_height="wrap_content"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 tools:context=".GetEquipment"
                 android:layout_marginBottom="@dimen/layout_bumper">
 
@@ -94,15 +76,14 @@
             </LinearLayout>
 
             <Button
-                style="@style/buttonTimer"
+                style="@style/buttonRaised"
                 android:text="@string/button_getEquip"
                 android:onClick="getEquip"
-                android:gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"/>
 
         </LinearLayout>
 
 
     </ScrollView>
-
-</FrameLayout>

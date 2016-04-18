@@ -87,109 +87,6 @@ public class ManageEquipment extends AppCompatActivity {
         finish();
     }
 
-/*
-    private class onLoad extends AsyncTask<String, Integer, List<String[]>> {
-        protected List<String[]> doInBackground(String... param) {
-
-
-
-            SharedPreferences sharedPref = ManageEquipment.this.getSharedPreferences(
-                    "aas.beetclock", Context.MODE_PRIVATE);
-
-
-            //Get an array of equipment
-            SQLiteHelper db = new SQLiteHelper(ManageEquipment.this);
-            String nullsearch = null; // Must send function a null string in order to return all results
-            List<String> machinelist = db.getMachineList(nullsearch);
-            java.util.Collections.sort(machinelist, new Comparator<String>() {
-                @Override
-                public int compare(String o1, String o2) {
-                    return o1.compareToIgnoreCase(o2);
-                }
-            }); // Alphebetizes while ignoring case
-            String[] machineArray = new String[machinelist.size()];
-            machineArray = machinelist.toArray(machineArray);
-
-            List<String[]> allSpinners = new ArrayList<>();
-            allSpinners.add(machineArray);
-
-            //Also getting reportDate from shared prefs
-
-            savedName = sharedPref.getString(FILE_NAME, "");
-            savedId = sharedPref.getString(FILE_ID, "");
-
-            return allSpinners;
-        }//end doInBackground
-
-        protected void onProgressUpdate(Integer... progress) {
-        }
-
-        protected void onPostExecute(List<String[]> allSpinners) {
-            String[] machineArray = allSpinners.get(0);
-
-            //Populate crops spinner
-            ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
-                    ManageEquipment.this, R.layout.spinnertext, machineArray); //android.R.layout.simple_spinner_item
-            spinnerArrayAdapter.setDropDownViewResource(R.layout.spinnertext); //android.R.layout.simple_spinner_item
-
-            Spinner machine_spinner = (Spinner)findViewById(R.id.machine_spinner);
-            machine_spinner.setAdapter(spinnerArrayAdapter);
-
-
-            //Get all files on drive if no file is preselected
-
-            if(savedId.equals("")) {
-                Intent intent = new Intent(ManageEquipment.this, DoScriptExecute.class);
-                //I will need to use two blank arrays to fill in for the jobs and values
-                String[] blank = {};
-                String[] params = {"getFiles"};
-                intent.putExtra(KEY_PARAMS, params);
-                intent.putExtra(KEY_JOBS, blank);
-                intent.putExtra(KEY_EQUIP, blank);
-                intent.putExtra(KEY_TIMES, blank);
-                startActivityForResult(intent, FILE_CODE);
-
-                //Set file text
-                TextView textView = (TextView) findViewById(R.id.file_text);
-                textView.setTextSize(16);
-                textView.setText("Choose file in Google Drive:");
-            } else {
-                //Get file names
-                Intent intent = new Intent(ManageEquipment.this, DoScriptExecute.class);
-                //I will need to use two blank arrays to fill in for the jobs and values
-                String[] blank = {};
-                String[] params = {"getFiles"};
-                intent.putExtra(KEY_PARAMS, params);
-                intent.putExtra(KEY_JOBS, blank);
-                intent.putExtra(KEY_EQUIP, blank);
-                intent.putExtra(KEY_TIMES, blank);
-                startActivityForResult(intent, FILE_CODE);
-                //Get spreadsheets
-                Intent intent2 = new Intent(ManageEquipment.this, DoScriptExecute.class);
-                String[] params2 = {"getSheets", savedId};
-                intent2.putExtra(KEY_PARAMS, params2);
-                intent2.putExtra(KEY_JOBS, blank);
-                intent2.putExtra(KEY_EQUIP, blank);
-                intent2.putExtra(KEY_TIMES, blank);
-                startActivityForResult(intent2, SHEET_CODE);
-
-                //Set text
-                TextView textView = (TextView) findViewById(R.id.file_text);
-                textView.setTextSize(16);
-                textView.setText("Write to " + savedName + " OR select a new file");
-            }// end saveid if
-
-
-
-        }// end onPostExecute
-    }// end AsyncTask populateSpinners
-
-
-*/
-
-
-
-
 
     private class populateSpinners extends AsyncTask<String, Integer, List<String[]>> {
         protected List<String[]> doInBackground(String... param) {
@@ -221,6 +118,9 @@ public class ManageEquipment extends AppCompatActivity {
         protected void onPostExecute(List<String[]> allSpinners) {
             String[] spinmachine = allSpinners.get(0);
 
+for (int i = 0; i < spinmachine.length; i++){
+    System.out.println(spinmachine[i]);
+}
             //Populate machine spinner
             ArrayAdapter<String> machineArrayAdapter = new ArrayAdapter<String>(
                     ManageEquipment.this, R.layout.spinnertext, spinmachine);
@@ -228,6 +128,14 @@ public class ManageEquipment extends AppCompatActivity {
 
             Spinner machine_spinner = (Spinner)findViewById(R.id.machine_spinner);
             machine_spinner.setAdapter(machineArrayAdapter);
+
+            //Initialize categories spinner and populate.  These values will never change.
+            String[] categories = {"Tractor","Implement"};
+            ArrayAdapter<String> catsArrayAdapter = new ArrayAdapter<String>(
+                    ManageEquipment.this, R.layout.spinnertext, categories);
+            catsArrayAdapter.setDropDownViewResource(R.layout.spinnertext);
+            Spinner cats_spinner = (Spinner)findViewById(R.id.equipcat_spinner);
+            cats_spinner.setAdapter(catsArrayAdapter);
         }// end onPostExecute
     }// end AsyncTask populateSpinners
 
@@ -237,21 +145,30 @@ public class ManageEquipment extends AppCompatActivity {
         EditText edit = (EditText) findViewById(R.id.edit_machine);
         String newmachine =  edit.getText().toString();
 
+        Spinner catSpin = (Spinner) findViewById(R.id.equipcat_spinner);
+        String category = catSpin.getSelectedItem().toString();
+        String[] catEquip = {newmachine, category};
+
         if (newmachine.equals("") || newmachine.isEmpty() || newmachine.equals(null)){
             Toast.makeText(getApplicationContext(), "Enter name of equipment to add", Toast.LENGTH_LONG).show();
-        }else{
+        }else if (newmachine.contains(":") || newmachine.contains(",")) {
+            Toast.makeText(getApplicationContext(), "Include only letters and numbers in equipment name", Toast.LENGTH_LONG).show();
+        } else {
             //Add crop to Db
-            new doAdd().execute(newmachine);
+            new doAdd().execute(catEquip);
         }
 
     } // End add machine
 
-    private class doAdd extends AsyncTask<String, Integer, String> {
-        protected String doInBackground(String... param) {
-            String newmachine = param[0];
+    private class doAdd extends AsyncTask<String[], Integer, String> {
+        protected String doInBackground(String[]... param) {
+            String[] outputs = param[0];
+            String newmachine = outputs[0];
+            String category = outputs[1];
+            String mechCat = category+": "+newmachine;
 
             SQLiteHelper db = new SQLiteHelper(ManageEquipment.this);
-            db.addMachineList(newmachine);
+            db.addMachineList(mechCat);
             return "";
         }
 

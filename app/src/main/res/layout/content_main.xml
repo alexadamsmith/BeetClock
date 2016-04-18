@@ -152,6 +152,16 @@
                         android:layout_gravity="center_vertical"
                         style="@style/buttonGraphic" />
 
+                    <ImageButton
+                        android:onClick="remEquip"
+                        android:id="@+id/equip_button_remove"
+                        android:src="@drawable/ic_remove_black_24dp"
+                        android:contentDescription="@string/button_remove"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        style="@style/buttonGraphic" />
+
                 </LinearLayout>
 
             </LinearLayout>

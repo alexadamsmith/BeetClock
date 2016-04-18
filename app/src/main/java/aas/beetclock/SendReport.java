@@ -21,6 +21,7 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -321,6 +322,13 @@ if (success){
         hs.addAll(alljobs);
         alljobs.clear();
         alljobs.addAll(hs);
+        //Sort all jobs list
+        java.util.Collections.sort(alljobs, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return o1.compareToIgnoreCase(o2);
+            }
+        }); // Alphebetizes while ignoring case
 
         //Retrieve list of equipment without duplicates based on hashset
         List<String> allequip = db.getMachine();
@@ -364,29 +372,22 @@ if (success){
         String[] headers = {"Crop","Job","Equipment","Hours", "Minutes"};
         csvSummaries.add(headers);
 
-        //Bugcheck equip:
-        for (int i = 0; i < equiplist.size(); i++){
-            System.out.println(equiplist.get(i));
-        }
-
             //Loop through all crops
             for (int i = 0; i < allcrops.size(); i++) {
                 //Begin sum for each crop
                 long cropsum = 0;
                 //Loop through all machinery
-                for (int h = 0; h < allequip.size(); h++) {
-                    System.out.println(allequip.get(h));
-
-                //Loop through all jobs
                 for (int j = 0; j < alljobs.size(); j++) {
-                    //--For each crop, job combo, loop through all entries
+                //--For each crop, job combo, loop through all entries
+                for (int h = 0; h < allequip.size(); h++) {
+                //Loop through all jobs
 
                     //This is a convoluted method, but going straight from worksum did not work
                     long worksum = 0;
                     for (int k = 0; k < cropslist.size(); k++) {
                         //---if crop and job match combo, sum elapsed time as worksum
                         if (cropslist.get(k).equals(allcrops.get(i)) && jobslist.get(k).equals(alljobs.get(j))
-                                && equiplist.get(k).contains(allequip.get(h)) && timeslist.get(k) > startDate) {
+                                && equiplist.get(k).equals(allequip.get(h)) && timeslist.get(k) > startDate) {
                             //worksum.add(elapsedlist.get(i));
                             worksum += Long.valueOf(elapsedlist.get(k));
                         }
@@ -407,8 +408,8 @@ if (success){
                         summaries.add(summary);
                         csvSummaries.add(csvsummary);
                     }
-                } // end all jobs for
-                }//end all equip for
+                } // end all equip for
+                }//end all jobs for
                 //Writing crop summaries
                 String hrsFormat = String.valueOf(TimeUnit.MILLISECONDS.toHours(cropsum));
                 String hrsSep = " hrs ";
@@ -433,7 +434,6 @@ if (success){
 
         File localDir = new File(this.getFilesDir(), "");
         file = new File(localDir, "beetclock_report.csv");
-        System.out.println(file.getAbsolutePath());
 
         try {
             CSVWriter writer;
@@ -562,7 +562,6 @@ if (success){
 
         //File localDir = new File(this.getFilesDir(), "");
         file = new File(this.getFilesDir(), "beetclock_records.csv");
-        // System.out.println(file.getAbsolutePath());
 
         try {
             CSVWriter writer;
