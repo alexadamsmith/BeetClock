@@ -60,7 +60,7 @@ public class ManageJobs extends AppCompatActivity {
     private class populateSpinners extends AsyncTask<String, Integer, List<String[]>> {
         protected List<String[]> doInBackground(String... param) {
 
-            //Get an array of crops
+            //Get an array of jobs
             SQLiteHelper db = new SQLiteHelper(ManageJobs.this);
                        List<String> joblist = db.getJobList();
             java.util.Collections.sort(joblist, new Comparator<String>() {

@@ -109,6 +109,11 @@
 
         </LinearLayout>
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/activity_margin">
 
             <Button
                 android:onClick="sendReport"
@@ -120,6 +125,7 @@
                 android:drawablePadding="@dimen/key_menu_padding"
                 style="@style/buttonRaised" />
 
+        </LinearLayout>
 
     </LinearLayout>
 

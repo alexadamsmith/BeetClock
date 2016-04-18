@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class SQLiteHelper extends SQLiteOpenHelper {
 
     // Database Version
-    private static final int DATABASE_VERSION = 12;
+    private static final int DATABASE_VERSION = 13;
     // Database Name
     private static final String DATABASE_NAME = "BeetDB";
 
@@ -133,7 +133,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         //Adding default machinery at db creation
 
-        String[] defaultmachines = {"Tractor 1","Tractor 2","Tiller 1","Tiller 2"};
+        String[] defaultmachines = {"Tractor: 1","Implement: plow","Implement: tiller","Implement: cultivator"};
         for (int i = 0; i < defaultmachines.length; i++) {
             String machine = defaultmachines[i];
             ContentValues mech = new ContentValues();

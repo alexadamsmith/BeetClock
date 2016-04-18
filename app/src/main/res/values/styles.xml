@@ -76,6 +76,18 @@
         <item name="android:layout_margin">@dimen/key_padding</item>
     </style>
 
+    <style name="menu_box_land">
+        <item name="android:background">@color/translucent_bg</item>
+        <item name="android:paddingTop">@dimen/key_padding</item>
+        <item name="android:paddingBottom">@dimen/key_padding</item>
+        <item name="android:paddingLeft">@dimen/key_padding</item>
+        <item name="android:paddingRight">@dimen/key_padding</item>
+        <item name="android:layout_marginTop">@dimen/activity_margin</item>
+        <item name="android:layout_marginBottom">@dimen/activity_margin</item>
+        <item name="android:layout_marginLeft">@dimen/wide_margin</item>
+        <item name="android:layout_marginRight">@dimen/wide_margin</item>
+    </style>
+
     <style name="divider">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>

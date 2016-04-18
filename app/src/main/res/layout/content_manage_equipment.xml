@@ -35,8 +35,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Equipment category:"
+                    style="@style/subhead"/>
 
-                <EditText android:id="@+id/edit_machine"
+                <Spinner
+                    android:id="@+id/equipcat_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/layout_bumper"
+                    android:layout_marginBottom="@dimen/layout_bumper"
+                    style="@style/spinner"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                                <EditText android:id="@+id/edit_machine"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="@string/new_machine"
@@ -54,6 +74,30 @@
                     android:layout_height="wrap_content" />
 
             </LinearLayout>
+
+        </LinearLayout>
+
+        <!--warning box-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/layout_bumper"
+            style="@style/warning_box">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/layout_bumper"
+                android:src="@drawable/ic_error_outline"
+                android:tint="@color/warning" />
+
+            <TextView
+                android:text="If using equipment from NOFA workbook, do not add additional equipment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/warning_text"
+                android:layout_gravity="center_vertical" />
 
         </LinearLayout>
 
@@ -125,12 +169,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/activity_margin">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Import from NOFA spreadsheet"
+                    android:text="Import from NOFA workbook"
                     android:layout_marginRight="@dimen/layout_bumper"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical"
@@ -147,6 +192,7 @@
 
 
             </LinearLayout>
+
 
         </LinearLayout>
 

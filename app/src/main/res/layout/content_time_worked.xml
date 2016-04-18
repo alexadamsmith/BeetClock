@@ -33,13 +33,14 @@
             android:gravity="center_vertical|fill_vertical"
             style="@style/menu_box_trans">
 
-            <!--Menu title-->
+            <!--
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/title_jobLog"
                 android:layout_marginBottom="@dimen/layout_bumper"
                 style="@style/title" />
+               -->
 
             <!--Crop selector-->
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -109,7 +110,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/hours_hint"
-                        android:inputType="numberDecimal" />
+                        />
 
                 </LinearLayout>
 

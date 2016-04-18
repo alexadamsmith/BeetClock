@@ -57,7 +57,7 @@ public class TimeWorked extends AppCompatActivity {
         setContentView(R.layout.activity_time_worked);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Time Worked");
+        getSupportActionBar().setTitle("Log Completed Job");
 
 
         //Do on create
@@ -272,8 +272,11 @@ isDateReturn = true;
         //Get currently selected equipment as a string
         Spinner equipSpin = (Spinner) findViewById(R.id.equip_spinner);
         String selectEquip = equipSpin.getSelectedItem().toString();
-        //Only add equip if not already contained in string
-        if(!allEquip.contains(selectEquip)) {
+        //Only add new equipment if another tractor / implement is not already present
+        if((allEquip.contains("Tractor") && selectEquip.contains("Tractor")) || (allEquip.contains("Implement") && selectEquip.contains("Implement"))) {
+//If trying to add duplicate tractor or implement, popup error
+            Toast.makeText(getApplicationContext(), "Only one tractor and one implement allowed per job", Toast.LENGTH_LONG).show();
+        }else{
             if(!allEquip.equals("")){
                 allEquip = allEquip + ", "+ selectEquip ;
             } else {

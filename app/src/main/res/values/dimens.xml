@@ -5,6 +5,7 @@
     <dimen name="activity_margin">16dp</dimen>
     <dimen name="activity_margin_wide">32dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="wide_margin">32dp</dimen>
 
     <!--Values for buttons-->
     <dimen name="button_minwidth">64dp</dimen>

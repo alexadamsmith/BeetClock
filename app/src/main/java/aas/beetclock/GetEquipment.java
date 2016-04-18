@@ -67,7 +67,7 @@ public class GetEquipment extends AppCompatActivity {
         setContentView(R.layout.activity_get_equipment);
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Get Equipment");
+        //getSupportActionBar().setTitle("Get Equipment");
 
         new onLoad().execute("");
 
@@ -160,19 +160,23 @@ public class GetEquipment extends AppCompatActivity {
                     //Get spreadsheets
                     //!!! Must get the ID of the selected file.  Should also RETURN the IDs of the sheets
                     Spinner fileSpin = (Spinner) findViewById(R.id.files_spinner);
-                    position = fileSpin.getSelectedItemPosition();
-                    String fileName = fileSpin.getSelectedItem().toString();
-                    String fileId = ids[position];
-                    //Save name and Id of selected
-                    savedName = fileName;
-                    savedId = fileId;
 
-                    String[] fileInfo = {fileName, fileId};
+                    if(fileSpin.getSelectedItem() != null) {
+                        position = fileSpin.getSelectedItemPosition();
 
-                    //Set text
-                    TextView textView = (TextView) findViewById(R.id.file_text);
-                    textView.setTextSize(16);
-                    textView.setText("Get equipment from " + savedName + " OR select a new file");
+                        String fileName = fileSpin.getSelectedItem().toString();
+                        String fileId = ids[position];
+                        //Save name and Id of selected
+                        savedName = fileName;
+                        savedId = fileId;
+
+                        String[] fileInfo = {fileName, fileId};
+
+                        //Set text
+                        TextView textView = (TextView) findViewById(R.id.file_text);
+                        textView.setTextSize(16);
+                        textView.setText("Get equipment from " + savedName + " OR select a new file");
+                    }//end if file not null
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parentView) {
@@ -186,9 +190,6 @@ public class GetEquipment extends AppCompatActivity {
 
             String[] equips = data.getStringArrayExtra(DoScriptExecute.KEY_RESPONSE);
 
-            for (int i = 0; i < equips.length; i++) {
-                System.out.println(equips[i]);
-            }
             new doWrite().execute(equips);
 
         }//End populate result
@@ -202,10 +203,16 @@ public class GetEquipment extends AppCompatActivity {
 
             String[] equipment = param[0];
             SQLiteHelper db = new SQLiteHelper(GetEquipment.this);
+            //Before retrieving new machines, remove all old machines from list
+            db.deleteMachineList("");
 
             for (int i = 0; i < equipment.length; i++) {
-                if (!equipment[i].equals("") && !equipment[i].isEmpty() &&! equipment[i].equals(null)) {
-                    db.addMachineList(equipment[i]);
+                //Add only array elements that contain data.
+                //Tractors comprise the first four entries; preface them with 'Tractor:', and the rest with 'Implement:'
+                if (!equipment[i].equals("") && !equipment[i].isEmpty() &&! equipment[i].equals(null) && i < 4) {
+                    db.addMachineList("Tractor: "+equipment[i]);
+                } else if (!equipment[i].equals("") && !equipment[i].isEmpty() &&! equipment[i].equals(null)){
+                    db.addMachineList("Implement: "+equipment[i]);
                 }
             }
             return "";
@@ -221,65 +228,22 @@ public class GetEquipment extends AppCompatActivity {
 
 
 
-    /*
-
-
-        private class populateSpinners extends AsyncTask<String, Integer, List<String[]>> {
-            protected List<String[]> doInBackground(String... param) {
-
-                SQLiteHelper db = new SQLiteHelper(ManageEquipment.this);
-                String nullsearch = null;
-
-                //Initialize machinery spinner and populate with items
-                //Load machinery names from Machine table
-                List<String> machinelist = db.getMachineList(nullsearch);
-                java.util.Collections.sort(machinelist, new Comparator<String>() {
-                    @Override
-                    public int compare(String o1, String o2) {
-                        return o1.compareToIgnoreCase(o2);
-                    }
-                }); // Alphebetizes while ignoring case
-                String[] spinmachine = new String[machinelist.size()];
-                spinmachine = machinelist.toArray(spinmachine);
-
-                List<String[]> allSpinners = new ArrayList<>();
-                allSpinners.add(spinmachine);
-
-                return allSpinners;
-            }//end doInBackground
-
-            protected void onProgressUpdate(Integer... progress) {
-            }
-
-            protected void onPostExecute(List<String[]> allSpinners) {
-                String[] spinmachine = allSpinners.get(0);
-
-                //Populate machine spinner
-                ArrayAdapter<String> machineArrayAdapter = new ArrayAdapter<String>(
-                        ManageEquipment.this, R.layout.spinnertext, spinmachine);
-                machineArrayAdapter.setDropDownViewResource(R.layout.spinnertext);
-
-                Spinner machine_spinner = (Spinner)findViewById(R.id.machine_spinner);
-                machine_spinner.setAdapter(machineArrayAdapter);
-            }// end onPostExecute
-        }// end AsyncTask populateSpinners
-
-    */
-
-
-
     public void getEquip(View view) {
-
-    new doGet().execute("");
-    }//End delete machine
+        //Get equipment if a sheet ID is saved / exists
+        if(!savedId.equals("") && !savedId.equals(null) && !savedId.isEmpty()) {
+            new doGet().execute("");
+        } else {
+            Toast.makeText(getApplicationContext(), "Select a file to retrieve equipment from", Toast.LENGTH_LONG).show();
+        }
+    }//End get equip
 
 
     private class doGet extends AsyncTask<String, Integer, String> {
         protected String doInBackground(String... param) {
-//Before retrieving new machines, remove all old machines from list
-            SQLiteHelper db = new SQLiteHelper(GetEquipment.this);
-            db.deleteMachineList("");
-                        return "";
+        //Before retrieving new machines, remove all old machines from list
+                SQLiteHelper db = new SQLiteHelper(GetEquipment.this);
+                db.deleteMachineList("");
+                            return "";
         }
 
         protected void onProgressUpdate(Integer... progress) {
@@ -294,8 +258,6 @@ public class GetEquipment extends AppCompatActivity {
             intent.putExtra(KEY_EQUIP, blank);
             intent.putExtra(KEY_TIMES, blank);
             startActivityForResult(intent, GET_CODE);
-
-            System.out.println("Saved ID: " + savedId);
         }
     }//end AsyncTask doGet
 
