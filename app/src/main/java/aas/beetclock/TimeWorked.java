@@ -368,7 +368,7 @@ isDateReturn = true;
 if(hours > 0 && workers > 0){
     //Multiply elapsed (ms) by workers
     long msElapsed = (long)(hours * 3600000);
-    long timeWorked = msElapsed * (long)workers;
+    //long timeWorked = msElapsed * (long)workers;
 
     //Get values from crop and jobs spinners
     Spinner cropSpin = (Spinner) findViewById(R.id.crop_spinner_worked);
@@ -377,7 +377,7 @@ if(hours > 0 && workers > 0){
     Spinner jobSpin = (Spinner) findViewById(R.id.jobs_spinner_worked);
     String job = jobSpin.getSelectedItem().toString();
 
-    String[] toSave = {crop, String.valueOf(timeWorked), job};
+    String[] toSave = {crop, String.valueOf(msElapsed), job, String.valueOf(workers)};
 
     new workedDb().execute(toSave);
 
@@ -395,6 +395,7 @@ if(hours > 0 && workers > 0){
             String crop = parameters[0];
             String timeWorked = parameters[1];
             String job = parameters[2];
+            String workers = parameters[3];
 
             //Get saved date OR current time
             Long preTime = null;
@@ -420,6 +421,7 @@ if(hours > 0 && workers > 0){
             }else {
                 entry.add(allEquip);
             }
+            entry.add(workers);
 
             SQLiteHelper db = new SQLiteHelper(TimeWorked.this);
             db.addTime(entry);

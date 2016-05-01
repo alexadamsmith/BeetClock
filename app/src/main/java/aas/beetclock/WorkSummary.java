@@ -212,7 +212,8 @@ if(spin.getSelectedItem() != null) {
        String[] jobsArray = summary.get(0);
        String[] equipArray = summary.get(1);
        String[] timesArray = summary.get(2);
-       String[] timeTotal = summary.get(3);
+       String[] equipTimesArray = summary.get(3);
+       String[] timeTotal = summary.get(4);
                Long totTime = Long.parseLong(timeTotal[0]);
                String hrsFormat = String.valueOf(TimeUnit.MILLISECONDS.toHours(totTime));
                String hrsSep = " hrs ";
@@ -223,7 +224,7 @@ if(spin.getSelectedItem() != null) {
        //String totalHours = String.format("%.2f", totalDec / 3600000);
         //NOW I can create a string to print using the for loop below on the list of string[] arrays
         StringBuilder liststring = new StringBuilder();
-        String sep = ": ";
+        String sep = "; ";
        //Starting with the total
        liststring.append("Total time for "+cropSelect+": "+totalTime);
        liststring.append(System.getProperty("line.separator"));
@@ -233,7 +234,12 @@ if(spin.getSelectedItem() != null) {
 //Adding both crop and job
             liststring.append(jobsArray[i]);
             liststring.append(sep).append("with ").append(equipArray[i]);
-            liststring.append(sep).append(timesArray[i]);
+
+            liststring.append(sep).append("Person time: ").append(timesArray[i]);
+            //Print eqipment time only if equipment was used!
+            if (!equipArray[i].equals("no equip")){
+                liststring.append(sep).append("Equipment time: ").append(equipTimesArray[i]);
+            }
             liststring.append(System.getProperty("line.separator"));
             liststring.append(System.getProperty("line.separator"));
         } // end jobsArray for
@@ -264,6 +270,7 @@ if(spin.getSelectedItem() != null) {
         List<String> sumJobs = new ArrayList<>();
         List<String> sumTimes = new ArrayList<>();
         List<String> sumEquip = new ArrayList<>();
+        List<String> sumEquipTimes = new ArrayList<>();
         long totalTime = 0;
 
 
@@ -275,6 +282,7 @@ if(spin.getSelectedItem() != null) {
         List<Long> elapsedlist = db.getElapsed();
         List<String> jobslist = db.getJobs();
         List<String> equiplist = db.getMachine();
+        List<Long> workerlist = db.getWorkers();
 
 //Removing duplicates from jobs and equipment lists using a hashset
         List<String> alljobs = db.getJobs();
@@ -319,23 +327,28 @@ if(spin.getSelectedItem() != null) {
                 for (int i = 0; i < allequip.size(); i++) {
                     //Loop through all jobs
                 long worksum = 0;
+                    long equipsum = 0;
                 for (int k = 0; k < cropslist.size(); k++) {
                     //---if crop and job match combo, sum elapsed time as worksum
                     if (cropslist.get(k).equals(crop) && jobslist.get(k).contains(alljobs.get(j)) &&
                             equiplist.get(k).equals(allequip.get(i)) && timeslist.get(k) > startDate) {
                         //worksum.add(elapsedlist.get(i));
-                        worksum += elapsedlist.get(k);
-                        totalTime += elapsedlist.get(k);
+                        worksum += elapsedlist.get(k) * workerlist.get(k);
+                        equipsum += elapsedlist.get(k);
+                        totalTime += elapsedlist.get(k) * workerlist.get(k);
                     }
                 } //end all entries for
                 //--if worksum > 0, add job and summary to array
 //We want zeros for all jobs w/o an entry
                 if (worksum > 0) {
                     String hrsFormat = String.valueOf(TimeUnit.MILLISECONDS.toHours(worksum));
+                    String hrsEquipForm = String.valueOf(TimeUnit.MILLISECONDS.toHours(equipsum));
                     String hrsSep = " hrs ";
                     String minFormat = String.valueOf(TimeUnit.MILLISECONDS.toMinutes(worksum) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(worksum)));
+                    String minEquipForm = String.valueOf(TimeUnit.MILLISECONDS.toMinutes(equipsum) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(equipsum)));
                     String minSep = " min";
                     String elapsed = hrsFormat+hrsSep+minFormat+minSep;
+                    String equipElapsed = hrsEquipForm + hrsSep + minEquipForm + minSep;
                     //String hours = String.format("%.2f", (float) worksum / 3600000); // Should produce hours to 2 decimal places
                     //Adding job and time to lists
                     String thisJob = alljobs.get(j);
@@ -343,6 +356,7 @@ if(spin.getSelectedItem() != null) {
                     sumTimes.add(elapsed);
                     sumJobs.add(thisJob);
                     sumEquip.add(thisEquip);
+                    sumEquipTimes.add(equipElapsed);
                 }
 
             } // end all equip for
@@ -351,11 +365,14 @@ if(spin.getSelectedItem() != null) {
             String[] jobsArray = sumJobs.toArray(new String[0]);
             String[] equipArray = sumEquip.toArray(new String[0]);
         String[] timesArray = sumTimes.toArray(new String[0]);
+        String[] equipTimesArray = sumEquipTimes.toArray(new String[0]);
         String[] totalArray = {String.valueOf(totalTime)};
 
         outputs.add(jobsArray);
             outputs.add(equipArray);
         outputs.add(timesArray);
+        outputs.add(equipTimesArray);
+
         outputs.add(totalArray);
 
         return outputs;
@@ -374,6 +391,7 @@ if(spin.getSelectedItem() != null) {
         List<Long> elapsedlist = db.getElapsed();
         List<String> jobslist = db.getJobs();
         List<String> equiplist = db.getMachine();
+            List<Long> workerlist = db.getWorkers();
 
 
             List<Long> timeSort = sortListWithoutModifyingOriginalList(timeslist);
@@ -410,15 +428,19 @@ if(spin.getSelectedItem() != null) {
                 for (int j = 0; j < timeslist.size(); j++) {
                     if (timeSort.get(i).equals(timeslist.get(j)) && timeslist.get(j) > startDate) {
                         //Format work times
-                        String hrsFormat = String.valueOf( TimeUnit.MILLISECONDS.toHours(elapsedlist.get(j)) );
+                        String hrsFormat = String.valueOf( TimeUnit.MILLISECONDS.toHours(elapsedlist.get(j)*workerlist.get(j)) );
+                        String hrsEquipFormat = String.valueOf( TimeUnit.MILLISECONDS.toHours(elapsedlist.get(j)) );
                         String hrsSep = " hrs";
-                        String minFormat = String.valueOf( TimeUnit.MILLISECONDS.toMinutes(elapsedlist.get(j)) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(elapsedlist.get(j))) );
+                        String minFormat = String.valueOf( TimeUnit.MILLISECONDS.toMinutes(elapsedlist.get(j)*workerlist.get(j)) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(elapsedlist.get(j)*workerlist.get(j))) );
+                        String minEquipFormat = String.valueOf( TimeUnit.MILLISECONDS.toMinutes(elapsedlist.get(j)) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(elapsedlist.get(j))) );
                         String minSep = " min";
+                        String personTimeFormat = "Person hours: "+hrsFormat+hrsSep+""+minFormat+minSep;
+                        String equipTimeFormat = "Equipment hours: "+hrsEquipFormat+hrsSep+""+minEquipFormat+minSep;
 
 //Add a column with the record date
                         String dateFormat = formatter.format(timeslist.get(j));
 
-                        String[] summary = {cropslist.get(j), jobslist.get(j), equiplist.get(j), hrsFormat, hrsSep, minFormat, minSep, dateFormat}; //String.valueOf(worksum)
+                        String[] summary = {cropslist.get(j), jobslist.get(j), equiplist.get(j), personTimeFormat, equipTimeFormat, dateFormat}; //String.valueOf(worksum)
                         summaries.add(summary);
                     }
                 }//end j for

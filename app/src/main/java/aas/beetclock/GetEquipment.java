@@ -189,8 +189,18 @@ public class GetEquipment extends AppCompatActivity {
         }  else if (requestCode == GET_CODE && resultCode == Activity.RESULT_OK) {
 
             String[] equips = data.getStringArrayExtra(DoScriptExecute.KEY_RESPONSE);
+            if(equips.length > 0) {
+                if (!equips[0].contains("Error")) {
+                    new doWrite().execute(equips);
 
-            new doWrite().execute(equips);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Make sure you have selected a NOFA crop budget workbook", Toast.LENGTH_LONG).show();
+                }
+                //equips length if
+            } else {
+                //go ahead and populate blank lists of no error returned
+                new doWrite().execute(equips);
+            }
 
         }//End populate result
 
@@ -206,14 +216,19 @@ public class GetEquipment extends AppCompatActivity {
             //Before retrieving new machines, remove all old machines from list
             db.deleteMachineList("");
 
+System.out.println("Length: "+equipment.length);
+
             for (int i = 0; i < equipment.length; i++) {
                 //Add only array elements that contain data.
                 //Tractors comprise the first four entries; preface them with 'Tractor:', and the rest with 'Implement:'
-                if (!equipment[i].equals("") && !equipment[i].isEmpty() &&! equipment[i].equals(null) && i < 4) {
+                /*
+                if (!equipment[i].equals("") && !equipment[i].isEmpty() && !equipment[i].equals(null) && i < 6) {
                     db.addMachineList("Tractor: "+equipment[i]);
-                } else if (!equipment[i].equals("") && !equipment[i].isEmpty() &&! equipment[i].equals(null)){
+                } else if (!equipment[i].equals("") && !equipment[i].isEmpty() && !equipment[i].equals(null)){
                     db.addMachineList("Implement: "+equipment[i]);
                 }
+                */
+                db.addMachineList(equipment[i]);
             }
             return "";
         }

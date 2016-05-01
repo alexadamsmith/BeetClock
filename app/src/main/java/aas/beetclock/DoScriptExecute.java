@@ -221,12 +221,14 @@ public class DoScriptExecute extends AppCompatActivity { //previously just an ac
                 String[] times = intent.getStringArrayExtra(PopulateSheet.KEY_TIMES);
                 String[] equip = intent.getStringArrayExtra(PopulateSheet.KEY_EQUIP);
                 String[] implem = intent.getStringArrayExtra(PopulateSheet.KEY_IMPLEM);
+                String[] equipTimes = intent.getStringArrayExtra(PopulateSheet.KEY_EQUIPTIMES);
                 List<String[]> allParams = new ArrayList<>();
                 allParams.add(params);
                 allParams.add(jobs);
                 allParams.add(equip);
                 allParams.add(times);
                 allParams.add(implem);
+                allParams.add(equipTimes);
 
                 new MakeRequestTask(mCredential).execute(allParams);
             } else {
@@ -367,6 +369,7 @@ public class DoScriptExecute extends AppCompatActivity { //previously just an ac
                 String[] values = inputs.get(3);
                 String[] equip = inputs.get(2);
                 String[] implem = inputs.get(4);
+                String[] equiptimes = inputs.get(5);
                 //Passing an array with parameters followed by input values
                 List<String> paramList = new ArrayList<>();
                 for (int i = 0; i < parameters.length; i++) {
@@ -380,6 +383,9 @@ public class DoScriptExecute extends AppCompatActivity { //previously just an ac
                 }
                 for (int l = 0; l < implem.length; l++) {
                     paramList.add(implem[l]);
+                }
+                for (int i = 0; i < implem.length; i++) {
+                    paramList.add(equiptimes[i]);
                 }
                 String[] paramValues = paramList.toArray(new String[0]);
 

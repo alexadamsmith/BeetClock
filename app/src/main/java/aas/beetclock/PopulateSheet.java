@@ -46,6 +46,7 @@ public class PopulateSheet extends AppCompatActivity {
     //Equip carries tractors, implem carries tractor implements
     public final static String KEY_EQUIP = "aas.beetclock.sheetEquipment";
     public final static String KEY_IMPLEM = "aas.beetclock.sheetImplements";
+    public final static String KEY_EQUIPTIMES = "aas.beetclock.sheetEqipTimes";
 
     public final static int FILE_CODE = 12345;
     public final static int SHEET_CODE = 54321;
@@ -312,8 +313,65 @@ public class PopulateSheet extends AppCompatActivity {
 
         else if (requestCode == EQUIP_CODE && resultCode == Activity.RESULT_OK) {
 //First populating list of equipment from NOFA sheet
-            String[] equips = data.getStringArrayExtra(DoScriptExecute.KEY_RESPONSE);
+            String[] equips = data.getStringArrayExtra(DoScriptExecute.KEY_RESPONSE); //equips
+if(equips.length > 0) {
+    if (!equips[0].contains("Error")) {
+        List<String> sheetEquipment = new ArrayList<>();
 
+        for (int i = 0; i < equips.length; i++) {
+            sheetEquipment.add(equips[i]);
+        }
+
+        String[] sheetEquip = sheetEquipment.toArray(new String[0]);
+
+        for (int i = 0; i < sheetEquip.length; i++) {
+            System.out.println("sheetEquip: " + sheetEquip[i]);
+        }
+
+        Spinner sheetSpin = (Spinner) findViewById(R.id.sheets_spinner);
+
+        Spinner cropSpin = (Spinner) findViewById(R.id.crops_spinner);
+
+        if (sheetSpin.getSelectedItem() != null && cropSpin.getSelectedItem() != null) {
+            String sheetName = sheetSpin.getSelectedItem().toString();
+            String cropName = cropSpin.getSelectedItem().toString();
+            String[] population = {sheetName, cropName};
+
+            List<String[]> outputs = new ArrayList<>();
+            outputs.add(population);
+            outputs.add(sheetEquip);
+
+            new doPopulate().execute(outputs);
+        }
+        //end contains error if
+    } else {
+        Toast.makeText(getApplicationContext(), "Make sure you have selected a NOFA crop budget workbook", Toast.LENGTH_LONG).show();
+    }
+    //end equips length if
+} else {
+
+  String[] noequip = {};
+
+    Spinner sheetSpin = (Spinner) findViewById(R.id.sheets_spinner);
+
+    Spinner cropSpin = (Spinner) findViewById(R.id.crops_spinner);
+
+    if (sheetSpin.getSelectedItem() != null && cropSpin.getSelectedItem() != null) {
+        String sheetName = sheetSpin.getSelectedItem().toString();
+        String cropName = cropSpin.getSelectedItem().toString();
+        String[] population = {sheetName, cropName};
+
+        List<String[]> outputs = new ArrayList<>();
+        outputs.add(population);
+        outputs.add(noequip);
+
+        new doPopulate().execute(outputs);
+    }
+
+}
+
+
+/*
             List<String> sheetEquipment = new ArrayList<>();
             for (int i = 0; i < equips.length; i++) {
                 //Add only array elements that contain data.
@@ -325,24 +383,10 @@ public class PopulateSheet extends AppCompatActivity {
                 }
             } // end equips for
             String[] sheetEquip = sheetEquipment.toArray(new String[0]);
-
+*/
 //Then running doPopulate
             //Getting the names of the selected sheet and selected crop
-            Spinner sheetSpin = (Spinner) findViewById(R.id.sheets_spinner);
 
-            Spinner cropSpin = (Spinner) findViewById(R.id.crops_spinner);
-
-            if(sheetSpin.getSelectedItem() != null && cropSpin.getSelectedItem() != null) {
-                String sheetName = sheetSpin.getSelectedItem().toString();
-                String cropName = cropSpin.getSelectedItem().toString();
-                String[] population = {sheetName, cropName};
-
-                List<String[]> outputs = new ArrayList<>();
-                outputs.add(population);
-                outputs.add(sheetEquip);
-
-                new doPopulate().execute(outputs);
-            }
             //new doWrite().execute(equips);
 
         }//End get equip result
@@ -436,7 +480,8 @@ public class PopulateSheet extends AppCompatActivity {
             String[] equipment = summary.get(1);
             String[] times = summary.get(2);
             String[] implem = summary.get(3);
-            String[] errors = summary.get(4);
+            String[] equiptimes = summary.get(4);
+            String[] errors = summary.get(5);
 
             List<String[]> toPopulate = new ArrayList<>();
             toPopulate.add(parameters);
@@ -444,6 +489,7 @@ public class PopulateSheet extends AppCompatActivity {
             toPopulate.add(equipment);
             toPopulate.add(times);
             toPopulate.add(implem);
+            toPopulate.add(equiptimes);
             toPopulate.add(errors);
 
             return toPopulate;
@@ -459,7 +505,8 @@ public class PopulateSheet extends AppCompatActivity {
             String[] tractors = toPopulate.get(2);
             String[] times = toPopulate.get(3);
             String[] implem = toPopulate.get(4);
-            String[] errors = toPopulate.get(5);
+            String[] equiptimes = toPopulate.get(5);
+            String[] errors = toPopulate.get(6);
 
             if(!errors[0].equals("")){
                 Toast.makeText(getApplicationContext(), errors[0], Toast.LENGTH_LONG).show();
@@ -478,6 +525,7 @@ public class PopulateSheet extends AppCompatActivity {
             intent.putExtra(KEY_EQUIP, tractors);
             intent.putExtra(KEY_TIMES, times);
             intent.putExtra(KEY_IMPLEM, implem);
+            intent.putExtra(KEY_EQUIPTIMES, equiptimes);
             startActivityForResult(intent, POP_CODE);
         }
     }
@@ -493,6 +541,9 @@ public class PopulateSheet extends AppCompatActivity {
 
         String crop = params.get(0)[1];
         String[] sheetEquipment = params.get(1);
+        for(int i = 0; i< sheetEquipment.length; i++){
+            System.out.println("sheetEquipment_makesum: "+sheetEquipment[i]);
+        }
 
         List<String[]> outputs = new ArrayList<>();
 
@@ -501,6 +552,7 @@ public class PopulateSheet extends AppCompatActivity {
         List<String> sumTract = new ArrayList<>();
         List<String> sumImplem = new ArrayList<>();
         List<String> sumTimes = new ArrayList<>();
+        List<String> sumEquipTimes = new ArrayList<>();
 
 
             //Retrieving all records
@@ -511,9 +563,13 @@ public class PopulateSheet extends AppCompatActivity {
         List<Long> elapsedlist = db.getElapsed();
         List<String> jobslist = db.getJobs();
         List<String> equiplist = db.getMachine();
+        List<Long> workerlist = db.getWorkers();
+
+        for(int i = 0; i < equiplist.size(); i++){
+            System.out.println("equiplist: "+equiplist.get(i));
+        }
 
 //Compare equipment in jobs to the list of equipment from sheet.  Remove others and generate warning popup
-
         //At the same time, write all matching equipment entries to a hashset
         Set<String> equipSet = new HashSet<>();
 
@@ -524,14 +580,14 @@ public class PopulateSheet extends AppCompatActivity {
             String[] equips = equiplist.get(i).split(",");
             for (int j = 0; j < equips.length; j++) {
                 for (int k = 0; k < sheetEquipment.length; k++) {
-                    if (equips[j].contains(sheetEquipment[k])) {
+                    if (equips[j].contains(sheetEquipment[k]) && cropslist.get(i).equals(crop)) {
                         occurrances++;
                     }//
                 } //equipSaved for
               }//equips for
-            if ((occurrances < equips.length) && !equips[0].equals("") && !equips[0].equals(" ") && !equips[0].equals("no equip") && !equips[0].isEmpty()) {
+            if ((occurrances < equips.length) && !equips[0].equals("") && !equips[0].equals(" ") && !equips[0].equals("no equip") && !equips[0].isEmpty() && cropslist.get(i).equals(crop)) {
                 countMismatch++;
-            } else {
+            } else if(cropslist.get(i).equals(crop)){
                 //If all pieces of equipment match saved pieces, add the entry to the set
                 equipSet.add(equiplist.get(i));
             }
@@ -547,6 +603,10 @@ List<String> errorList = new ArrayList<>();
             //Write equipment hashset to a list for further work
             List<String> allequip = new ArrayList<>();
              allequip.addAll(equipSet);
+
+        for(int i = 0; i < allequip.size(); i++){
+            System.out.println("allequip: "+allequip.get(i));
+        }
 
 
         //Jobs that are included in spreadsheet
@@ -595,6 +655,7 @@ List<String> errorList = new ArrayList<>();
                 String equip = "";
                 //summarize all worktime
                 long worksum = 0;
+                long equiptimesum = 0;
 
                 //Loop through all equipment
 
@@ -603,7 +664,8 @@ List<String> errorList = new ArrayList<>();
                     if (cropslist.get(k).equals(crop) && jobslist.get(k).contains(ssJobs[j])
                             && timeslist.get(k) > startDate) {
                         //worksum.add(elapsedlist.get(i));
-                        worksum += Long.valueOf(elapsedlist.get(k));
+                        worksum += elapsedlist.get(k)*workerlist.get(k);
+
                         for (int i = 0; i < allequip.size(); i++) {
                             //If the 'equip' string starts as blank, simply add the entry.  Otherwise add a comma spacer
                             if(!equip.contains(allequip.get(i)) && equiplist.get(k).contains(allequip.get(i)) && equip.equals("")) {
@@ -612,19 +674,30 @@ List<String> errorList = new ArrayList<>();
                                 equip = equip + ", "+equiplist.get(k);
                             }
                         }// end all equipment for
+                        if(!equip.contains("no equip")){
+                            equiptimesum += elapsedlist.get(k);
+                        }
+
+
                     }
                 } //end all entries for
 
                 //--if worksum > 0, add job and summary to array
 //Add number as string if greater than zero; else add empty string
                 String hours = "";
+                String equiphours = "";
                 if(worksum>0) {
                     hours = String.valueOf(worksum);
+                    equiphours = String.valueOf(equiptimesum);
+                    System.out.println("hours: "+hours);
+                    System.out.println("equiphours: "+equiphours);
+
                 }
                 //Adding job time and equipment to lists
                 String thisJob = ssJobs[j];
                 sumTimes.add(hours);
                 sumJobs.add(thisJob);
+                sumEquipTimes.add(equiphours);
 
                 String tractStr = "";
                 String implemStr = "";
@@ -643,42 +716,17 @@ List<String> errorList = new ArrayList<>();
                         if(pieces[0].contains("Tractor")){
                             tractStr = (pieces[1]);
                             tractCount ++;
+                            System.out.println("tractStr: "+tractStr);
                         }else if (pieces[0].contains("Implement")){
                             implemStr = (pieces[1]);
                             implemCount ++;
+                            System.out.println("implemStr: "+implemStr);
                         }
                     }
 
                     if(tractCount > 1 || implemCount > 1){
                     multiImp ++;
                     }
-//Make a comma separated list of tractors for each job
-                    /*
-                    StringBuilder tractBuilder = new StringBuilder();
-                    String sep = ", ";
-                    for(int i = 0; i < tractorsJob.size(); i++){
-                        if(i < (tractorsJob.size()-1) && !tractorsJob.get(i).equals("")){
-                        tractBuilder.append(tractorsJob.get(i));
-                        tractBuilder.append(sep);
-                        } else{
-                            tractBuilder.append(tractorsJob.get(i));
-                        }
-                    }
-                    */
-
-/*
-                    // Make a comma separated list of implements for each job
-                    StringBuilder implemBuilder = new StringBuilder();
-                    for(int i = 0; i < implementsJob.size(); i++){
-                        if(i < (tractorsJob.size()-1) && !tractorsJob.get(i).equals("")){
-                            implemBuilder.append(implementsJob.get(i));
-                            implemBuilder.append(sep);
-                        } else{
-                            implemBuilder.append(implementsJob.get(i));
-                        }
-                    }
-                    String implemStr = implemBuilder.toString().trim();
-*/
 
                 } //end equip else
                 //Add tractor and implement for current job (no leading or trailing spaces
@@ -726,6 +774,7 @@ List<String> errorList = new ArrayList<>();
         sumJobs.add("Soil prep: Other");
         sumTract.add("");
         sumImplem.add("");
+        sumEquipTimes.add("");
         long decCult = (cultTot - cultSum);
         if(decCult>0) {
             sumTimes.add(String.valueOf(decCult));
@@ -735,6 +784,7 @@ List<String> errorList = new ArrayList<>();
         sumJobs.add("Cultivation: Other");
         sumTract.add("");
         sumImplem.add("");
+        sumEquipTimes.add("");
         long decPost = (postTot - postSum);
         if(decPost>0) {
             sumTimes.add(String.valueOf(decPost));
@@ -744,17 +794,36 @@ List<String> errorList = new ArrayList<>();
         sumJobs.add("Post-harvest: Other");
         sumTract.add("");
         sumImplem.add("");
+        sumEquipTimes.add("");
 
         String[] timesArray = sumTimes.toArray(new String[0]);
         String[] tractArray = sumTract.toArray(new String[0]);
         String[] implemArray = sumImplem.toArray(new String[0]);
         String[] jobsArray = sumJobs.toArray(new String[0]);
+        String[] equipTimesArray = sumEquipTimes.toArray(new String[0]);
         String[] errors = errorList.toArray(new String[0]);
+
+        for (int i = 0; i< timesArray.length; i++) {
+            System.out.println("Person times: "+timesArray[i]);
+        }
+        for (int i = 0; i< tractArray.length; i++) {
+            System.out.println("Tractors: "+tractArray[i]);
+        }
+        for (int i = 0; i< implemArray.length; i++) {
+            System.out.println("Implements: "+implemArray[i]);
+        }
+        for (int i = 0; i< jobsArray.length; i++) {
+            System.out.println("Jobs: "+jobsArray[i]);
+        }
+        for (int i = 0; i< equipTimesArray.length; i++) {
+            System.out.println("Equipment times: "+equipTimesArray[i]);
+        }
 
         outputs.add(jobsArray);
             outputs.add(tractArray);
                 outputs.add(timesArray);
         outputs.add(implemArray);
+        outputs.add(equipTimesArray);
         outputs.add(errors);
 
             return outputs;

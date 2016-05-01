@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class SQLiteHelper extends SQLiteOpenHelper {
 
     // Database Version
-    private static final int DATABASE_VERSION = 13;
+    private static final int DATABASE_VERSION = 14;
     // Database Name
     private static final String DATABASE_NAME = "BeetDB";
 
@@ -75,7 +75,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 "elapsed INTEGER, " +
                 "category TEXT, " +
                 "job TEXT, " +
-                "machine TEXT)";
+                "machine TEXT, "+
+                "workers TEXT)";
 
         String CREATE_CURRENT_TABLE = "CREATE TABLE current ( " +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -182,6 +183,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         String machinery = timestamp.get(4);
 
+        String workers = timestamp.get(5);
+
         //Content values get sent to the table in a package
         ContentValues values = new ContentValues();
         values.put(KEY_CROP, crop);
@@ -190,6 +193,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         values.put(KEY_CATEGORY, category);
         values.put(KEY_JOB, job);
         values.put(KEY_MACHINE, machinery);
+        values.put(KEY_WORKERS, workers);
 
         // insert into db
         db.insert(TABLE_TIMES, // table
@@ -338,6 +342,25 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         return jobs;
     } // End get jobs
+
+    public List<Long> getWorkers() {
+        List<Long> entries = new ArrayList<>();
+        String query = "SELECT  " + KEY_WORKERS + " FROM "+TABLE_TIMES;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        Long workers = null;
+        if (cursor.moveToFirst()) {
+            do {
+                workers = cursor.getLong(0);
+                entries.add(workers);
+            } while (cursor.moveToNext());
+        }
+        // close
+        db.close();
+        cursor.close();
+
+        return entries;
+    } // End get workers
 
     // Delete all time records
     public Integer deleteTimes(Long selected) {

@@ -306,6 +306,7 @@ if (success){
         List<Long> elapsedlist = db.getElapsed();
         List<String> jobslist = db.getJobs();
         List<String> equiplist = db.getMachine();
+        List<Long> workerlist = db.getWorkers();
 
         //Retrieve list of crops without duplicates based on hashset
         //String nullsearch = null; // Must send function a null string in order to return all results
@@ -369,13 +370,14 @@ if (success){
         String[] spacer = {};
         summaries.add(spacer);
         csvSummaries.add(spacer);
-        String[] headers = {"Crop","Job","Equipment","Hours", "Minutes"};
+        String[] headers = {"Crop","Job","Equipment","Person Hours", "Person Minutes", "Equipment Hours", "Equipment Minutes"};
         csvSummaries.add(headers);
 
             //Loop through all crops
             for (int i = 0; i < allcrops.size(); i++) {
                 //Begin sum for each crop
                 long cropsum = 0;
+                long cropequipsum = 0;
                 //Loop through all machinery
                 for (int j = 0; j < alljobs.size(); j++) {
                 //--For each crop, job combo, loop through all entries
@@ -384,46 +386,80 @@ if (success){
 
                     //This is a convoluted method, but going straight from worksum did not work
                     long worksum = 0;
+                    long equipsum = 0;
                     for (int k = 0; k < cropslist.size(); k++) {
                         //---if crop and job match combo, sum elapsed time as worksum
                         if (cropslist.get(k).equals(allcrops.get(i)) && jobslist.get(k).equals(alljobs.get(j))
                                 && equiplist.get(k).equals(allequip.get(h)) && timeslist.get(k) > startDate) {
                             //worksum.add(elapsedlist.get(i));
-                            worksum += Long.valueOf(elapsedlist.get(k));
+                            worksum += elapsedlist.get(k)*workerlist.get(k);
+                            if(!equiplist.get(k).equals("no equip")) {
+                                equipsum += elapsedlist.get(k);
+                            }
                         }
                     } //end all entries for
                     //Add worksum to cropsum
                     cropsum = cropsum + worksum;
+                    cropequipsum = cropequipsum + equipsum;
+
                     //--if worksum > 0, create string[] array with crop, job, worksum
                     if (worksum > 0) {
                         String hrsFormat = String.valueOf(TimeUnit.MILLISECONDS.toHours(worksum));
+                        String hrsEquipFormat = String.valueOf(TimeUnit.MILLISECONDS.toHours(equipsum));
                         String hrsSep = "hrs";
                         String minFormat = String.valueOf(TimeUnit.MILLISECONDS.toMinutes(worksum) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(worksum)));
+                        String minEquipFormat = String.valueOf(TimeUnit.MILLISECONDS.toMinutes(equipsum) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(equipsum)));
                         String minSep = "min";
                         //String secFormat = String.valueOf(TimeUnit.MILLISECONDS.toSeconds(worksum) -
                         //        (TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(worksum))));
                         //String secSep = "sec";
-                        String[] csvsummary = {allcrops.get(i), alljobs.get(j), allequip.get(h), hrsFormat, minFormat};
-                        String[] summary = {allcrops.get(i), alljobs.get(j), allequip.get(h), hrsFormat, hrsSep, minFormat, minSep}; //String.valueOf(worksum)
+
+                        String sep = ";";
+
+                        List<String> csvList = new ArrayList<>();
+                        //String[] csvsummary = {allcrops.get(i), sep, alljobs.get(j), sep ,allequip.get(h), sep, hrsFormat, minFormat, hrsEquipFormat, minEquipFormat};
+                        String equipTime = "";
+                        if(!allequip.get(h).equals("no equip")){
+                            equipTime = "Equipment hours: "+hrsEquipFormat+" "+hrsSep+" "+minEquipFormat+" "+minSep;
+                            csvList.add(allcrops.get(i));
+                            csvList.add(alljobs.get(j));
+                            csvList.add(allequip.get(h));
+                            csvList.add(hrsFormat);
+                            csvList.add(minFormat);
+                            csvList.add(hrsEquipFormat);
+                            csvList.add(minEquipFormat);
+                        } else {
+                            csvList.add(allcrops.get(i));
+                            csvList.add(alljobs.get(j));
+                            csvList.add(allequip.get(h));
+                            csvList.add(hrsFormat);
+                            csvList.add(minFormat);
+                        }
+
+
+                        String[] summary = {allcrops.get(i), sep, alljobs.get(j), sep, allequip.get(h), sep, "Person hours:", hrsFormat, hrsSep, minFormat, minSep, sep, equipTime}; //String.valueOf(worksum)
                         summaries.add(summary);
+                        String[] csvsummary = csvList.toArray(new String[0]);
                         csvSummaries.add(csvsummary);
                     }
                 } // end all equip for
                 }//end all jobs for
                 //Writing crop summaries
                 String hrsFormat = String.valueOf(TimeUnit.MILLISECONDS.toHours(cropsum));
+                String hrsEquipFormat = String.valueOf(TimeUnit.MILLISECONDS.toHours(cropequipsum));
                 String hrsSep = " hrs ";
                 String minFormat = String.valueOf(TimeUnit.MILLISECONDS.toMinutes(cropsum) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(cropsum)));
+                String minEquipFormat = String.valueOf(TimeUnit.MILLISECONDS.toMinutes(cropequipsum) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(cropequipsum)));
                 String minSep = " min";
 
                 //Add summary line to text output
                 summaries.add(spacer);
-                String[] cropTot = {"Total for "+allcrops.get(i)+" "+hrsFormat+hrsSep+minFormat+minSep};
+                String[] cropTot = {"Total for "+allcrops.get(i)+": "+hrsFormat+hrsSep+minFormat+minSep};
                 summaries.add(cropTot);
                 summaries.add(spacer);
 
                 //Add summary line to CSV
-                String[] csvTot = {allcrops.get(i),"total:","",hrsFormat,minFormat};
+                String[] csvTot = {allcrops.get(i),"","Total:",hrsFormat,minFormat,hrsEquipFormat,minEquipFormat};
                 csvSummaries.add(csvTot);
                 csvSummaries.add(spacer);
             } // end all crops for
@@ -479,6 +515,7 @@ if (success){
         List<Long> elapsedlist = db.getElapsed();
         List<String> jobslist = db.getJobs();
         List<String> equiplist = db.getMachine();
+        List<Long> workerlist = db.getWorkers();
 
         List<Long> timeSort = sortListWithoutModifyingOriginalList(timeslist);
 
@@ -535,7 +572,7 @@ if (success){
         String[] spacer = {};
         summaries.add(spacer);
         csvSummaries.add(spacer);
-        String[] header = {"Crop","Job","Equipment","Hours","Minutes","Date"};
+        String[] header = {"Crop","Job","Equipment","Person Hours","Person Minutes", "Equipment Hours","Equipment Minutes","Date"};
         csvSummaries.add(header);
 
 
@@ -545,16 +582,38 @@ if (success){
             for (int j = 0; j < timeslist.size(); j++) {
                 if (timeSort.get(i).equals(timeslist.get(j)) && timeslist.get(j) > startDate) {
                     //Format work times
-                    String hrsFormat = String.valueOf( TimeUnit.MILLISECONDS.toHours(elapsedlist.get(j)) );
-                    String hrsSep = " hrs";
-                    String minFormat = String.valueOf( TimeUnit.MILLISECONDS.toMinutes(elapsedlist.get(j)) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(elapsedlist.get(j))) );
-                    String minSep = " min";
+                    String hrsFormat = String.valueOf( TimeUnit.MILLISECONDS.toHours(elapsedlist.get(j)*workerlist.get(j)) );
+                    String hrsEquipFormat = String.valueOf( TimeUnit.MILLISECONDS.toHours(elapsedlist.get(j)) );
+                    String hrsSep = "hrs";
+                    String minFormat = String.valueOf( TimeUnit.MILLISECONDS.toMinutes(elapsedlist.get(j)*workerlist.get(j)) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(elapsedlist.get(j)*workerlist.get(j))) );
+                    String minEquipFormat = String.valueOf( TimeUnit.MILLISECONDS.toMinutes(elapsedlist.get(j)) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(elapsedlist.get(j))) );
+                    String minSep = "min";
 
 //Add a column with the record date
                     String dateFormat = formatter.format(timeslist.get(j));
-                    String[] csvsummary = {cropslist.get(j), jobslist.get(j), equiplist.get(j), hrsFormat, minFormat, dateFormat};
-                    String[] summary = {cropslist.get(j), jobslist.get(j), equiplist.get(j), hrsFormat, hrsSep, minFormat, minSep, dateFormat}; //String.valueOf(worksum)
+                    //String[] csvsummary = {cropslist.get(j), jobslist.get(j), equiplist.get(j), hrsFormat, minFormat, hrsEquipFormat, minEquipFormat, dateFormat};
+                    List<String> csvList = new ArrayList<>();
+                    String sep = ";";
+                    String equipTime = "";
+                    if(!equiplist.get(j).equals("no equip")){
+                        equipTime = "Equipment hours: "+hrsEquipFormat+" "+hrsSep+" "+minEquipFormat+" "+minSep;
+                        csvList.add(cropslist.get(j));
+                        csvList.add(jobslist.get(j));
+                        csvList.add(equiplist.get(j));
+                        csvList.add(hrsFormat);
+                        csvList.add(minFormat);
+                        csvList.add(hrsEquipFormat);
+                        csvList.add(minEquipFormat);
+                    } else {
+                        csvList.add(cropslist.get(j));
+                        csvList.add(jobslist.get(j));
+                        csvList.add(equiplist.get(j));
+                        csvList.add(hrsFormat);
+                        csvList.add(minFormat);
+                    }
+                    String[] summary = {cropslist.get(j), sep, jobslist.get(j), sep, equiplist.get(j), sep, "Person hours:", hrsFormat, hrsSep, minFormat, minSep, sep, equipTime, sep, dateFormat}; //String.valueOf(worksum)
                     summaries.add(summary);
+                    String[] csvsummary = csvList.toArray(new String[0]);
                     csvSummaries.add(csvsummary);
                                     }
             }//end j for
@@ -590,7 +649,8 @@ if (success){
 
         //Return the summary
         String display = liststring.toString();
-        return display;
+        //return display;
+        return "";
 
 
     }// end full work dump

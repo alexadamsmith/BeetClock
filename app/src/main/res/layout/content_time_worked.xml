@@ -31,7 +31,9 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center_vertical|fill_vertical"
-            style="@style/menu_box_trans">
+            style="@style/menu_box_trans"
+            android:descendantFocusability="beforeDescendants"
+            android:focusableInTouchMode="true">
 
             <!--
             <TextView

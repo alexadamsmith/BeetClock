@@ -15,7 +15,9 @@
         android:orientation="vertical"
         android:padding="@dimen/activity_margin"
         android:gravity="center_vertical|fill_vertical"
-        android:id="@+id/content_main_body">
+        android:id="@+id/content_main_body"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"

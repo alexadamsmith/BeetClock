@@ -151,8 +151,10 @@ public class DeleteRecords extends AppCompatActivity {
                 Button stopButton = new Button(DeleteRecords.this);
                 stopButton.setTag(Integer.parseInt(index[i]));//This assigns a button index based on the original position in the retrieved records
                 stopButton.setText(stopProcess);
+                stopButton.setTextColor(getResources().getColor(R.color.button_text));
 
                 stopButton.setOnClickListener(listener); //end onclicklistener
+                stopButton.setBackgroundResource(R.drawable.button_standard);
 
                 linLayout.addView(stopButton, layoutParams);
 

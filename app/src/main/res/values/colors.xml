@@ -8,7 +8,10 @@
     <color name="translucent_bg">#c8fafafa</color>
 
     <color name="colorButton">#03a9f4</color>
-    <color name="colorButtonPressed">#0288d1</color>
+    <color name="colorButtonPressed">#026b9d</color>
+    <color name="colorTimerButton">#4caf50</color>
+    <color name="colorTimerButtonPressed">#367c39</color>
+
 
     <color name="button_text">#ffffff</color>
     <color name="button_text_disabled">#55ffffff</color>

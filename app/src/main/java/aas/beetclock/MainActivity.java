@@ -464,8 +464,10 @@ if((allEquip.contains("Tractor") && selectEquip.contains("Tractor")) || (allEqui
                 Button stopButton = new Button(MainActivity.this);
                 stopButton.setTag(i);
                 stopButton.setText(stopProcess);
+                stopButton.setTextColor(getResources().getColor(R.color.button_text));
 
                 stopButton.setOnClickListener(listener); //end onclicklistener
+                stopButton.setBackgroundResource(R.drawable.button_standard);
 
                 linLayout.addView(stopButton, layoutParams);
 
@@ -590,19 +592,18 @@ if((allEquip.contains("Tractor") && selectEquip.contains("Tractor")) || (allEqui
 
             //If string is convertable to int, convert to int
 
-            long elapsedWork = 0;
-            if(elapsed > 0 && currentWorkers.get(process) > 1){
-                elapsedWork = elapsed * currentWorkers.get(process);
-            } else {
-                elapsedWork = elapsed;
+            long workers = 1;
+            if(currentWorkers.get(process) > 1){
+                workers = currentWorkers.get(process);
             }
 //add entry to times database
             List<String> entry = new ArrayList<String>();
             entry.add(currentCrops.get(process));
             entry.add(String.valueOf(stoptime));
-            entry.add(String.valueOf(elapsedWork));
+            entry.add(String.valueOf(elapsed));
             entry.add(currentJobs.get(process));
             entry.add(currentEquip.get(process));
+            entry.add(String.valueOf(workers));
 
             db.addTime(entry);
 
