@@ -216,8 +216,6 @@ public class GetEquipment extends AppCompatActivity {
             //Before retrieving new machines, remove all old machines from list
             db.deleteMachineList("");
 
-System.out.println("Length: "+equipment.length);
-
             for (int i = 0; i < equipment.length; i++) {
                 //Add only array elements that contain data.
                 //Tractors comprise the first four entries; preface them with 'Tractor:', and the rest with 'Implement:'

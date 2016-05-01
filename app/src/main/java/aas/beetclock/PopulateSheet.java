@@ -324,10 +324,6 @@ if(equips.length > 0) {
 
         String[] sheetEquip = sheetEquipment.toArray(new String[0]);
 
-        for (int i = 0; i < sheetEquip.length; i++) {
-            System.out.println("sheetEquip: " + sheetEquip[i]);
-        }
-
         Spinner sheetSpin = (Spinner) findViewById(R.id.sheets_spinner);
 
         Spinner cropSpin = (Spinner) findViewById(R.id.crops_spinner);
@@ -541,9 +537,6 @@ if(equips.length > 0) {
 
         String crop = params.get(0)[1];
         String[] sheetEquipment = params.get(1);
-        for(int i = 0; i< sheetEquipment.length; i++){
-            System.out.println("sheetEquipment_makesum: "+sheetEquipment[i]);
-        }
 
         List<String[]> outputs = new ArrayList<>();
 
@@ -564,10 +557,6 @@ if(equips.length > 0) {
         List<String> jobslist = db.getJobs();
         List<String> equiplist = db.getMachine();
         List<Long> workerlist = db.getWorkers();
-
-        for(int i = 0; i < equiplist.size(); i++){
-            System.out.println("equiplist: "+equiplist.get(i));
-        }
 
 //Compare equipment in jobs to the list of equipment from sheet.  Remove others and generate warning popup
         //At the same time, write all matching equipment entries to a hashset
@@ -603,10 +592,6 @@ List<String> errorList = new ArrayList<>();
             //Write equipment hashset to a list for further work
             List<String> allequip = new ArrayList<>();
              allequip.addAll(equipSet);
-
-        for(int i = 0; i < allequip.size(); i++){
-            System.out.println("allequip: "+allequip.get(i));
-        }
 
 
         //Jobs that are included in spreadsheet
@@ -689,9 +674,6 @@ List<String> errorList = new ArrayList<>();
                 if(worksum>0) {
                     hours = String.valueOf(worksum);
                     equiphours = String.valueOf(equiptimesum);
-                    System.out.println("hours: "+hours);
-                    System.out.println("equiphours: "+equiphours);
-
                 }
                 //Adding job time and equipment to lists
                 String thisJob = ssJobs[j];
@@ -716,11 +698,9 @@ List<String> errorList = new ArrayList<>();
                         if(pieces[0].contains("Tractor")){
                             tractStr = (pieces[1]);
                             tractCount ++;
-                            System.out.println("tractStr: "+tractStr);
                         }else if (pieces[0].contains("Implement")){
                             implemStr = (pieces[1]);
                             implemCount ++;
-                            System.out.println("implemStr: "+implemStr);
                         }
                     }
 
@@ -802,22 +782,6 @@ List<String> errorList = new ArrayList<>();
         String[] jobsArray = sumJobs.toArray(new String[0]);
         String[] equipTimesArray = sumEquipTimes.toArray(new String[0]);
         String[] errors = errorList.toArray(new String[0]);
-
-        for (int i = 0; i< timesArray.length; i++) {
-            System.out.println("Person times: "+timesArray[i]);
-        }
-        for (int i = 0; i< tractArray.length; i++) {
-            System.out.println("Tractors: "+tractArray[i]);
-        }
-        for (int i = 0; i< implemArray.length; i++) {
-            System.out.println("Implements: "+implemArray[i]);
-        }
-        for (int i = 0; i< jobsArray.length; i++) {
-            System.out.println("Jobs: "+jobsArray[i]);
-        }
-        for (int i = 0; i< equipTimesArray.length; i++) {
-            System.out.println("Equipment times: "+equipTimesArray[i]);
-        }
 
         outputs.add(jobsArray);
             outputs.add(tractArray);

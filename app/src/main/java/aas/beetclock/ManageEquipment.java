@@ -118,9 +118,6 @@ public class ManageEquipment extends AppCompatActivity {
         protected void onPostExecute(List<String[]> allSpinners) {
             String[] spinmachine = allSpinners.get(0);
 
-for (int i = 0; i < spinmachine.length; i++){
-    System.out.println(spinmachine[i]);
-}
             //Populate machine spinner
             ArrayAdapter<String> machineArrayAdapter = new ArrayAdapter<String>(
                     ManageEquipment.this, R.layout.spinnertext, spinmachine);
