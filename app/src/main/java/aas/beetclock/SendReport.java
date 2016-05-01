@@ -595,7 +595,8 @@ if (success){
                     List<String> csvList = new ArrayList<>();
                     String sep = ";";
                     String equipTime = "";
-                    if(!equiplist.get(j).equals("no equip")){
+                    if(!equiplist.get(j).contains("no equip")){
+                        //equipTime used in email body report
                         equipTime = "Equipment hours: "+hrsEquipFormat+" "+hrsSep+" "+minEquipFormat+" "+minSep;
                         csvList.add(cropslist.get(j));
                         csvList.add(jobslist.get(j));
@@ -604,12 +605,17 @@ if (success){
                         csvList.add(minFormat);
                         csvList.add(hrsEquipFormat);
                         csvList.add(minEquipFormat);
+                        csvList.add(dateFormat);
                     } else {
                         csvList.add(cropslist.get(j));
                         csvList.add(jobslist.get(j));
                         csvList.add(equiplist.get(j));
                         csvList.add(hrsFormat);
                         csvList.add(minFormat);
+                        //Add spaces in equipment time columns
+                        csvList.add("");
+                        csvList.add("");
+                        csvList.add(dateFormat);
                     }
                     String[] summary = {cropslist.get(j), sep, jobslist.get(j), sep, equiplist.get(j), sep, "Person hours:", hrsFormat, hrsSep, minFormat, minSep, sep, equipTime, sep, dateFormat}; //String.valueOf(worksum)
                     summaries.add(summary);

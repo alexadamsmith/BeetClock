@@ -15,22 +15,22 @@ android {
         versionName "1.0"
         multiDexEnabled = true
     }
-
+/*
     signingConfigs {
         release {
             storeFile file("C:\\Program Files\\Java\\jdk1.8.0_65\\bin\\release-key.keystore")
-            storePassword "M0x3y%0"
+            storePassword "PASSWORD"
             keyAlias "alias_name"
-            keyPassword "M0x3y%0"
+            keyPassword "PASSWORD"
         }
         debug {
             storeFile file("C:\\Program Files\\Java\\jdk1.8.0_65\\bin\\release-key.keystore")
-            storePassword "M0x3y%0"
+            storePassword "PASSWORD"
             keyAlias "alias_name"
-            keyPassword "M0x3y%0"
+            keyPassword "PASSWORD"
         }
     }
-
+*/
 
 
     buildTypes {

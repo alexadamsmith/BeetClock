@@ -751,11 +751,11 @@ List<String> errorList = new ArrayList<>();
             if (cropslist.get(m).equals(crop) && timeslist.get(m) > startDate) {
                 String thisJob = jobslist.get(m);
                 if (thisJob.contains("Soil prep")){
-                    soilTot += Long.valueOf(elapsedlist.get(m));
+                    soilTot += elapsedlist.get(m)*workerlist.get(m);
                 }  else if(thisJob.contains("Cultivation")){
-                    cultTot += Long.valueOf(elapsedlist.get(m));
+                    cultTot += elapsedlist.get(m)*workerlist.get(m);
                 }  else if(thisJob.contains("Post-harvest")){
-                    postTot += Long.valueOf(elapsedlist.get(m));
+                    postTot += elapsedlist.get(m)*workerlist.get(m);
                 }
             }
         } //end total worktime for

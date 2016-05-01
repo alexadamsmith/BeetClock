@@ -436,12 +436,17 @@ if(spin.getSelectedItem() != null) {
                         String minSep = " min";
                         String personTimeFormat = "Person hours: "+hrsFormat+hrsSep+""+minFormat+minSep;
                         String equipTimeFormat = "Equipment hours: "+hrsEquipFormat+hrsSep+""+minEquipFormat+minSep;
-
 //Add a column with the record date
                         String dateFormat = formatter.format(timeslist.get(j));
 
-                        String[] summary = {cropslist.get(j), jobslist.get(j), equiplist.get(j), personTimeFormat, equipTimeFormat, dateFormat}; //String.valueOf(worksum)
-                        summaries.add(summary);
+                        //Only add eqip time if equipment used
+                        if(!equiplist.get(j).contains("no equip")) {
+                            String[] summary = {cropslist.get(j), jobslist.get(j), equiplist.get(j), personTimeFormat, equipTimeFormat, dateFormat}; //String.valueOf(worksum)
+                            summaries.add(summary);
+                        } else {
+                            String[] summary = {cropslist.get(j), jobslist.get(j), equiplist.get(j), personTimeFormat, dateFormat}; //String.valueOf(worksum)
+                            summaries.add(summary);
+                        }
                     }
                 }//end j for
             }//end i for

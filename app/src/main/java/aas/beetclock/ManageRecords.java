@@ -217,6 +217,7 @@ public void exportDb(View view) {
         List<Long> elapsedlist = db.getElapsed();
         List<String> jobslist = db.getJobs();
         List<String> equiplist = db.getMachine();
+            List<Long> workerlist = db.getWorkers();
 
         //Retrieve list of ALL crops
         String nullsearch = null; // Must send function a null string in order to return all results
@@ -243,7 +244,7 @@ public void exportDb(View view) {
         for (int i = 0; i < cropslist.size(); i++) {
             if(timeslist.get(i) > startDate) {
 
-                String[] csvsummary = {cropslist.get(i), jobslist.get(i), equiplist.get(i), Long.toString(elapsedlist.get(i)), Long.toString(timeslist.get(i))};
+                String[] csvsummary = {cropslist.get(i), jobslist.get(i), equiplist.get(i), Long.toString(elapsedlist.get(i)), Long.toString(timeslist.get(i)), Long.toString(workerlist.get(i))};
                 csvSummaries.add(csvsummary);
             } //end timeslist if
         } //end all entries for
@@ -339,6 +340,7 @@ try {
                 entry.add(record[3]);
                 entry.add(record[1]);
                 entry.add(record[2]);
+                entry.add(record[5]);
 //Add all records to times table
                 db.addTime(entry);
             }
